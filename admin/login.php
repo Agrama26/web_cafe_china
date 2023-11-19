@@ -38,7 +38,7 @@ require "../includes/koneksi.php";
         <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
         <ul class="navbar-nav ms-auto d-flex gap-3">
           <li class="nav-item me-3">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item dropdown me-3">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -62,7 +62,7 @@ require "../includes/koneksi.php";
                 class="bi bi-cart2"></i>Cart</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="login.php" tabindex="-1" aria-disabled="true"><i
+            <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true"><i
                 class="bi bi-person-fill"></i>Login</a>
           </li>
         </ul>
