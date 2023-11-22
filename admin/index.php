@@ -116,7 +116,7 @@ require './session.php';
             <div class="row mt-5 justify-content-center">
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <img src="image/coffee.jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h6 class="card-title">Potongan Harga 20%</h6>
                             <p class="card-text">
@@ -128,7 +128,7 @@ require './session.php';
 
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <img src="produk1/img/Indonesian/Klepon 1.jpeg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Lokal/Klepon 1.jpeg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Bonus Kelapa</h5>
                             <p class="card-text">
@@ -140,7 +140,7 @@ require './session.php';
 
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <img src="produk1/img/Japanese/Chicken Katsudon1.jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Japanese/Sakura Tea Latte.jpeg.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Gratis Garpu</h5>
                             <p class="card-text">
@@ -152,7 +152,7 @@ require './session.php';
 
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <img src="produk1/img/Western/Mochacindo (Square).jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Beli 1 Gratis ???</h5>
                             <p class="card-text">
@@ -228,8 +228,8 @@ require './session.php';
             <div class="row">
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <a href="image/produk/coffee.jpg" data-lightbox="Produk" data-title="Coffee">
-                            <img src="image/coffee.jpg" class="card-img-top" alt="404" />
+                        <a href="../assets/images/Western/coffee_1.jpg" data-lightbox="Produk" data-title="Coffee">
+                            <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Coffee</h6>
@@ -243,8 +243,8 @@ require './session.php';
 
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <a href="produk1/img/Indonesian/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
-                            <img src="produk1/img/Indonesian/Klepon 1.jpeg" class="card-img-top" alt="404" />
+                        <a href="../assets/images/Lokal/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
+                            <img src="../assets/images/Lokal/Klepon 1.jpeg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Klepon Cake</h6>
@@ -258,9 +258,9 @@ require './session.php';
 
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <a href="produk1/img/Chinese/Bubble Thai Tea.jpg" data-lightbox="Produk"
+                        <a href="../assets/images/Chinese/Bubble Thai Tea.jpg" data-lightbox="Produk"
                             data-title="Bubble Thai Tea">
-                            <img src="produk1/img/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="404" />
+                            <img src="../assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Thai Tea</h6>
@@ -274,8 +274,10 @@ require './session.php';
 
                 <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
                     <div class="card">
-                        <a href="produk1/img/Western/Mochacindo.jpg" data-lightbox="Produk" data-title="Mochacindo">
-                            <img src="produk1/img/Western/Mochacindo (Square).jpg" class="card-img-top" alt="404" />
+                        <a href="../assets/images/Western/Mochacindo.jpg" data-lightbox="Produk"
+                            data-title="Mochacindo">
+                            <img src="../assets/images/Western/Mochacindo (Square).jpg" class="card-img-top"
+                                alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Mocha Chindo</h6>
