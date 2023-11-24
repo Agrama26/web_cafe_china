@@ -74,7 +74,8 @@ require './session.php';
         <div class="container">
             <div class="row">
                 <h3 class="text-light display-6">
-                    Selamat Datang <br />di Cafe<span> China</span>
+                    Selamat Datang
+                    <?php echo $_SESSION['username'] ?> <br />di Cafe<span> China</span>
                 </h3>
                 <p class="text-light opacity-75 mt-2">
                     Ayo kunjungi cafe dengan nuansa china,

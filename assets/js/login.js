@@ -24,12 +24,12 @@ $(document).ready(function () {
       if ($(this).val().length === 0) {
         $(this)
           .siblings("span.error")
-          .text("Tolong Full Name ya")
+          .text("Isi Dulu")
           .fadeIn()
           .parent(".form-group")
           .addClass("hasError");
         usernameError = true;
-      } else if ($(this).val().length > 1 && $(this).val().length <= 6) {
+      } else if ($(this).val().length > 1 && $(this).val().length <= 2) {
         $(this)
           .siblings("span.error")
           .text("Sikit kali itu")
