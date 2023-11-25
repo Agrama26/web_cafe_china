@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['login'] == false) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php"); // Redirect jika belum login
     exit();
 }
