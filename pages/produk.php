@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "../includes/koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +52,7 @@
                                 <a class="dropdown-item nav-link btn-nav active" href="#">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="minum.html">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="#">Drink</a>
                             </li>
                         </ul>
                     </li>
@@ -59,7 +64,7 @@
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-person-fill"></i>Login</a>
                     </li>
                 </ul>
@@ -88,9 +93,9 @@
         <div class="container">
             <div class="row">
                 <!-- Kategori -->
-                <div class="col-md-4 col-lg-3 mb-5">
-                    <h5>Category</h5>
-                    <ul class="list-group mt-4">
+                <div class="text-center mb-5">
+                    <h5 class="mb-3">Category</h5>
+                    <!-- <ul class="list-group mt-4">
                         <li class="list-group-item active-danger btn-produk">All</li>
                         <li class="list-group-item btn-produk">
                             <a class="text-dark" style="text-decoration: none" href="produk1/Chinese.html">Chinese</a>
@@ -104,265 +109,60 @@
                         <li class="list-group-item btn-produk">
                             <a class="text-dark" style="text-decoration: none" href="produk1/Western.html">Western</a>
                         </li>
-                    </ul>
+                    </ul> -->
+                    <div class="text-center ">
+                        <button class="btn btn-produk" onclick="showProducts('All')">All</button>
+                        <button class="btn btn-produk" onclick="showProducts('Chinese')">Cina</button>
+                        <button class="btn btn-produk" onclick="showProducts('Japanese')">Jepang</button>
+                        <button class="btn btn-produk" onclick="showProducts('Western')">Western</button>
+                        <button class="btn btn-produk" onclick="showProducts('Lokal')">Indonesia</button>
+                    </div>
                 </div>
                 <!-- Produk -->
-                <div class="col-md-8 col-lg-9">
-                    <h5 class="text-center">All</h5>
-                    <div class="row">
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Indonesian/Klepon.jpeg" data-lightbox="kopi" data-title="Klepon">
-                                    <img src="produk1/img/Indonesian/Klepon 1.jpeg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Klepon</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Chow-Mein.jpg" data-lightbox="kopi" data-title="Chou Mein">
-                                    <img src="produk1/img/Chinese/Chow-Mein1.jpg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Chou Mein</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Jiaozi.jpg" data-lightbox="kopi" data-title="Jiaozi">
-                                    <img src="produk1/img/Chinese/Jiaozi1.jpg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Jiaozi</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="container-fluid ">
+                    <h5 class="text-center"></h5>
+                    <div class="row justify-content-center">
+                        <?php
+                        $sql = "SELECT * FROM products ORDER BY category, country_origin";
+                        $result = mysqli_query($conn, $sql);
 
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Zhajiangmian.jpg" data-lightbox="kopi"
-                                    data-title="Zhajiangmian">
-                                    <img src="produk1/img/Chinese/Zhajiangmian2.jpg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Zhajiangmian</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<div class="col-6 col-sm-6 col-lg-3 mt-3 mb-2 product-item ' . $row['country_origin'] . '">';
+                                echo '<div class="card">';
+                                echo '<a href="detail_produk.php?id=' . $row['product_id'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
+                                echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';
+                                echo '</a>';
+                                echo '<div class="card-body">';
+                                echo '<h5 class="card-title text-center text-danger">';
+                                echo '<strong>' . $row['product_name'] . '</strong>';
+                                echo '</h5>';
+                                echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
+                                echo '<div class="dropdown">';
+                                echo '<a class="btn btn-produk dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">';
+                                echo 'More';
+                                echo '</a>';
+                                echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
+                                echo '<li>';
+                                echo '<a class="dropdown-item" href="detail_produk.php?id=' . $row['product_id'] . '">Details</a>';
+                                echo '</li>';
+                                echo '<li>';
+                                echo '<a class="dropdown-item" href="keranjang.php?action=add&id=' . $row['product_id'] . '">Add To Cart</a>';
+                                echo '</li>';
+                                echo '</ul>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                        }
 
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Japanese/Dorayaki.jpeg" data-lightbox="kopi" data-title="Dorayaki">
-                                    <img src="produk1/img/Japanese/Dorayaki.jpeg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Dorayaki</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Indonesian/Kue Lupis.jpeg" data-lightbox="kopi" data-title="Lupis">
-                                    <img src="produk1/img/Indonesian/Kue Lupis1.jpeg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Lupis</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Japanese/Kibi Dango.jpeg" data-lightbox="kopi" data-title="Dango">
-                                    <img src="produk1/img/Japanese/Kibi Dango.jpeg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Kibi Dango</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Western/burger.jpg" data-lightbox="kopi" data-title="Burger">
-                                    <img src="produk1/img/Western/burger1.jpg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Burger</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Indonesian/tahuwalek.png" data-lightbox="kopi"
-                                    data-title="Tahu walek">
-                                    <img src="produk1/img/Indonesian/tahuwalek1.png" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Tahu Walek</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        mysqli_close($conn);
+                        ?>
 
                         <!-- Pagination -->
                         <nav class="mt-4 d-flex justify-content-center" aria-label="Page navigation example">
@@ -389,383 +189,6 @@
             </div>
         </div>
     </div>
-
-    <!-- PHP -->
-    <section>
-        <h2>Makanan</h2>
-        <ul>
-            <?php
-
-            // Hubungkan ke database MySQL
-            $conn = new mysqli("localhost", "root", "", "kafe_cina");
-
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            // Query SQL untuk mengambil data makanan
-            $sql = "SELECT * FROM products WHERE product_type = 'Makanan'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["product_name"] . " - $" . $row["price"] . "</li>";
-                }
-            } else {
-                echo "Tidak ada makanan yang tersedia.";
-            }
-
-            $conn->close();
-            ?>
-        </ul>
-    </section>
-
-    <!-- Produknya Minum -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row">
-                <!-- Kategori -->
-                <div class="col-md-4 col-lg-3 mb-5">
-                    <h5>Category</h5>
-                    <ul class="list-group mt-4">
-                        <li class="list-group-item active-danger btn-produk">All</li>
-                        <li class="list-group-item btn-produk">
-                            <a class="text-dark" style="text-decoration: none" href="produk1/minum_c.html">Chinese</a>
-                        </li>
-                        <li class="list-group-item btn-produk">
-                            <a class="text-dark" style="text-decoration: none" href="produk1/minum_l.html">Local</a>
-                        </li>
-                        <li class="list-group-item btn-produk">
-                            <a class="text-dark" style="text-decoration: none" href="produk1/minum_j.html">Japanese</a>
-                        </li>
-                        <li class="list-group-item btn-produk">
-                            <a class="text-dark" style="text-decoration: none" href="produk1/minum_w.html">Western</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Produk -->
-                <div class="col-md-8 col-lg-9">
-                    <h5 class="text-center">All</h5>
-                    <div class="row">
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="image/produk/coffee.jpg" data-lightbox="kopi" data-title="Kopi ajah">
-                                    <img src="image/coffee.jpg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Coffee</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail_1.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Soy Milk.jpg" data-lightbox="kopi" data-title="Soy Milk">
-                                    <img src="produk1/img/Chinese/Soy Milk (Square).jpg" class="card-img-top"
-                                        alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Soy Milk</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Yunnan Coffee.jpeg.jpg" data-lightbox="kopi"
-                                    data-title="Yunan Coffee">
-                                    <img src="produk1/img/Chinese/Yunnan Coffee (Square).jpeg.jpg" class="card-img-top"
-                                        alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Yunan Coffee</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Details</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Krisan Tea.jpg" data-lightbox="kopi"
-                                    data-title="Krisan Tea">
-                                    <img src="produk1/img/Chinese/Krisan Tea (Square).jpg" class="card-img-top"
-                                        alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Krisan Tea</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Chinese/Plum Juice.jpg" data-lightbox="kopi"
-                                    data-title="Plum Juice">
-                                    <img src="produk1/img/Chinese/Plum Juice (Square).jpg" class="card-img-top"
-                                        alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Plum Juice</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Indonesian/Bandrek Susu.jpg" data-lightbox="kopi"
-                                    data-title="Bandrek Susu">
-                                    <img src="produk1/img/Indonesian/Bandrek Susu (Square).jpg" class="card-img-top"
-                                        alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Bandrek Susu</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Japanese/Sakura Tea.jpg" data-lightbox="kopi"
-                                    data-title="Sakura Tea">
-                                    <img src="produk1/img/Japanese/Sakura Tea.jpg" class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Sakura Tea</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Western/Tripple Berry Frozen.jpg" data-lightbox="kopi"
-                                    data-title="Tripple Berry Frozen">
-                                    <img src="produk1/img/Western/Tripple Berry Frozen (Square).jpg"
-                                        class="card-img-top" alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Triple Berry Frozen</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-lg-4 mt-3 mb-2">
-                            <div class="card">
-                                <a href="produk1/img/Indonesian/Kopi Sanger.jpg" data-lightbox="kopi"
-                                    data-title="Kopi Sanger">
-                                    <img src="produk1/img/Indonesian/Kopi Sanger (Square).jpg" class="card-img-top"
-                                        alt="404" />
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center text-danger">
-                                        <strong>Kopi Sanger</strong>
-                                    </h5>
-                                    <h5 class="text-center text-danger mb-3">Rp.18.000</h5>
-                                    <div class="dropdown">
-                                        <a class="btn btn-produk dropdown-toggle w-100" href="#" role="button"
-                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="detail.html">Details</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Add To Cart</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pagination -->
-                        <nav class="mt-4 d-flex justify-content-center" aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link btn-produk" href="#">Previous</a>
-                                </li>
-                                <li class="page-item pagination-active-danger">
-                                    <a class="page-link btn-produk" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link btn-produk" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link btn-produk" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link btn-produk" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PHP -->
-    <section>
-        <h2>Minuman</h2>
-        <ul>
-            <?php
-            // Sama seperti sebelumnya, tetapi untuk minuman
-            $conn = new mysqli("localhost", "root", "", "kafe_cina");
-
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT * FROM products WHERE product_type = 'Minuman'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["product_name"] . " - $" . $row["price"] . "</li>";
-                }
-            } else {
-                echo "Tidak ada minuman yang tersedia.";
-            }
-
-            $conn->close();
-            ?>
-        </ul>
-    </section>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
@@ -833,6 +256,31 @@
     <!-- Footer End -->
 
     <!-- Script -->
+    <script>
+        function showProducts(category) {
+            // Semua item produk
+            var products = document.querySelectorAll('.product-item');
+
+            // Menyembunyikan semua item produk
+            products.forEach(function (product) {
+                product.style.display = 'none';
+            });
+
+            // Menampilkan item produk berdasarkan kategori yang dipilih
+            if (category === 'All') {
+                // Menampilkan semua produk
+                products.forEach(function (product) {
+                    product.style.display = 'block';
+                });
+            } else {
+                // Menampilkan produk sesuai kategori
+                var selectedProducts = document.querySelectorAll('.' + category);
+                selectedProducts.forEach(function (product) {
+                    product.style.display = 'block';
+                });
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>

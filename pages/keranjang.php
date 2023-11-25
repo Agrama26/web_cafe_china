@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "../includes/koneksi.php"
+    ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -43,22 +48,22 @@
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="makan.html">Food</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="minum.html">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="product.php">Drink</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="promo.html">Promo</a>
+                        <a class="nav-link" href="promo.php">Promo</a>
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-person-fill"></i>Login</a>
                     </li>
                 </ul>
@@ -231,49 +236,6 @@
         </div>
     </div>
 
-    <!-- PHP -->
-    <section>
-        <h2>Daftar Pesanan</h2>
-        <table>
-            <tr>
-                <th>Nama Produk</th>
-                <th>Harga</th>
-                <th>Jumlah</th>
-                <th>Total</th>
-            </tr>
-            <?php
-
-            // Hubungkan ke database MySQL
-            $conn = new mysqli("localhost", "root", "", "kafe_cina");
-
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            // Query SQL untuk mengambil data pesanan
-            $sql = "SELECT * FROM orders";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row["product_name"] . "</td>";
-                    echo "<td>$" . $row["product_price"] . "</td>";
-                    echo "<td>" . $row["quantity"] . "</td>";
-                    echo "<td>$" . ($row["product_price"] * $row["quantity"]) . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "Keranjang belanja Anda kosong.";
-            }
-
-            $conn->close();
-            ?>
-        </table>
-        <p>Total Belanja: $XX.XX</p>
-        <p><a href="produk.php">Kembali ke Menu Produk</a></p>
-    </section>
-
     <!-- Footer Start -->
     <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
@@ -356,6 +318,55 @@
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
     <link rel="stylesheet" type="text/css" href="../assets/css/custom.css" />
+
+
 </body>
 
 </html>
+<!-- PHP -->
+<?php
+// Jika tombol "Tambah ke Keranjang" diklik
+if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
+    $productID = $_GET['id'];
+
+    // Cek apakah produk sudah ada di dalam keranjang
+    if (isset($_SESSION['carts'][$productID])) {
+        // Jika sudah ada, tambahkan jumlahnya
+        $_SESSION['carts'][$productID]['quantity']++;
+    } else {
+        // Jika belum ada, tambahkan produk ke keranjang
+        // Ambil data produk dari database dan simpan ke dalam keranjang
+        // Gantilah dengan informasi koneksi database Anda
+        $host = "localhost";
+        $user = "root";
+        $password = "";
+        $database = "kafe_cina";
+
+        $conn = mysqli_connect($host, $user, $password, $database);
+
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        $sql = "SELECT * FROM products WHERE product_id = $productID";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+
+            $_SESSION['carts'][$productID] = array(
+                'user_id' => $row['product_id'],
+                'product_id' => $row['product_name'],
+                'price' => $row['price'],
+                'quantity' => 1,
+            );
+        }
+
+        mysqli_close($conn);
+    }
+}
+
+// Redirect kembali ke halaman index.php setelah menambah ke keranjang
+// header("Location: index.php");
+// exit();
+?>

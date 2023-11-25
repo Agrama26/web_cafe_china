@@ -24,9 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result && mysqli_num_rows($result) > 0) {
       $user = mysqli_fetch_assoc($result);
-      if (password_verify($loginPassword, $user['password'])) {
+      if (password_verify($loginPassword, $user['passwordd'])) {
         // Login berhasil
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['user_id'];
         header("Location: index.php");
         exit();
       } else {
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <!-- Form Box -->
           <div class="col-sm-6 form">
             <!-- Login Form -->
-            <div class="login form-peice ">
+            <div class="login form-peice <?php echo $formClass; ?>">
               <form class="login-form" action="#" method="post">
                 <div class="form-group">
                   <label for="loginemail">Email Lu</label>
@@ -177,8 +177,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="signup form-peice switched">
               <form class="signup-form" action="#" method="post">
                 <div class="form-group">
-                  <label for="username">Nama Lu</label>
-                  <input type="text" name="username" id="username" class="username" />
+                  <label for="uname">Nama Lu</label>
+                  <input type="text" name="username" id="uname" class="username" />
                   <span class="error"></span>
                 </div>
 
@@ -189,13 +189,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="form-group">
-                  <label for="phone">08 berapa? - <small>null</small></label>
-                  <input type="text" name="phone" id="phone" />
+                  <label for="no_hp">08 berapa? - <small>null</small></label>
+                  <input type="text" name="phone" id="no_hp" />
                 </div>
 
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" name="password" id="password" class="pass" />
+                  <label for="passlu">Password</label>
+                  <input type="password" name="password" id="passlu" class="pass" />
                   <span class="error"></span>
                 </div>
 
@@ -222,9 +222,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="../assets/js/login.js"></script>
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
