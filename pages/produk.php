@@ -112,7 +112,7 @@ include "../includes/koneksi.php";
                             <a class="text-dark" style="text-decoration: none" href="produk1/Western.html">Western</a>
                         </li>
                     </ul> -->
-                    <div class="text-center ">
+                    <div class="text-center pt-3">
                         <button class="btn btn-produk" onclick="showProducts('All')">All</button>
                         <button class="btn btn-produk" onclick="showProducts('Chinese')">Cina</button>
                         <button class="btn btn-produk" onclick="showProducts('Japanese')">Jepang</button>
@@ -130,7 +130,7 @@ include "../includes/koneksi.php";
 
                         if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<div data-aos="zoom-in-down" class="col-6 col-sm-6 col-lg-3 mt-3 mb-2 product-item ' . $row['country_origin'] . '"> ';
+                                echo '<div data-aos="zoom-in-down" class="col-6 col-sm-6 col-lg-3 mb-4 product-item ' . $row['country_origin'] . '"> ';
                                 echo '<div class="card">';
                                 echo '<a href="detail_produk.php?id=' . $row['product_id'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
                                 echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';

@@ -25,6 +25,7 @@ require './session.php';
     <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -72,22 +73,41 @@ require './session.php';
     </nav>
 
     <!-- Banner -->
-    <div class="container-fluid banner">
-        <div class="container">
-            <div class="row">
-                <h3 class="text-light display-6">
-                    Selamat Datang <br />di Cafe<span> China</span>
-                </h3>
-                <p class="text-light opacity-75 mt-2">
-                    Ayo kunjungi cafe dengan nuansa china,
-                    <br class="d-none d-md-block" />
-                    kapan lagi nongki serasa di china
-                </p>
-                <div class="mt-1">
-                    <a href="#" class="btn btn-light bg-btn px-4 shadow"> Belanja </a>
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- <div class="carousel-item ">
+                <img src="../assets/images/logo/tempat2.png" class="d-block w-100" alt="Slide 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Selamat Datang di Cafe <span>China</span></h3>
+                    <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
+                </div>
+            </div> -->
+            <div class="carousel-item">
+                <img src="../assets/images/logo/ghost1.png" class="d-block w-100" alt="Slide 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
+                    <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
+                </div>
+            </div>
+            <div class="carousel-item active">
+                <video class="d-block w-100" autoplay loop muted>
+                    <source src="../assets/images/logo/hu-tao.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Video Slide</h3>
+                    <p>Deskripsi video slide.</p>
                 </div>
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 
     <!-- Menu Promo -->
@@ -427,7 +447,7 @@ require './session.php';
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger px-4 mt-3" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
-                        Add To Cart
+                        Submit
                     </button>
 
                     <!-- Modal -->
@@ -543,6 +563,10 @@ require './session.php';
             once: true // Animasi hanya akan dimainkan satu kali
         });
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
