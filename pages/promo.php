@@ -45,22 +45,22 @@
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="makan.html">Food</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="minum.html">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk.php">Drink</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link active" href="promo.html">Promo</a>
+                        <a class="nav-link active" href="#">Promo</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="keranjang.html" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="keranjang.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-person-fill"></i>Login</a>
                     </li>
                 </ul>
@@ -108,7 +108,7 @@
                 <div class="row justify-content-center">
                     <div class="col-6 col-sm-6 col-lg-3 mb-3">
                         <div class="card">
-                            <a href="image/produk/coffee.jpg" data-lightbox="Produk" data-title="Coffee">
+                            <a href="..assets/images/Western/coffee_1.jpg" data-lightbox="Produk" data-title="Coffee">
                                 <img src="image/coffee.jpg" class="card-img-top" alt="..." />
                             </a>
                             <div class="card-body">

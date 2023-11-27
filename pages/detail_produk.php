@@ -43,8 +43,51 @@ mysqli_close($conn);
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
+                <ul class="navbar-nav ms-auto d-flex gap-3">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" aria-current="page" href="../admin/index.php">Home</a>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Product
+                        </a>
+                        <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item nav-link btn-nav active" href="#">Food</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link btn-nav" href="#">Drink</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="promo.php">Promo</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="keranjang.php" tabindex="-1" aria-disabled="true"><i
+                                class="bi bi-cart2"></i>Cart</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                                class="bi bi-person-fill"></i>Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div class="container">
+    <!-- Produk -->
+    <div class="container py-5 pt-5">
         <div class="row mt-3">
             <div class="col-lg-6">
                 <div class="card">
@@ -87,7 +130,6 @@ mysqli_close($conn);
             </div>
         </div>
     </div>
-
 
     <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"

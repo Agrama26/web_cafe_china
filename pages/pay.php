@@ -59,7 +59,7 @@
                 class="bi bi-cart2"></i>Cart</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="login.php" tabindex="-1" aria-disabled="true"><i
+            <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
                 class="bi bi-person-fill"></i>Login</a>
           </li>
         </ul>
@@ -96,12 +96,12 @@
             <h3 class="text-judul mt-5">Kurir Pengiriman</h3>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="kurir" />
-              <img src="../assets/images/kurir-1.png" />
+              <img src="../assets/images/logo/kurir-1.png" />
               <span class="float-end">+ Rp 10.000</span>
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="kurir" />
-              <img src="../assets/images/kurir-2.png" />
+              <img src="../assets/images/logo/kurir-2.png" />
               <span class="float-end">+ Rp 12.000</span>
             </label>
 
@@ -116,15 +116,15 @@
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="pembayaran" />
-              <img src="../assets/images/bayar-1.png" />
+              <img src="../assets/images/logo/bayar-1.png" />
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="pembayaran" />
-              <img src="../assets/images/bayar-2.png" />
+              <img src="../assets/images/logo/bayar-2.png" />
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="pembayaran" />
-              <img src="../assets/images/bayar-3.png" />
+              <img src="../assets/images/logo/bayar-3.png" />
             </label>
 
             <button type="submit" class="btn btn-lg btn-danger mt-5 mb-5">

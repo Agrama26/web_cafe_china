@@ -63,7 +63,7 @@ include "../includes/koneksi.php"
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="logout.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-person-fill"></i>Login</a>
                     </li>
                 </ul>

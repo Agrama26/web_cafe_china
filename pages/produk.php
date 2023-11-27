@@ -26,6 +26,8 @@ include "../includes/koneksi.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
@@ -60,7 +62,7 @@ include "../includes/koneksi.php";
                         <a class="nav-link" href="promo.php">Promo</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="keranjang.html" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="keranjang.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
@@ -119,8 +121,6 @@ include "../includes/koneksi.php";
                     </div>
                 </div>
                 <!-- Produk -->
-
-
                 <div class="container-fluid ">
                     <h5 class="text-center"></h5>
                     <div class="row justify-content-center">
@@ -130,7 +130,7 @@ include "../includes/koneksi.php";
 
                         if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<div class="col-6 col-sm-6 col-lg-3 mt-3 mb-2 product-item ' . $row['country_origin'] . '">';
+                                echo '<div data-aos="zoom-in-down" class="col-6 col-sm-6 col-lg-3 mt-3 mb-2 product-item ' . $row['country_origin'] . '"> ';
                                 echo '<div class="card">';
                                 echo '<a href="detail_produk.php?id=' . $row['product_id'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
                                 echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';
@@ -285,6 +285,13 @@ include "../includes/koneksi.php";
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
     <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
+    <script>
+        AOS.init({
+            duration: 500, // Durasi animasi dalam milidetik
+            offset: 50, // Offset untuk memicu animasi lebih awal atau lebih lambat
+            once: true // Animasi hanya akan dimainkan satu kali
+        });
+    </script>
 </body>
 
 </html>
