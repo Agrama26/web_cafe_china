@@ -1,3 +1,8 @@
+<?php
+require '../admin/session.php';
+include "../includes/koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +52,7 @@
                 <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
               </li>
               <li>
-                <a class="dropdown-item nav-link btn-nav" href="produk.php">Drink</a>
+                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
               </li>
             </ul>
           </li>
@@ -60,7 +65,7 @@
           </li>
           <li class="nav-item me-3">
             <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
-                class="bi bi-person-fill"></i>Login</a>
+                class="bi bi-box-arrow-left"></i>Logout</a>
           </li>
         </ul>
       </div>
@@ -189,10 +194,13 @@
             <i class="fa fa-envelope me-3"></i>kelompok2@gmail.com
           </p>
           <div class="d-flex pt-2">
-            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-outline-light btn-social" href=""><i class="bi bi-instagram"></i></a>
+            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social"
+              href="https://www.facebook.com/profile.php?id=100009281760851"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-social"
+              href="https://www.youtube.com/channel/UC8NhEuvVu0tQHqpRHKP6rnw"><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/ramadhan_agung_/?hl=en"><i
+                class="bi bi-instagram"></i></a>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
@@ -204,7 +212,7 @@
         </div>
         <div class="col-lg-3 col-md-6">
           <h4 class="section-judul text-start mb-4">Newsletter</h4>
-          <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+          <p>Besok Tutup ges</p>
         </div>
       </div>
     </div>
@@ -218,7 +226,7 @@
           </div>
           <div class="col-md-6 text-center text-md-end">
             <div class="footer-menu">
-              <a class="" href="index.html">Home</a>
+              <a class="" href="#">Home</a>
               <a class="" href="">Cookies</a>
               <a class="" href="">Help</a>
               <a class="" href="">FQAs</a>

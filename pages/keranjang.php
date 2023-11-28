@@ -1,7 +1,7 @@
 <?php
-session_start();
-include "../includes/koneksi.php"
-    ?>
+include "../includes/koneksi.php";
+require '../admin/session.php';
+?>
 
 <!DOCTYPE html>
 <html>
@@ -51,7 +51,7 @@ include "../includes/koneksi.php"
                                 <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="product.php">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
@@ -64,7 +64,7 @@ include "../includes/koneksi.php"
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
-                                class="bi bi-person-fill"></i>Login</a>
+                                class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -260,10 +260,15 @@ include "../includes/koneksi.php"
                         <i class="fa fa-envelope me-3"></i>kelompok2@gmail.com
                     </p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="bi bi-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.facebook.com/profile.php?id=100009281760851"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.youtube.com/channel/UC8NhEuvVu0tQHqpRHKP6rnw"><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.instagram.com/ramadhan_agung_/?hl=en"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -275,14 +280,7 @@ include "../includes/koneksi.php"
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="section-judul text-start mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px">
-                        <input class="form-control border-danger w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Your email" />
-                        <button type="button" class="btn bg-btn py-2 position-absolute top-0 end-0 mt-2 me-2">
-                            SignUp
-                        </button>
-                    </div>
+                    <p>Besok Tutup ges</p>
                 </div>
             </div>
         </div>
@@ -296,7 +294,7 @@ include "../includes/koneksi.php"
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a class="" href="index.html">Home</a>
+                            <a class="" href="#">Home</a>
                             <a class="" href="">Cookies</a>
                             <a class="" href="">Help</a>
                             <a class="" href="">FQAs</a>
@@ -319,54 +317,6 @@ include "../includes/koneksi.php"
         async></script>
     <link rel="stylesheet" type="text/css" href="../assets/css/custom.css" />
 
-
 </body>
 
 </html>
-<!-- PHP -->
-<?php
-// Jika tombol "Tambah ke Keranjang" diklik
-if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
-    $productID = $_GET['id'];
-
-    // Cek apakah produk sudah ada di dalam keranjang
-    if (isset($_SESSION['carts'][$productID])) {
-        // Jika sudah ada, tambahkan jumlahnya
-        $_SESSION['carts'][$productID]['quantity']++;
-    } else {
-        // Jika belum ada, tambahkan produk ke keranjang
-        // Ambil data produk dari database dan simpan ke dalam keranjang
-        // Gantilah dengan informasi koneksi database Anda
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        $database = "kafe_cina";
-
-        $conn = mysqli_connect($host, $user, $password, $database);
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        $sql = "SELECT * FROM products WHERE product_id = $productID";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-
-            $_SESSION['carts'][$productID] = array(
-                'user_id' => $row['product_id'],
-                'product_id' => $row['product_name'],
-                'price' => $row['price'],
-                'quantity' => 1,
-            );
-        }
-
-        mysqli_close($conn);
-    }
-}
-
-// Redirect kembali ke halaman index.php setelah menambah ke keranjang
-// header("Location: index.php");
-// exit();
-?>

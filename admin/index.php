@@ -1,5 +1,19 @@
 <?php
 require './session.php';
+include "../includes/koneksi.php";
+
+$productID = isset($_GET['id']) ? $_GET['id'] : 1;
+
+$sql = "SELECT * FROM users WHERE user_id = $productID";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+    $userData = mysqli_fetch_assoc($result);
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +78,8 @@ require './session.php';
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="login.php" tabindex="-1" aria-disabled="true"><i
-                                class="bi bi-person-fill"></i>Login</a>
+                        <a class="nav-link" href="logout.php" tabindex="-1" aria-disabled="true"><i
+                                class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -75,14 +89,7 @@ require './session.php';
     <!-- Banner -->
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <!-- <div class="carousel-item ">
-                <img src="../assets/images/logo/tempat2.png" class="d-block w-100" alt="Slide 1">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Selamat Datang di Cafe <span>China</span></h3>
-                    <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
-                </div>
-            </div> -->
-            <div class="carousel-item">
+            <div class="carousel-item banner">
                 <img src="../assets/images/logo/ghost1.png" class="d-block w-100" alt="Slide 2">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
@@ -95,8 +102,10 @@ require './session.php';
                     Your browser does not support the video tag.
                 </video>
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>Video Slide</h3>
-                    <p>Deskripsi video slide.</p>
+                    <h3>Selamat Datang</h3>
+                    <p>
+                        <?php echo $userData['username']; ?> Di Cafe China.
+                    </p>
                 </div>
             </div>
         </div>
@@ -164,7 +173,7 @@ require './session.php';
                 </div>
 
                 <div class="mt-5 d-flex justify-content-center mb-2">
-                    <a href="promo.html" class="btn bg-btn px-4 shadow">Lihat Semua Promo
+                    <a href="../pages/promo.php" class="btn bg-btn px-4 shadow">See All Promo
                     </a>
                 </div>
             </div>
@@ -193,7 +202,7 @@ require './session.php';
                 <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="zoom-in">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
-                            <a href="pelayanan/bangku.html"><i class="text-light bi bi-shop-window display-6"></i></a>
+                            <a href="#"><i class="text-light bi bi-shop-window display-6"></i></a>
                         </div>
                     </div>
                     <div class="mt-3 text-light text-center">
@@ -207,7 +216,7 @@ require './session.php';
                 <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="fade-left">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
-                            <a href="pelayanan/karaoke.html"><i class="text-light bi bi-mic display-6"></i></a>
+                            <a href="#"><i class="text-light bi bi-mic display-6"></i></a>
                         </div>
                     </div>
                     <div class="mt-3 text-light text-center">
@@ -295,14 +304,14 @@ require './session.php';
                 <div class="dropdown">
                     <a class="btn bg-btn dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Lihat Lainnya
+                        See All
                     </a>
                     <ul class="dropdown-menu" data-aos="fade-up" aria-labelledby="dropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="makan.html">Food</a>
+                            <a class="dropdown-item" href="produk.php">Food</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="minum.html">Drink</a>
+                            <a class="dropdown-item" href="produk1.php">Drink</a>
                         </li>
                     </ul>
                 </div>
@@ -561,6 +570,56 @@ require './session.php';
             duration: 500, // Durasi animasi dalam milidetik
             offset: 50, // Offset untuk memicu animasi lebih awal atau lebih lambat
             once: true // Animasi hanya akan dimainkan satu kali
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 500,
+                offset: 50,
+                once: true
+            });
         });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

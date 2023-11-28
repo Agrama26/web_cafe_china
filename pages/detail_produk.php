@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "../admin/session.php";
 include "../includes/koneksi.php";
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -23,7 +23,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details -
-        <?php echo $productData['name']; ?>
+        <?php echo $productData['product_name']; ?>
     </title>
     <!-- icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
@@ -63,10 +63,10 @@ mysqli_close($conn);
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav active" href="#">Food</a>
+                                <a class="dropdown-item nav-link btn-nav active" href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="#">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
@@ -79,7 +79,7 @@ mysqli_close($conn);
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
-                                class="bi bi-person-fill"></i>Login</a>
+                                class="bi bi-box-arrow-left"></i>Login</a>
                     </li>
                 </ul>
             </div>

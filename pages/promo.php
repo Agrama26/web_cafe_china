@@ -1,8 +1,13 @@
+<?php
+require '../admin/session.php';
+include "../includes/koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Promo Kafe Kita</title>
+    <title>Promo</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,7 +66,7 @@
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
-                                class="bi bi-person-fill"></i>Login</a>
+                                class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -101,7 +106,6 @@
                     <button class="btn btn-promo w-100 fs-6 mb-3">Promo Bonus</button>
                 </div>
             </div>
-
             <!-- Isi Promo -->
             <!-- Semua Promo -->
             <div id="semuapromo">
@@ -300,36 +304,6 @@
         </div>
     </div>
 
-    <!-- PHP -->
-    <section>
-        <h2>Promo Hari Ini</h2>
-        <ul>
-            <?php
-
-            // Hubungkan ke database MySQL
-            $conn = new mysqli("localhost", "root", "", "kafe_cina");
-
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            // Query SQL untuk mengambil data promo
-            $sql = "SELECT * FROM promotions";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["promo_name"] . " - " . $row["description"] . "</li>";
-                }
-            } else {
-                echo "Tidak ada promo yang tersedia.";
-            }
-
-            $conn->close();
-            ?>
-        </ul>
-    </section>
-
     <!-- Footer Start -->
     <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
@@ -354,10 +328,15 @@
                         <i class="fa fa-envelope me-3"></i>kelompok2@gmail.com
                     </p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="bi bi-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.facebook.com/profile.php?id=100009281760851"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.youtube.com/channel/UC8NhEuvVu0tQHqpRHKP6rnw"><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.instagram.com/ramadhan_agung_/?hl=en"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -369,7 +348,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="section-judul text-start mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <p>Besok Tutup ges</p>
                 </div>
             </div>
         </div>
@@ -383,7 +362,7 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a class="" href="index.html">Home</a>
+                            <a class="" href="#">Home</a>
                             <a class="" href="">Cookies</a>
                             <a class="" href="">Help</a>
                             <a class="" href="">FQAs</a>

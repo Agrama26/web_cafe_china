@@ -51,10 +51,10 @@ require '../admin/session.php';
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav active" href="#">Food</a>
+                                <a class="dropdown-item nav-link btn-nav " href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav active" href="#">Drink</a>
                             </li>
                         </ul>
                     </li>
@@ -90,7 +90,7 @@ require '../admin/session.php';
         </div>
     </div>
 
-    <!-- Produknya Makan -->
+    <!-- Produknya Minum -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
@@ -123,7 +123,7 @@ require '../admin/session.php';
                     <h5 class="text-center mb-3">Product</h5>
                     <div class="row justify-content-center">
                         <?php
-                        $sql = "SELECT * FROM products WHERE category = 'Makanan' ORDER BY country_origin";
+                        $sql = "SELECT * FROM products WHERE category = 'Minuman' ORDER BY country_origin";
                         $result = mysqli_query($conn, $sql);
 
                         if ($result) {
