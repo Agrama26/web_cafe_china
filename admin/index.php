@@ -66,7 +66,7 @@ mysqli_close($conn);
                                 <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
@@ -89,7 +89,7 @@ mysqli_close($conn);
     <!-- Banner -->
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item banner">
+            <div class="carousel-item">
                 <img src="../assets/images/logo/ghost1.png" class="d-block w-100" alt="Slide 2">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
@@ -138,7 +138,7 @@ mysqli_close($conn);
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Lokal/Klepon 1.jpeg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Bonus Kelapa</h5>
                             <p class="card-text">
@@ -254,7 +254,7 @@ mysqli_close($conn);
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
                         <a href="../assets/images/Lokal/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
-                            <img src="../assets/images/Lokal/Klepon 1.jpeg" class="card-img-top" alt="404" />
+                            <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Klepon Cake</h6>

@@ -1,13 +1,21 @@
 <?php
 include "../includes/koneksi.php";
 require '../admin/session.php';
+
+// Pastikan Anda memiliki informasi pengguna saat ini atau sesuaikan sesuai kebutuhan
+$user_id = 1; // Gantilah ini dengan metode untuk mendapatkan ID pengguna saat ini
+
+// Query untuk mengambil produk dari tabel kafe_cina berdasarkan user_id
+$query = "SELECT * FROM carts WHERE user_id = $user_id";
+$result = $conn->query($query);
 ?>
+
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Keranjang Belanja - Kafe Cina</title>
+    <title>Cart</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- icon -->
@@ -87,8 +95,73 @@ require '../admin/session.php';
         </div>
     </div>
 
-    <!-- Belanja -->
     <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-judul-halaman text-center">Keranjang Belanja</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nama Produk</th>
+                                <th>Harga Satuan</th>
+                                <th>Kuantitas</th>
+                                <th>Harga</th>
+                                <th>Hapus</th>
+                            </tr>
+                            <?php
+                            while ($row = $result->fetch_assoc()) {
+                                // Query untuk mendapatkan informasi produk berdasarkan produk_id
+                                $produk_id = $row['produk_id'];
+                                $produkQuery = "SELECT * FROM products WHERE id = $produk_id";
+                                $produkResult = $conn->query($produkQuery);
+                                $produk = $produkResult->fetch_assoc();
+                                ?>
+                                <tr>
+                                    <td>
+                                        <img src="<?php echo $produk['foto']; ?>" class="img-cart"
+                                            style="height: 80px; width: 80px" />
+                                    </td>
+                                    <td>
+                                        <?php echo $produk['nama_produk']; ?><br />
+                                        <small>
+                                            <?php echo $produk['deskripsi']; ?>
+                                        </small>
+                                    </td>
+                                    <td>Rp.
+                                        <?php echo number_format($produk['harga_satuan'], 0, ',', '.'); ?>
+                                    </td>
+                                    <td>
+                                        <input type="number" value="<?php echo $row['quantity']; ?>"
+                                            class="form-control input-kuantitas" />
+                                    </td>
+                                    <td>Rp.
+                                        <?php echo number_format($row['quantity'] * $produk['harga_satuan'], 0, ',', '.'); ?>
+                                    </td>
+                                    <td>
+                                        <a href="hapus_item.php?id=<?php echo $row['id']; ?>"
+                                            class="btn btn-danger rounded-circle btn-tambah">
+                                            <!-- Icon Hapus -->
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Belanja -->
+    <!-- <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -234,7 +307,7 @@ require '../admin/session.php';
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">

@@ -7,7 +7,7 @@ require '../admin/session.php';
 <html>
 
 <head>
-    <title>Menu Produk - Kafe Kita</title>
+    <title>Produk | Minuman</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
