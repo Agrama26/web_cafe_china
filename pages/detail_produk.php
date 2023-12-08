@@ -14,6 +14,20 @@ if ($result) {
 }
 
 mysqli_close($conn);
+if (isset($_POST['add_to_cart'])) {
+    $cartItem = [
+        'id' => $productId,
+        'name' => $productData['name'],
+        'price' => $productData['price'],
+    ];
+
+    // Tambahkan produk ke session keranjang belanja
+    $_SESSION['cart'][] = $cartItem;
+
+    // Redirect ke halaman keranjang
+    header("Location: keranjang.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -146,7 +160,7 @@ mysqli_close($conn);
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <input type="number" value="2" class="form-control input-kuantitas" />
+                                        <input type="number" value="0" class="form-control input-kuantitas" />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">

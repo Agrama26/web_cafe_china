@@ -8,8 +8,24 @@ $user_id = 1; // Gantilah ini dengan metode untuk mendapatkan ID pengguna saat i
 // Query untuk mengambil produk dari tabel kafe_cina berdasarkan user_id
 $query = "SELECT * FROM carts WHERE user_id = $user_id";
 $result = $conn->query($query);
-?>
 
+function calculateTotalPrice($cartItems, $conn)
+{
+    $totalPrice = 0;
+    foreach ($cartItems as $item) {
+        $productId = $item['product_id'];
+        $sql = "SELECT * FROM products WHERE product_id = $productId";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $productData = $result->fetch_assoc();
+            $totalPrice += $item['quantity'] * $productData['price'];
+        }
+    }
+    return $totalPrice;
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -95,6 +111,7 @@ $result = $conn->query($query);
         </div>
     </div>
 
+    <!-- Belanja -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
@@ -109,7 +126,7 @@ $result = $conn->query($query);
                         <table class="table">
                             <tr>
                                 <th>Foto</th>
-                                <th>Nama Produk</th>
+                                <th>Nama Produk & Deskripsi</th>
                                 <th>Harga Satuan</th>
                                 <th>Kuantitas</th>
                                 <th>Harga</th>
@@ -117,37 +134,37 @@ $result = $conn->query($query);
                             </tr>
                             <?php
                             while ($row = $result->fetch_assoc()) {
-                                // Query untuk mendapatkan informasi produk berdasarkan produk_id
-                                $produk_id = $row['produk_id'];
-                                $produkQuery = "SELECT * FROM products WHERE id = $produk_id";
+
+                                $produk_id = $row['product_id'];
+                                $produkQuery = "SELECT * FROM products WHERE product_id = $produk_id";
                                 $produkResult = $conn->query($produkQuery);
                                 $produk = $produkResult->fetch_assoc();
                                 ?>
                                 <tr>
                                     <td>
-                                        <img src="<?php echo $produk['foto']; ?>" class="img-cart"
+                                        <img src="<?php echo $produk['imagePath']; ?>" class="img-cart"
                                             style="height: 80px; width: 80px" />
                                     </td>
                                     <td>
-                                        <?php echo $produk['nama_produk']; ?><br />
+                                        <?php echo $produk['product_name']; ?><br />
                                         <small>
-                                            <?php echo $produk['deskripsi']; ?>
+                                            <?php echo $produk['description']; ?>
                                         </small>
                                     </td>
                                     <td>Rp.
-                                        <?php echo number_format($produk['harga_satuan'], 0, ',', '.'); ?>
+                                        <?php echo number_format($produk['price'], 0, ',', '.'); ?>
                                     </td>
                                     <td>
                                         <input type="number" value="<?php echo $row['quantity']; ?>"
                                             class="form-control input-kuantitas" />
                                     </td>
                                     <td>Rp.
-                                        <?php echo number_format($row['quantity'] * $produk['harga_satuan'], 0, ',', '.'); ?>
+                                        <?php echo number_format($row['quantity'] * $produk['price'], 0, ',', '.'); ?>
                                     </td>
                                     <td>
-                                        <a href="hapus_item.php?id=<?php echo $row['id']; ?>"
+                                        <a href="hapus.php?id=<?php echo $row['id']; ?>"
                                             class="btn btn-danger rounded-circle btn-tambah">
-                                            <!-- Icon Hapus -->
+
                                         </a>
                                     </td>
                                 </tr>
@@ -160,7 +177,7 @@ $result = $conn->query($query);
             </div>
         </div>
     </div>
-    <!-- Belanja -->
+
     <!-- <div class="container-fluid py-5">
         <div class="container">
             <div class="row">

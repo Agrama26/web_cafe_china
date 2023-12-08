@@ -25,6 +25,18 @@ function getPromotions($type = '')
     return $promotions;
 }
 
+// Handle Add to Cart logic
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $productId = $_POST['product_id'];
+
+    // Assuming you have user authentication in place, get the user ID
+    $userId = 1; // Replace with your user authentication logic
+
+    // Add the product to the cart
+    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
+    $conn->query($sql);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -148,7 +160,10 @@ function getPromotions($type = '')
                         echo '<div class="card-body">';
                         echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
                         echo '<p class="text-center">' . $promotion['description'] . '</p>';
-                        echo '<button class="btn btn-promo w-100">Add To Cart</button>';
+                        echo '<form method="post" action="">';
+                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                        echo '</form>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
