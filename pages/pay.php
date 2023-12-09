@@ -1,6 +1,22 @@
 <?php
 require '../admin/session.php';
 include "../includes/koneksi.php";
+
+$cartTotal = 0;
+
+$sqlCart = "SELECT products.product_name, products.price, carts.quantity
+            FROM carts
+            JOIN products ON carts.product_id = products.product_id
+            WHERE carts.user_id = 1"; // Replace with your user authentication logic
+
+$resultCart = mysqli_query($conn, $sqlCart);
+if ($resultCart) {
+  while ($cartItem = mysqli_fetch_assoc($resultCart)) {
+    $cartTotal += $cartItem['price'] * $cartItem['quantity'];
+  }
+} else {
+  echo "Error: " . $sqlCart . "<br>" . mysqli_error($conn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -147,7 +163,9 @@ include "../includes/koneksi.php";
             <div class="card-body">
               <div class="row mt-2 mb-2">
                 <div class="col-md"><small>Sub Total</small></div>
-                <div class="col-md">Rp. 146.000</div>
+                <div class="col-md">Rp.
+                  <?= number_format($cartTotal, 0, ',', '.') ?>
+                </div>
               </div>
               <div class="row mt-2 mb-2">
                 <div class="col-md"><small>Biaya pengiriman</small></div>

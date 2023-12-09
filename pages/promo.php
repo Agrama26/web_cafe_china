@@ -27,7 +27,7 @@ function getPromotions($type = '')
 
 // Handle Add to Cart logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $productId = $_POST['product_id'];
+    $productId = $_POST['promo_id'];
 
     // Assuming you have user authentication in place, get the user ID
     $userId = 1; // Replace with your user authentication logic
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
                         echo '<p class="text-center">' . $promotion['description'] . '</p>';
                         echo '<form method="post" action="">';
-                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<input type="hidden" name="promo_id" value="' . $promotion['promo_id'] . '">';
                         echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
                         echo '</form>';
                         echo '</div>';
@@ -189,7 +189,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         echo '<div class="card-body">';
                         echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
                         echo '<p class="text-center">' . $promotion['description'] . '</p>';
-                        echo '<button class="btn btn-promo w-100">Add To Cart</button>';
+                        echo '<form method="post" action="">';
+                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                        echo '</form>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
@@ -215,7 +218,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         echo '<div class="card-body">';
                         echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
                         echo '<p class="text-center">' . $promotion['description'] . '</p>';
-                        echo '<button class="btn btn-promo w-100">Add To Cart</button>';
+                        echo '<form method="post" action="">';
+                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                        echo '</form>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';

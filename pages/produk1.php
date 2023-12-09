@@ -1,6 +1,23 @@
 <?php
 include "../includes/koneksi.php";
 require '../admin/session.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $productId = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
+
+    // Assuming you have user authentication in place, get the user ID
+    $userId = 1; // Replace with your user authentication logic
+
+    // Add the product to the cart
+    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, $quantity)";
+    $conn->query($sql);
+
+    // Display an alert with the added quantity
+    echo '<script>';
+    echo 'alert("Added ' . $quantity . ' item(s) to your cart!");';
+    echo '</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -138,6 +155,12 @@ require '../admin/session.php';
                                 echo '<strong>' . $row['product_name'] . '</strong>';
                                 echo '</h5>';
                                 echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
+                                echo '<form method="post" action="">';
+                                echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
+                                echo '<div class="form-group">';
+                                echo '<label for="quantity"></label>';
+                                echo '<input type="number" name="quantity" id="quantity" class="mb-2 btn-produk form-control" value="1" min="1">';
+                                echo '</div>';
                                 echo '<div class="dropdown">';
                                 echo '<a class="btn btn-produk dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">';
                                 echo 'More';
@@ -147,10 +170,11 @@ require '../admin/session.php';
                                 echo '<a class="dropdown-item" href="detail_produk.php?id=' . $row['product_id'] . '">Details</a>';
                                 echo '</li>';
                                 echo '<li>';
-                                echo '<a class="dropdown-item" href="keranjang.php?action=add&id=' . $row['product_id'] . '">Add To Cart</a>';
+                                echo '<button type="submit" name="add_to_cart" class="dropdown-item">Add To Cart</button>';
                                 echo '</li>';
                                 echo '</ul>';
                                 echo '</div>';
+                                echo '</form>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
@@ -163,7 +187,7 @@ require '../admin/session.php';
                         ?>
 
                         <!-- Pagination -->
-                        <nav class="mt-4 d-flex justify-content-center" aria-label="Page navigation example">
+                        <!-- <nav class="mt-4 d-flex justify-content-center" aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
                                     <a class="page-link btn-produk" href="#">Previous</a>
@@ -181,7 +205,7 @@ require '../admin/session.php';
                                     <a class="page-link btn-produk" href="#">Next</a>
                                 </li>
                             </ul>
-                        </nav>
+                        </nav> -->
                     </div>
                 </div>
             </div>

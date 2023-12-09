@@ -150,7 +150,7 @@ mysqli_close($conn);
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Japanese/Sakura Tea Latte.jpeg.jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Japanese/Sakura Tea Latte.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Gratis Garpu</h5>
                             <p class="card-text">
@@ -308,10 +308,10 @@ mysqli_close($conn);
                     </a>
                     <ul class="dropdown-menu" data-aos="fade-up" aria-labelledby="dropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="produk.php">Food</a>
+                            <a class="dropdown-item" href="../pages/produk.php">Food</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="produk1.php">Drink</a>
+                            <a class="dropdown-item" href="../pages/produk1.php">Drink</a>
                         </li>
                     </ul>
                 </div>
