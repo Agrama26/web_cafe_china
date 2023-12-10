@@ -12,6 +12,18 @@ a span {
   font-weight: bolder;
 }
 
+.banner {
+  height: 80vh;
+  background: linear-gradient rgba(0, 0, 0, 0.9);
+  background: linear-gradient(67deg, #000 0%, #3a0202 100%);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .btn-nav:hover {
   background-color: rgb(226, 40, 40);
   color: #fff;
@@ -33,18 +45,6 @@ a span {
 
 h3 span {
   color: rgb(226, 40, 40);
-}
-
-.banner {
-  height: 80vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
-  background-image: url("../images/logo/hu2.jpg");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .animasi:hover {

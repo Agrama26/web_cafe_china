@@ -1,8 +1,49 @@
+<?php
+require '../admin/session.php';
+include "../includes/koneksi.php";
+
+// Function to fetch promotions from the database
+function getPromotions($type = '')
+{
+    global $conn;
+    $promotions = [];
+
+    if ($type === '') {
+        $sql = "SELECT * FROM promotions";
+    } else {
+        $sql = "SELECT * FROM promotions WHERE type = '$type'";
+    }
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $promotions[] = $row;
+        }
+    }
+
+    return $promotions;
+}
+
+// Handle Add to Cart logic
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $productId = $_POST['promo_id'];
+
+    // Assuming you have user authentication in place, get the user ID
+    $userId = 1; // Replace with your user authentication logic
+
+    // Add the product to the cart
+    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
+    $conn->query($sql);
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Promo Kafe Kita</title>
+    <title>Promo</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,23 +86,23 @@
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="makan.html">Food</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="minum.html">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link active" href="promo.html">Promo</a>
+                        <a class="nav-link active" href="#">Promo</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="keranjang.html" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="keranjang.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="login.html" tabindex="-1" aria-disabled="true"><i
-                                class="bi bi-person-fill"></i>Login</a>
+                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                                class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -84,7 +125,7 @@
         </div>
     </div>
 
-    <!-- promo -->
+    <!-- Promo -->
     <div class="container-fluid py-5">
         <div class="container">
             <!-- kategori promo -->
@@ -103,232 +144,95 @@
             </div>
 
             <!-- Isi Promo -->
-            <!-- Semua Promo -->
+            <!-- All Promo -->
             <div id="semuapromo">
                 <div class="row justify-content-center">
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="image/produk/coffee.jpg" data-lightbox="Produk" data-title="Coffee">
-                                <img src="image/coffee.jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h6 class="card-title text-center fs-5">Coffee</h6>
-                                <p class="text-center">
-                                    Diskon 20% untuk pembelian 1 gelas Coffee
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Indonesian/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
-                                <img src="produk1/img/Indonesian/Klepon 1.jpeg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title text-center fs-5">Klepon</h5>
-                                <p class="text-center">
-                                    Jika beli 1 porsi klepon akan dapat gula merah
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    $allPromotions = getPromotions("all");
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Japanese/Chicken Katsudon.jpg" data-lightbox="Produk"
-                                data-title="Chicken Katsudon">
-                                <img src="produk1/img/Japanese/Chicken Katsudon1.jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title text-center fs-5">Chicken Katsudon</h5>
-                                <p class="text-center">
-                                    Gratis garpu yang bisa dibawa pulang untuk kenangan
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    foreach ($allPromotions as $promotion) {
+                        echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
+                        echo '<div class="card">';
+                        echo '<a href="' . $promotion['image'] . '" data-lightbox="Produk" data-title="' . $promotion['name'] . '">';
+                        echo '<img src="' . $promotion['image'] . '" class="card-img-top" alt="..." />';
+                        echo '</a>';
+                        echo '<div class="card-body">';
+                        echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
+                        echo '<p class="text-center">' . $promotion['description'] . '</p>';
+                        echo '<form method="post" action="">';
+                        echo '<input type="hidden" name="promo_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                        echo '</form>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                    ?>
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Western/Mochacindo.jpg" data-lightbox="Produk" data-title="Mochacindo">
-                                <img src="produk1/img/Western/Mochacindo (Square).jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title text-center fs-5">Mochacindo</h5>
-                                <p class="text-center">
-                                    Beli 1 gratis ??? Gratis bertanya dan memberi saran
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Japanese/Dorayaki.jpeg" data-lightbox="Produk" data-title="Dorayaki">
-                                <img src="produk1/img/Japanese/Dorayaki.jpeg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h6 class="card-title text-center fs-5">Dorayaki</h6>
-                                <p class="text-center">
-                                    Diskon 5% untuk pembelian 3 buah Dorayaki
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Chinese/Dim Sum.jpg" data-lightbox="Produk" data-title="Dim Sum">
-                                <img src="produk1/img/Chinese/Dim Sum1.jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h4 class="card-title text-center fs-5">Dim Sum</h4>
-                                <p class="text-center">
-                                    Diskon 10% untuk pembelian 1 porsi dimsum
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
             <!-- Promo Diskon -->
             <div id="promodiskon">
                 <div class="row justify-content-center">
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="image/produk/coffee.jpg" data-lightbox="Produk" data-title="Coffee">
-                                <img src="image/coffee.jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h6 class="card-title text-center fs-5">Coffee</h6>
-                                <p class="text-center">
-                                    Diskon 20% untuk pembelian 1 gelas kopi
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Chinese/Dim Sum.jpg" data-lightbox="Produk" data-title="Dim Sum">
-                                <img src="produk1/img/Chinese/Dim Sum1.jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h6 class="card-title text-center fs-5">Dim Sum</h6>
-                                <p class="text-center">
-                                    Diskon 10% untuk pembelian 1 porsi dimsum
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    $diskonPromotions = getPromotions("Diskon");
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Japanese/Dorayaki.jpeg" data-lightbox="Produk" data-title="Dorayaki">
-                                <img src="produk1/img/Japanese/Dorayaki.jpeg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h6 class="card-title text-center fs-5">Dorayaki</h6>
-                                <p class="text-center">
-                                    Diskon 5% untuk pembelian 3 buah Dorayaki
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    foreach ($diskonPromotions as $promotion) {
+                        echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
+                        echo '<div class="card">';
+                        echo '<a href="' . $promotion['image'] . '" data-lightbox="Produk" data-title="' . $promotion['name'] . '">';
+                        echo '<img src="' . $promotion['image'] . '" class="card-img-top" alt="..." />';
+                        echo '</a>';
+                        echo '<div class="card-body">';
+                        echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
+                        echo '<p class="text-center">' . $promotion['description'] . '</p>';
+                        echo '<form method="post" action="">';
+                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                        echo '</form>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                    ?>
+
                 </div>
             </div>
+
             <!-- Promo Bonus -->
             <div id="promobonus">
                 <div class="row justify-content-center">
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Indonesian/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
-                                <img src="produk1/img/Indonesian/Klepon 1.jpeg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title text-center fs-5">Klepon</h5>
-                                <p class="text-center">
-                                    Jika beli 1 porsi klepon akan dapat gula merah
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Japanese/Chicken Katsudon.jpg" data-lightbox="Produk"
-                                data-title="Chicken Katsudon">
-                                <img src="produk1/img/Japanese/Chicken Katsudon1.jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title text-center fs-5">Chicken Katsudon</h5>
-                                <p class="text-center">
-                                    Gratis garpu yang bisa dibawa pulang untuk kenangan
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    $bonusPromotions = getPromotions("bonus");
 
-                    <div class="col-6 col-sm-6 col-lg-3 mb-3">
-                        <div class="card">
-                            <a href="produk1/img/Western/Mochacindo.jpg" data-lightbox="Produk" data-title="Mochacindo">
-                                <img src="produk1/img/Western/Mochacindo (Square).jpg" class="card-img-top" alt="..." />
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title text-center fs-5">Mochacindo</h5>
-                                <p class="text-center">
-                                    Beli 1 gratis ??? Gratis bertanya dan memberi saran
-                                </p>
-                                <button class="btn btn-promo w-100">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    foreach ($bonusPromotions as $promotion) {
+                        echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
+                        echo '<div class="card">';
+                        echo '<a href="' . $promotion['image'] . '" data-lightbox="Produk" data-title="' . $promotion['name'] . '">';
+                        echo '<img src="' . $promotion['image'] . '" class="card-img-top" alt="..." />';
+                        echo '</a>';
+                        echo '<div class="card-body">';
+                        echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
+                        echo '<p class="text-center">' . $promotion['description'] . '</p>';
+                        echo '<form method="post" action="">';
+                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
+                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                        echo '</form>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                    ?>
+
                 </div>
             </div>
+
         </div>
     </div>
-
-    <!-- PHP -->
-    <section>
-        <h2>Promo Hari Ini</h2>
-        <ul>
-            <?php
-
-            // Hubungkan ke database MySQL
-            $conn = new mysqli("localhost", "root", "", "kafe_cina");
-
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            // Query SQL untuk mengambil data promo
-            $sql = "SELECT * FROM promotions";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["promo_name"] . " - " . $row["description"] . "</li>";
-                }
-            } else {
-                echo "Tidak ada promo yang tersedia.";
-            }
-
-            $conn->close();
-            ?>
-        </ul>
-    </section>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
@@ -354,10 +258,15 @@
                         <i class="fa fa-envelope me-3"></i>kelompok2@gmail.com
                     </p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="bi bi-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.facebook.com/profile.php?id=100009281760851"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.youtube.com/channel/UC8NhEuvVu0tQHqpRHKP6rnw"><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social"
+                            href="https://www.instagram.com/ramadhan_agung_/?hl=en"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -369,7 +278,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="section-judul text-start mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <p>Besok Tutup ges</p>
                 </div>
             </div>
         </div>
@@ -383,7 +292,7 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a class="" href="index.html">Home</a>
+                            <a class="" href="#">Home</a>
                             <a class="" href="">Cookies</a>
                             <a class="" href="">Help</a>
                             <a class="" href="">FQAs</a>
@@ -407,3 +316,6 @@
 </body>
 
 </html>
+<?php
+$conn->close();
+?>

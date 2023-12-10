@@ -1,6 +1,66 @@
-<!-- <?php
-require "../includes/koneksi.php";
-?> -->
+<?php
+session_start();
+include "../includes/koneksi.php";
+
+// Fungsi untuk menyaring inpu
+// Menemukan sanitizeInput function
+function sanitizeInput($input)
+{
+  $input = trim($input);
+  $input = stripslashes($input);
+  $input = htmlspecialchars($input);
+  return $input;
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (isset($_POST["login"])) {
+    // Proses login
+    $loginemail = sanitizeInput($_POST["loginemail"]);
+    $loginPassword = sanitizeInput($_POST["loginPassword"]);
+
+    $query = "SELECT * FROM users WHERE email = '$loginemail'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+      $user = mysqli_fetch_assoc($result);
+      if (password_verify($loginPassword, $user['passwordd'])) {
+        // Login berhasil
+        $_SESSION['user_id'] = $user['user_id'];
+        header("Location: index.php");
+        exit();
+      } else {
+        // Password tidak cocok
+        header("Location: index.php?error=invalid");
+        exit();
+      }
+    } else {
+      // Email tidak ditemukan
+      header("Location: index.php?error=invalid");
+      exit();
+    }
+  } elseif (isset($_POST["signup_btn"])) {
+    // Proses registrasi
+    $username = sanitizeInput($_POST["username"]);
+    $email = sanitizeInput($_POST["emailAdress"]);
+    $phone = sanitizeInput($_POST["phone"]);
+    $password = password_hash(sanitizeInput($_POST["password"]), PASSWORD_DEFAULT);
+
+    $insertQuery = "INSERT INTO users (username, email, no_hp, passwordd) VALUES ('$username', '$email', '$phone', '$password')";
+    $result = mysqli_query($conn, $insertQuery);
+
+    if ($result) {
+      // Registrasi berhasil
+      header("Location: index.php?success=true");
+      exit();
+    } else {
+      // Registrasi gagal
+      header("Location: index.php?error=registration_failed");
+      exit();
+    }
+  }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +130,6 @@ require "../includes/koneksi.php";
     </div>
   </nav>
 
-
   <!-- Login dan registrasi -->
   <div class="container-fluid py-5">
     <div class="container">
@@ -87,14 +146,14 @@ require "../includes/koneksi.php";
 
             <div class="success-msg">
               <p>Slamat ! Kamu adalah salah satu member skarang.</p>
-              <a href="index.php" class="profile">Masukan</a>
+              <a href="index.php" class="profile">Masuk</a>
             </div>
           </div>
 
           <!-- Form Box -->
           <div class="col-sm-6 form">
             <!-- Login Form -->
-            <div class="login form-peice switched">
+            <div class="login form-peice <?php echo $formClass; ?>">
               <form class="login-form" action="#" method="post">
                 <div class="form-group">
                   <label for="loginemail">Email Lu</label>
@@ -107,19 +166,19 @@ require "../includes/koneksi.php";
                 </div>
 
                 <div class="CTA">
-                  <input type="submit" value="Login" />
-                  <a href="index.php" class="switch">Belum Punya</a>
+                  <input type="submit" value="Login" name="login"></input>
+                  <a href="#" class="switch">Belum Punya</a>
                 </div>
               </form>
             </div>
             <!-- End Login Form -->
 
             <!-- Signup Form -->
-            <div class="signup form-peice">
+            <div class="signup form-peice switched">
               <form class="signup-form" action="#" method="post">
                 <div class="form-group">
-                  <label for="name">Nama Lu</label>
-                  <input type="text" name="username" id="name" class="name" />
+                  <label for="uname">Nama Lu</label>
+                  <input type="text" name="username" id="uname" class="username" />
                   <span class="error"></span>
                 </div>
 
@@ -130,13 +189,13 @@ require "../includes/koneksi.php";
                 </div>
 
                 <div class="form-group">
-                  <label for="phone">08 berapa? - <small>null</small></label>
-                  <input type="text" name="phone" id="phone" />
+                  <label for="no_hp">08 berapa? - <small>null</small></label>
+                  <input type="text" name="phone" id="no_hp" />
                 </div>
 
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" name="password" id="password" class="pass" />
+                  <label for="passlu">Password</label>
+                  <input type="password" name="password" id="passlu" class="pass" />
                   <span class="error"></span>
                 </div>
 
@@ -163,9 +222,8 @@ require "../includes/koneksi.php";
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="../assets/js/login.js"></script>
-  <!-- <script src="../assets/js/bootstrap.bundle.min.js"></script> -->
 </body>
 
 </html>

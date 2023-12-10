@@ -1,6 +1,7 @@
 <?php
-// session_start();
-// if ($_SESSION['login'] == false) {
-//     header('location: login.php');
-// }
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php"); // Redirect jika belum login
+    exit();
+}
 ?>

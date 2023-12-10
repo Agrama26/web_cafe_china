@@ -1,5 +1,19 @@
 <?php
 require './session.php';
+include "../includes/koneksi.php";
+
+$productID = isset($_GET['id']) ? $_GET['id'] : 1;
+
+$sql = "SELECT * FROM users WHERE user_id = $productID";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+    $userData = mysqli_fetch_assoc($result);
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +37,9 @@ require './session.php';
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -49,7 +66,7 @@ require './session.php';
                                 <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
@@ -61,8 +78,8 @@ require './session.php';
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="login.php" tabindex="-1" aria-disabled="true"><i
-                                class="bi bi-person-fill"></i>Login</a>
+                        <a class="nav-link" href="logout.php" tabindex="-1" aria-disabled="true"><i
+                                class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -70,52 +87,45 @@ require './session.php';
     </nav>
 
     <!-- Banner -->
-    <div class="container-fluid banner">
-        <div class="container">
-            <div class="row">
-                <h3 class="text-light display-6">
-                    Selamat Datang <br />di Cafe<span> China</span>
-                </h3>
-                <p class="text-light opacity-75 mt-2">
-                    Ayo kunjungi cafe dengan nuansa china,
-                    <br class="d-none d-md-block" />
-                    kapan lagi nongki serasa di china
-                </p>
-                <div class="mt-1">
-                    <a href="#" class="btn btn-light bg-btn px-4 shadow"> Belanja </a>
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item">
+                <img src="../assets/images/logo/ghost1.png" class="d-block w-100" alt="Slide 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
+                    <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
                 </div>
-                <!-- <div class="mt-1">
-                    <a href="#" class="btn btn-light bg-btn rounded-pill text-light px-4 shadow">
-                        Tentang
-                    </a>
+            </div>
+            <div class="carousel-item active">
+                <video class="d-block w-100" autoplay loop muted>
+                    <source src="../assets/images/logo/hu-tao.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Selamat Datang</h3>
+                    <p>
+                        <?php echo $userData['username']; ?> Di Cafe China.
+                    </p>
                 </div>
-                <div class="col-md-8 offset-md-2">
-                    <div class="input-group input-group-md">
-                        <select class="form-control" id="inputGroupSelect04">
-                            <option selected>Choose Your Choice..</option>
-                            <option value="1">Chinese</option>
-                            <option value="2">Japanese</option>
-                            <option value="3">Western</option>
-                            <option value="4">Local</option>
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-md btn-primary text-dark" type="button">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 
     <!-- Menu Promo -->
     <div class="container-fluid py-5">
-        <div class="container">
+        <div class="container" data-aos="fade-up">
             <h3 class="text-center">Promo Of The<span> Week</span></h3>
             <div class="row mt-5 justify-content-center">
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
                         <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h6 class="card-title">Potongan Harga 20%</h6>
@@ -126,9 +136,9 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
-                        <img src="../assets/images/Lokal/Klepon 1.jpeg" class="card-img-top" alt="..." />
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
+                        <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Bonus Kelapa</h5>
                             <p class="card-text">
@@ -138,9 +148,9 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
-                        <img src="../assets/images/Japanese/Sakura Tea Latte.jpeg.jpg" class="card-img-top" alt="..." />
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
+                        <img src="../assets/images/Japanese/Sakura Tea Latte.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Gratis Garpu</h5>
                             <p class="card-text">
@@ -150,8 +160,8 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
                         <img src="../assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Beli 1 Gratis ???</h5>
@@ -163,7 +173,7 @@ require './session.php';
                 </div>
 
                 <div class="mt-5 d-flex justify-content-center mb-2">
-                    <a href="promo.html" class="btn bg-btn px-4 shadow">Lihat Semua Promo
+                    <a href="../pages/promo.php" class="btn bg-btn px-4 shadow">See All Promo
                     </a>
                 </div>
             </div>
@@ -172,10 +182,10 @@ require './session.php';
 
     <!-- Melayani -->
     <div class="container-fluid py-5 main-color">
-        <div class="container">
+        <div class="container" data-aos="fade-down">
             <h3 class="text-center text-light mb-5">Our <span>Services</span></h3>
             <div class="row justify-content-center">
-                <div class="col-sm-6 col-md-2 animasi mb-3">
+                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="fade-right">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
                             <a href="#"><i class="text-light bi bi-truck display-6"></i></a>
@@ -189,10 +199,10 @@ require './session.php';
                         </p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-2 animasi mb-3">
+                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="zoom-in">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
-                            <a href="pelayanan/bangku.html"><i class="text-light bi bi-shop-window display-6"></i></a>
+                            <a href="#"><i class="text-light bi bi-shop-window display-6"></i></a>
                         </div>
                     </div>
                     <div class="mt-3 text-light text-center">
@@ -203,10 +213,10 @@ require './session.php';
                         </p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-2 animasi mb-3">
+                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="fade-left">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
-                            <a href="pelayanan/karaoke.html"><i class="text-light bi bi-mic display-6"></i></a>
+                            <a href="#"><i class="text-light bi bi-mic display-6"></i></a>
                         </div>
                     </div>
                     <div class="mt-3 text-light text-center">
@@ -222,12 +232,12 @@ require './session.php';
     </div>
 
     <!-- Produk -->
-    <div class="container-fluid">
+    <div class="container-fluid" data-aos="fade-up">
         <div class="container">
             <h3 class="text-center mb-5 mt-5">Best <span>Seller</span></h3>
             <div class="row">
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
                         <a href="../assets/images/Western/coffee_1.jpg" data-lightbox="Produk" data-title="Coffee">
                             <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="404" />
                         </a>
@@ -241,10 +251,10 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
                         <a href="../assets/images/Lokal/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
-                            <img src="../assets/images/Lokal/Klepon 1.jpeg" class="card-img-top" alt="404" />
+                            <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Klepon Cake</h6>
@@ -256,8 +266,8 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
                         <a href="../assets/images/Chinese/Bubble Thai Tea.jpg" data-lightbox="Produk"
                             data-title="Bubble Thai Tea">
                             <img src="../assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="404" />
@@ -272,8 +282,8 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 animasi mb-3">
-                    <div class="card">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                    <div class="card animasi">
                         <a href="../assets/images/Western/Mochacindo.jpg" data-lightbox="Produk"
                             data-title="Mochacindo">
                             <img src="../assets/images/Western/Mochacindo (Square).jpg" class="card-img-top"
@@ -294,14 +304,14 @@ require './session.php';
                 <div class="dropdown">
                     <a class="btn bg-btn dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Lihat Lainnya
+                        See All
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <ul class="dropdown-menu" data-aos="fade-up" aria-labelledby="dropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="makan.html">Food</a>
+                            <a class="dropdown-item" href="../pages/produk.php">Food</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="minum.html">Drink</a>
+                            <a class="dropdown-item" href="../pages/produk1.php">Drink</a>
                         </li>
                     </ul>
                 </div>
@@ -312,12 +322,12 @@ require './session.php';
     <!-- Masonry -->
     <div class="container-fluid py-5 main-color mt-5">
         <div class="container">
-            <h3 class="text-light text-center mb-5">
+            <h3 class="text-light text-center mb-5" data-aos="fade-down">
                 Customer <span>Coment</span>
             </h3>
 
             <div class="row" data-masonry='{"percentPosition": true }'>
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-4 mb-3" data-aos="fade-down-right">
                     <div class="card p-3 masonri">
                         <figure>
                             <blockquote class="blockquote">
@@ -330,7 +340,7 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-4 mb-3" data-aos="fade-down">
                     <div class="card p-3 masonri">
                         <figure>
                             <blockquote class="blockquote">
@@ -346,7 +356,7 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-4 mb-3" data-aos="fade-down-left">
                     <div class="card p-3 masonri">
                         <figure>
                             <blockquote class="blockquote">
@@ -363,7 +373,7 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-4 mb-3" data-aos="fade-up-right">
                     <div class="card p-3 masonri">
                         <figure>
                             <blockquote class="blockquote">
@@ -380,7 +390,7 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-4 mb-3" data-aos="fade-up">
                     <div class="card p-3 masonri">
                         <figure>
                             <blockquote class="blockquote">
@@ -396,7 +406,7 @@ require './session.php';
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-4 mb-3" data-aos="fade-up-left">
                     <div class="card p-3 masonri">
                         <figure>
                             <blockquote class="blockquote">
@@ -415,7 +425,7 @@ require './session.php';
         <div class="container">
             <div class="row">
                 <!-- Map -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-right">
                     <h3 class="mb-3">Address</h3>
                     <div class="embed-responsive mb-3">
                         <iframe class="col-12 col-sm-12"
@@ -425,7 +435,7 @@ require './session.php';
                     </div>
                 </div>
                 <!-- Keterangan -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-left">
                     <h3>Coment</h3>
                     <form>
                         <div class="form-group mb-2">
@@ -446,7 +456,7 @@ require './session.php';
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger px-4 mt-3" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
-                        Add To Cart
+                        Submit
                     </button>
 
                     <!-- Modal -->
@@ -547,6 +557,7 @@ require './session.php';
     </div>
     <!-- Footer End -->
 
+    <!-- Script -->
     <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
@@ -554,6 +565,67 @@ require './session.php';
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
+    <script>
+        AOS.init({
+            duration: 500, // Durasi animasi dalam milidetik
+            offset: 50, // Offset untuk memicu animasi lebih awal atau lebih lambat
+            once: true // Animasi hanya akan dimainkan satu kali
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 500,
+                offset: 50,
+                once: true
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

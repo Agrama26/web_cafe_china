@@ -1,3 +1,24 @@
+<?php
+require '../admin/session.php';
+include "../includes/koneksi.php";
+
+$cartTotal = 0;
+
+$sqlCart = "SELECT products.product_name, products.price, carts.quantity
+            FROM carts
+            JOIN products ON carts.product_id = products.product_id
+            WHERE carts.user_id = 1"; // Replace with your user authentication logic
+
+$resultCart = mysqli_query($conn, $sqlCart);
+if ($resultCart) {
+  while ($cartItem = mysqli_fetch_assoc($resultCart)) {
+    $cartTotal += $cartItem['price'] * $cartItem['quantity'];
+  }
+} else {
+  echo "Error: " . $sqlCart . "<br>" . mysqli_error($conn);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +68,7 @@
                 <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
               </li>
               <li>
-                <a class="dropdown-item nav-link btn-nav" href="produk.php">Drink</a>
+                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
               </li>
             </ul>
           </li>
@@ -59,8 +80,8 @@
                 class="bi bi-cart2"></i>Cart</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="login.php" tabindex="-1" aria-disabled="true"><i
-                class="bi bi-person-fill"></i>Login</a>
+            <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                class="bi bi-box-arrow-left"></i>Logout</a>
           </li>
         </ul>
       </div>
@@ -96,12 +117,12 @@
             <h3 class="text-judul mt-5">Kurir Pengiriman</h3>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="kurir" />
-              <img src="../assets/images/kurir-1.png" />
+              <img src="../assets/images/logo/kurir-1.png" />
               <span class="float-end">+ Rp 10.000</span>
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="kurir" />
-              <img src="../assets/images/kurir-2.png" />
+              <img src="../assets/images/logo/kurir-2.png" />
               <span class="float-end">+ Rp 12.000</span>
             </label>
 
@@ -116,15 +137,15 @@
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="pembayaran" />
-              <img src="../assets/images/bayar-1.png" />
+              <img src="../assets/images/logo/bayar-1.png" />
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="pembayaran" />
-              <img src="../assets/images/bayar-2.png" />
+              <img src="../assets/images/logo/bayar-2.png" />
             </label>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="pembayaran" />
-              <img src="../assets/images/bayar-3.png" />
+              <img src="../assets/images/logo/bayar-3.png" />
             </label>
 
             <button type="submit" class="btn btn-lg btn-danger mt-5 mb-5">
@@ -142,7 +163,9 @@
             <div class="card-body">
               <div class="row mt-2 mb-2">
                 <div class="col-md"><small>Sub Total</small></div>
-                <div class="col-md">Rp. 146.000</div>
+                <div class="col-md">Rp.
+                  <?= number_format($cartTotal, 0, ',', '.') ?>
+                </div>
               </div>
               <div class="row mt-2 mb-2">
                 <div class="col-md"><small>Biaya pengiriman</small></div>
@@ -189,10 +212,13 @@
             <i class="fa fa-envelope me-3"></i>kelompok2@gmail.com
           </p>
           <div class="d-flex pt-2">
-            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-outline-light btn-social" href=""><i class="bi bi-instagram"></i></a>
+            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social"
+              href="https://www.facebook.com/profile.php?id=100009281760851"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-social"
+              href="https://www.youtube.com/channel/UC8NhEuvVu0tQHqpRHKP6rnw"><i class="fab fa-youtube"></i></a>
+            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/ramadhan_agung_/?hl=en"><i
+                class="bi bi-instagram"></i></a>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
@@ -204,7 +230,7 @@
         </div>
         <div class="col-lg-3 col-md-6">
           <h4 class="section-judul text-start mb-4">Newsletter</h4>
-          <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+          <p>Besok Tutup ges</p>
         </div>
       </div>
     </div>
@@ -218,7 +244,7 @@
           </div>
           <div class="col-md-6 text-center text-md-end">
             <div class="footer-menu">
-              <a class="" href="index.html">Home</a>
+              <a class="" href="#">Home</a>
               <a class="" href="">Cookies</a>
               <a class="" href="">Help</a>
               <a class="" href="">FQAs</a>
