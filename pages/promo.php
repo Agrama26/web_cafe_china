@@ -27,16 +27,21 @@ function getPromotions($type = '')
 
 // Handle Add to Cart logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $productId = $_POST['promo_id'];
+    $productId = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
 
     // Assuming you have user authentication in place, get the user ID
     $userId = 1; // Replace with your user authentication logic
 
     // Add the product to the cart
-    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
+    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, $quantity)";
     $conn->query($sql);
-}
 
+    // Display an alert with the added quantity
+    echo '<script>';
+    echo 'alert("Added ' . $quantity . ' item(s) to your cart!");';
+    echo '</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -130,16 +135,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         <div class="container">
             <!-- kategori promo -->
             <div id="divku" class="row justify-content-center mb-4">
-                <div id="btnall" onclick="showall()" class="col-sm-4 col-md-3 col-lg-2">
-                    <button class="btn btn-promo w-100 fs-6 mb-3 activate">
+                <div id="btnall" onclick="filterPromo('all')" class="col-sm-4 col-md-3 col-lg-2">
+                    <button
+                        class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'all' ? 'activate' : ''; ?>">
                         All Promo
                     </button>
                 </div>
-                <div id="btndiskon" onclick="showdiskon()" class="col-sm-4 col-md-3 col-lg-2">
-                    <button class="btn btn-promo w-100 fs-6 mb-3">Promo Diskon</button>
+                <div id="btndiskon" onclick="filterPromo('diskon')" class="col-sm-4 col-md-3 col-lg-2">
+                    <button
+                        class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'diskon' ? 'activate' : ''; ?>">
+                        Promo Diskon
+                    </button>
                 </div>
-                <div id="btnpromo" onclick="showbonus()" class="col-sm-4 col-md-3 col-lg-2">
-                    <button class="btn btn-promo w-100 fs-6 mb-3">Promo Bonus</button>
+                <div id="btnpromo" onclick="filterPromo('bonus')" class="col-sm-4 col-md-3 col-lg-2">
+                    <button
+                        class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'bonus' ? 'activate' : ''; ?>">
+                        Promo Bonus
+                    </button>
                 </div>
             </div>
 
@@ -149,88 +161,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 <div class="row justify-content-center">
 
                     <?php
-                    $allPromotions = getPromotions("all");
+                    $typeFilter = isset($_GET['type']) ? $_GET['type'] : 'all';
 
-                    foreach ($allPromotions as $promotion) {
-                        echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
-                        echo '<div class="card">';
-                        echo '<a href="' . $promotion['image'] . '" data-lightbox="Produk" data-title="' . $promotion['name'] . '">';
-                        echo '<img src="' . $promotion['image'] . '" class="card-img-top" alt="..." />';
-                        echo '</a>';
-                        echo '<div class="card-body">';
-                        echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
-                        echo '<p class="text-center">' . $promotion['description'] . '</p>';
-                        echo '<form method="post" action="">';
-                        echo '<input type="hidden" name="promo_id" value="' . $promotion['promo_id'] . '">';
-                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
-                        echo '</form>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
+                    $sql = "SELECT products.product_id, products.product_name, products.imagePath, products.price, promotions.type, promotions.description
+                            FROM promotions
+                            JOIN products ON promotions.product_id = products.product_id";
+
+                    if ($typeFilter !== 'all') {
+                        $sql .= " WHERE promotions.type = '$typeFilter'";
                     }
+
+                    $sql .= " ORDER BY promotions.type, promotions.created_at DESC";
+
+                    $result = mysqli_query($conn, $sql);
+
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
+                            echo '<div class="card">';
+                            echo '<a href="' . $row['imagePath'] . '" data-lightbox="Produk" data-title="' . $row['product_name'] . '">';
+                            echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="..." />';
+                            echo '</a>';
+                            echo '<div class="card-body">';
+                            echo '<h6 class="card-title text-center fs-5">' . $row['product_name'] . '</h6>';
+                            echo '<p class="text-center">' . $row['description'] . '</p>';
+                            echo '<form action="keranjang.php" method="post">';
+                            echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
+                            echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
+                            echo '<div class="form-group">';
+                            echo '<label for="quantity"></label>';
+                            echo '<input type="number" name="quantity" id="quantity" class="mb-2 btn-produk form-control" value="1" min="1">';
+                            echo '</div>';
+                            echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    }
+
                     ?>
 
                 </div>
             </div>
-
-            <!-- Promo Diskon -->
-            <div id="promodiskon">
-                <div class="row justify-content-center">
-
-                    <?php
-                    $diskonPromotions = getPromotions("Diskon");
-
-                    foreach ($diskonPromotions as $promotion) {
-                        echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
-                        echo '<div class="card">';
-                        echo '<a href="' . $promotion['image'] . '" data-lightbox="Produk" data-title="' . $promotion['name'] . '">';
-                        echo '<img src="' . $promotion['image'] . '" class="card-img-top" alt="..." />';
-                        echo '</a>';
-                        echo '<div class="card-body">';
-                        echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
-                        echo '<p class="text-center">' . $promotion['description'] . '</p>';
-                        echo '<form method="post" action="">';
-                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
-                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
-                        echo '</form>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                    ?>
-
-                </div>
-            </div>
-
-            <!-- Promo Bonus -->
-            <div id="promobonus">
-                <div class="row justify-content-center">
-
-                    <?php
-                    $bonusPromotions = getPromotions("bonus");
-
-                    foreach ($bonusPromotions as $promotion) {
-                        echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
-                        echo '<div class="card">';
-                        echo '<a href="' . $promotion['image'] . '" data-lightbox="Produk" data-title="' . $promotion['name'] . '">';
-                        echo '<img src="' . $promotion['image'] . '" class="card-img-top" alt="..." />';
-                        echo '</a>';
-                        echo '<div class="card-body">';
-                        echo '<h6 class="card-title text-center fs-5">' . $promotion['name'] . '</h6>';
-                        echo '<p class="text-center">' . $promotion['description'] . '</p>';
-                        echo '<form method="post" action="">';
-                        echo '<input type="hidden" name="product_id" value="' . $promotion['promo_id'] . '">';
-                        echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
-                        echo '</form>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                    ?>
-
-                </div>
-            </div>
-
         </div>
     </div>
 
@@ -313,6 +288,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
     <script src="../assets/js/script.js"></script>
+    <script>
+        function filterPromo(type) {
+            window.location.href = 'promo.php?type=' + type;
+        }
+    </script>
 </body>
 
 </html>
