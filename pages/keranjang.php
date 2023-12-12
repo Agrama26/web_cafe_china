@@ -150,10 +150,16 @@ if ($resultCart) {
                             </tr>
                             <?php
                             while ($row = $result->fetch_assoc()) {
-
                                 $produk_id = $row['product_id'];
-                                $produkQuery = "SELECT * FROM products WHERE product_id = $produk_id";
-                                $produkResult = $conn->query($produkQuery);
+                                $produkQuery = "SELECT * FROM products WHERE product_id = ?";
+
+                                // Use prepared statement
+                                $stmt = $conn->prepare($produkQuery);
+                                $stmt->bind_param("i", $produk_id); // Assuming product_id is an integer
+                            
+                                $stmt->execute();
+
+                                $produkResult = $stmt->get_result();
                                 $produk = $produkResult->fetch_assoc();
                                 ?>
                                 <tr>

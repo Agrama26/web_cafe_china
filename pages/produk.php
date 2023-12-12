@@ -118,21 +118,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     <ul class="list-group mt-4">
                         <li type="button" class="list-group-item text-dark btn-produk" style="text-decoration: none"
                             onclick="showProducts('All')">All</li>
-                        <li class="list-group-item btn-produk">
-                            <a type="button" class="text-dark" style="text-decoration: none"
-                                onclick="showProducts('Chinese')">Chinese</a>
+                        <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
+                            onclick="showProducts('Chinese')">
+                            Chinese
                         </li>
-                        <li class="list-group-item btn-produk">
-                            <a type="button" class="text-dark" style="text-decoration: none"
-                                onclick="showProducts('Lokal')">Local</a>
+                        <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
+                            onclick="showProducts('Lokal')">
+                            Local
                         </li>
-                        <li class="list-group-item btn-produk">
-                            <a type="button" class="text-dark" style="text-decoration: none"
-                                onclick="showProducts('Japanese')">Japanese</a>
+                        <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
+                            onclick="showProducts('Japanese')">
+                            Japanese
                         </li>
-                        <li class="list-group-item btn-produk">
-                            <a type="button" class="text-dark" style="text-decoration: none"
-                                onclick="showProducts('Western')">Western</a>
+                        <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
+                            onclick="showProducts('Western')">
+                            Western
                         </li>
                     </ul>
                 </div>
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                                 echo '<strong>' . $row['product_name'] . '</strong>';
                                 echo '</h5>';
                                 echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
-                                echo '<form method="post" action="">';
+                                echo '<form method="post" action="keranjang.php">';
                                 echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                                 echo '<div class="form-group">';
                                 echo '<label for="quantity"></label>';
@@ -184,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                         }
 
-                        mysqli_close($conn);
+
                         ?>
 
                         <!-- Pagination -->
