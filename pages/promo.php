@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                             echo '<div class="card-body">';
                             echo '<h6 class="card-title text-center fs-5">' . $row['product_name'] . '</h6>';
                             echo '<p class="text-center">' . $row['description'] . '</p>';
-                            echo '<form action="keranjang.php" method="post">';
+                            echo '<form action="" method="post">';
                             echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
                             echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                             echo '<div class="form-group">';
