@@ -27,16 +27,21 @@ function getPromotions($type = '')
 
 // Handle Add to Cart logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $productId = $_POST['promo_id'];
+    $productId = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
 
     // Assuming you have user authentication in place, get the user ID
     $userId = 1; // Replace with your user authentication logic
 
     // Add the product to the cart
-    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
+    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, $quantity)";
     $conn->query($sql);
-}
 
+    // Display an alert with the added quantity
+    echo '<script>';
+    echo 'alert("Added ' . $quantity . ' item(s) to your cart!");';
+    echo '</script>';
+}
 ?>
 
 <!DOCTYPE html>
