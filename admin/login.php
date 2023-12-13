@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   } elseif (isset($_POST["signup_btn"])) {
     // Proses registrasi
-    $username = sanitizeInput($_POST["username"]);
+    $username = sanitizeInput($_POST["name"]);
     $email = sanitizeInput($_POST["emailAdress"]);
     $phone = sanitizeInput($_POST["phone"]);
     $password = password_hash(sanitizeInput($_POST["password"]), PASSWORD_DEFAULT);
@@ -132,11 +132,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <!-- Login dan registrasi -->
   <div class="container-fluid py-5">
-    <div class="container">
+    <div class="container containerr">
       <section id="formHolder">
         <div class="row">
           <!-- Brand Box -->
-          <div class="col-sm-6 brand">
+          <div class="col-sm-12 col-md-6 col-lg-6 brand">
             <a href="#" class="logo">Cafe <span>.</span></a>
 
             <div class="heading">
@@ -151,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
 
           <!-- Form Box -->
-          <div class="col-sm-6 form">
+          <div class="col-sm-12 col-md-6 col-lg-6 form">
             <!-- Login Form -->
             <div class="login form-peice <?php echo $formClass; ?>">
               <form class="login-form" action="#" method="post">
@@ -177,8 +177,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="signup form-peice switched">
               <form class="signup-form" action="#" method="post">
                 <div class="form-group">
-                  <label for="uname">Nama Lu</label>
-                  <input type="text" name="username" id="uname" class="username" />
+                  <label for="name">Nama Lu</label>
+                  <input type="text" name="name" id="name" class="name" />
                   <span class="error"></span>
                 </div>
 
