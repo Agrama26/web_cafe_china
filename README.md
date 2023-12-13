@@ -32,9 +32,16 @@ Pastikan perangkat Anda sudah terinstal dengan perangkat lunak berikut:
 
 ### Langkah 2: Clone Repository
 
-Buka terminal atau command prompt bisa juga menggunakan gitbash,
-untuk mempermudah anda bisa membuka terminal atau gitbash langsung pada Visual Studio Code anda langsung,
-lalu jalankan perintah berikut untuk mengklon repository:
+- Pastikan anda sudah memiliki akun GitHub
+- Jika belum silahkan buat terlebih dahulu
+
+```bash
+https://github.com/
+```
+
+- Lalu buka terminal atau command prompt bisa juga menggunakan gitbash,
+- untuk mempermudah anda bisa membuka terminal atau gitbash langsung pada Visual Studio Code anda langsung,
+- lalu jalankan perintah berikut untuk mengklon repository:
 
 ```bash
 git clone https://github.com/Agrama26/web_cafe_china.git
@@ -46,7 +53,7 @@ git clone https://github.com/Agrama26/web_cafe_china.git
 - Pastikan XAMPP atau Laragon sudah diinstal dan dijalankan.
 - Start Apache dan MySql di XAMPP atau Laragon.
 
-### Langkah 4: Import kafe_cina.sql
+### Langkah 4: Import Database
 
 - Buka http://localhost/phpmyadmin/ lalu buat new database dengan nama kafe_cina
 - Klik Import cari file kafe_cina.sql yang sudah anda ambil saat clone sebelumnya lalu klik import
