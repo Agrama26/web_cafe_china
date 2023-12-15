@@ -4,16 +4,16 @@ include "../includes/koneksi.php";
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
 
-$sql = "SELECT * FROM users WHERE user_id = $productID";
-$result = mysqli_query($conn, $sql);
+$sqll = "SELECT * FROM users WHERE user_id = $productID";
+$resultt = mysqli_query($conn, $sqll);
 
-if ($result) {
-    $userData = mysqli_fetch_assoc($result);
+if ($resultt) {
+    $userData = mysqli_fetch_assoc($resultt);
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-mysqli_close($conn);
+// mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +92,7 @@ mysqli_close($conn);
             <div class="carousel-item">
                 <img src="../assets/images/logo/ghost1.png" class="d-block w-100" alt="Slide 2">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
+                    <h3>Nikmati <span>Nuansa China di C</span>afe Kami</h3>
                     <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
                 </div>
             </div>
@@ -172,7 +172,7 @@ mysqli_close($conn);
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-center mb-2">
+                <div class="mt-5 d-flex justify-content-center mb-2" data-aos="fade-down">
                     <a href="../pages/promo.php" class="btn bg-btn px-4 shadow">See All Promo
                     </a>
                 </div>
@@ -300,7 +300,7 @@ mysqli_close($conn);
                 </div>
             </div>
 
-            <div class="mt-5 d-flex justify-content-center">
+            <div class="mt-5 d-flex justify-content-center" data-aos="fade-down">
                 <div class="dropdown">
                     <a class="btn bg-btn dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -323,99 +323,42 @@ mysqli_close($conn);
     <div class="container-fluid py-5 main-color mt-5">
         <div class="container">
             <h3 class="text-light text-center mb-5" data-aos="fade-down">
-                Customer <span>Coment</span>
+                Customer <span>Comments</span>
             </h3>
 
-            <div class="row" data-masonry='{"percentPosition": true }'>
-                <div class="col-lg-4 mb-3" data-aos="fade-down-right">
-                    <div class="card p-3 masonri">
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p>Saya terpesona dengan pelayan wanitanya. Btw 08 berapa?</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Dimas Anjay Mabar Sleebw
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
+            <div class="row" id="commentsContainer" data-masonry='{"percentPosition": true }'>
+                <?php
+                // Fetch the first 6 comments from the database
+                $sql = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 6";
+                $result = $conn->query($sql);
 
-                <div class="col-lg-4 mb-3" data-aos="fade-down">
-                    <div class="card p-3 masonri">
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p>
-                                    Kopi Cina Sangat Enak. Kopi tersebut membuat saya merasa
-                                    dekat dengan kampung halaman saya
-                                </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Jabal Keren Ost Jr
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Display the initial 6 comments
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down">';
+                        echo '<div class="card p-3 masonri">';
+                        echo '<figure>';
+                        echo '<blockquote class="blockquote">';
+                        echo '<p>' . $row['comment'] . '</p>';
+                        echo '</blockquote>';
+                        echo '<figcaption class="blockquote-footer">';
+                        echo $row['name'];
+                        echo '</figcaption>';
+                        echo '</figure>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p>No comments yet.</p>';
+                }
+                ?>
+            </div>
 
-                <div class="col-lg-4 mb-3" data-aos="fade-down-left">
-                    <div class="card p-3 masonri">
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p>
-                                    Saya sangat suka dengan fasilitas karaoke yang ada pada cafe
-                                    cina ini dan pelayanannya juga baik, minumanya juga sangat
-                                    menyegarkan
-                                </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Abil Repper Ganas
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 mb-3" data-aos="fade-up-right">
-                    <div class="card p-3 masonri">
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p>
-                                    Dicafe ini ada makanan dan minuman yang sangat baik untuk
-                                    kulit. Btw soal kulit kalian bisa mencoba skincare dari
-                                    Fitrah Cosmetic ya ges lagi ada promo
-                                </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Fitrah Cosmetic
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 mb-3" data-aos="fade-up">
-                    <div class="card p-3 masonri">
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p>
-                                    Yang paling penting adalah wifi nya ya ges ya sangat bagus
-                                    sehingga peforma gwe bermain epep menjadi meningkat
-                                </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                ~-_Abay Haayyyuuqq_-~
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 mb-3" data-aos="fade-up-left">
-                    <div class="card p-3 masonri">
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p>Nasi goreng nya sangat recomended ya sahabat</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">Reyhan Baik</figcaption>
-                        </figure>
-                    </div>
-                </div>
+            <!-- Button to load more comments -->
+            <div class="d-flex justify-content-center" data-aos="fade-down">
+                <a href="../pages/koment_lain.php" class="btn btn-danger mt-3">
+                    View More Comments
+                </a>
             </div>
         </div>
     </div>
@@ -435,56 +378,44 @@ mysqli_close($conn);
                     </div>
                 </div>
                 <!-- Keterangan -->
+                <?php
+                $status = isset($_GET['status']) ? $_GET['status'] : '';
+
+                if ($status === 'success') {
+                    echo '<script>alert("Comment submitted successfully!");</script>';
+                } elseif ($status === 'error') {
+                    echo '<script>alert("Failed to submit comment. Please try again.");</script>';
+                }
+                ?>
+
                 <div class="col-lg-6" data-aos="fade-left">
-                    <h3>Coment</h3>
-                    <form>
+                    <h3>Comment</h3>
+                    <form action="../pages/process_comment.php" method="post">
                         <div class="form-group mb-2">
-                            <label for="exampleFormControlInput1" class="mb-2 mt-3">Email</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Email" />
+                            <label for="email" class="mb-2 mt-3">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                required />
                         </div>
                         <div class="form-group mb-2">
-                            <label class="mb-2" for="exampleFormControlInput1">Name</label>
-                            <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Name" />
+                            <label for="name" class="mb-2">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required />
                         </div>
                         <div class="form-group">
-                            <label class="mb-2" for="exampleFormControlTextarea1">Coment</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Your Coment"></textarea>
+                            <label for="comment" class="mb-2">Comment</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="3"
+                                placeholder="Your Comment" required></textarea>
                         </div>
+                        <!-- Button trigger modal -->
+                        <button type="submit" class="btn btn-danger px-4 mt-3">
+                            Submit
+                        </button>
                     </form>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger px-4 mt-3" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Submit
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                        Send your comentar
-                                    </h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                        Cancel
-                                    </button>
-                                    <button type="button" class="btn btn-success">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
+
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Footer Start -->
@@ -565,13 +496,6 @@ mysqli_close($conn);
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
-    <script>
-        AOS.init({
-            duration: 500, // Durasi animasi dalam milidetik
-            offset: 50, // Offset untuk memicu animasi lebih awal atau lebih lambat
-            once: true // Animasi hanya akan dimainkan satu kali
-        });
-    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll('[data-aos]');

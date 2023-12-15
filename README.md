@@ -36,11 +36,11 @@ Pastikan perangkat Anda sudah terinstal dengan perangkat lunak berikut:
 - Jika belum silahkan buat terlebih dahulu
 
 ```bash
-https://github.com/
+https://github.com
 ```
 
 - Lalu buka terminal atau command prompt bisa juga menggunakan gitbash,
-- untuk mempermudah anda bisa membuka terminal atau gitbash langsung pada Visual Studio Code anda langsung,
+- untuk mempermudah anda bisa membuka terminal atau gitbash langsung pada Visual Studio Code anda,
 - lalu jalankan perintah berikut untuk mengklon repository:
 
 ```bash

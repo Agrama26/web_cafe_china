@@ -185,7 +185,8 @@ if ($resultCart) {
                                     </td>
                                     <td>
                                         <a href="hapus.php?id=<?php echo $row['id']; ?>"
-                                            class="btn btn-danger rounded-circle btn-tambah">
+                                            class="btn btn-danger rounded-circle btn-tambah"
+                                            onclick="return confirmDelete();">
                                             <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_54_458)">
@@ -209,6 +210,12 @@ if ($resultCart) {
                     </div>
                 </div>
             </div>
+
+            <script>
+                function confirmDelete() {
+                    return confirm("Are you sure you want to delete this product?");
+                }
+            </script>
 
             <div class="row">
                 <div class="col-md-5 ms-auto">
