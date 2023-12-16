@@ -67,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
@@ -178,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     if ($result) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
-                            echo '<div class="card">';
+                            echo '<div class="card" data-aos="zoom-in-down">';
                             echo '<a href="' . $row['imagePath'] . '" data-lightbox="Produk" data-title="' . $row['product_name'] . '">';
                             echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="..." />';
                             echo '</a>';
@@ -292,6 +294,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         function filterPromo(type) {
             window.location.href = 'promo.php?type=' + type;
         }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 500,
+                offset: 50,
+                once: true
+            });
+        });
     </script>
 </body>
 

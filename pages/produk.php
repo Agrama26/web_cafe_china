@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<div class="col-6 col-sm-6 col-lg-3 mb-4 product-item ' . $row['country_origin'] . '"> ';
                                 echo '<div class="card" data-aos="zoom-in-down">';
-                                echo '<a href="detail_produk.php?id=' . $row['product_id'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
+                                echo '<a href="' . $row['imagePath'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
                                 echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';
                                 echo '</a>';
                                 echo '<div class="card-body">';
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                                 echo '<label for="quantity"></label>';
                                 echo '<input type="number" name="quantity" id="quantity" class="mb-2 btn-produk form-control" value="1" min="1">';
                                 echo '</div>';
-                                echo '<div class="dropdown">';
+                                echo '<div class="dropup">';
                                 echo '<a class="btn btn-produk dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">';
                                 echo 'More';
                                 echo '</a>';
@@ -314,10 +314,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         crossorigin="anonymous"></script>
     <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
     <script>
-        AOS.init({
-            duration: 500, // Durasi animasi dalam milidetik
-            offset: 50, // Offset untuk memicu animasi lebih awal atau lebih lambat
-            once: true // Animasi hanya akan dimainkan satu kali
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 500,
+                offset: 50,
+                once: true
+            });
         });
     </script>
 </body>

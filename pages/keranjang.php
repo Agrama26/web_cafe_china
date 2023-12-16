@@ -64,6 +64,8 @@ if ($resultCart) {
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
@@ -131,7 +133,7 @@ if ($resultCart) {
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" data-aos="fade-down">
                     <h2 class="text-judul-halaman text-center">Shopping Cart</h2>
                 </div>
             </div>
@@ -142,9 +144,9 @@ if ($resultCart) {
                         <table class="table">
                             <tr>
                                 <th>Foto</th>
-                                <th>Nama Produk & Deskripsi</th>
+                                <th>Nama Produk</th>
                                 <th>Harga Satuan</th>
-                                <th>Kuantitas</th>
+                                <th>Jumlah</th>
                                 <th>Harga</th>
                                 <th>Hapus</th>
                             </tr>
@@ -162,16 +164,16 @@ if ($resultCart) {
                                 $produkResult = $stmt->get_result();
                                 $produk = $produkResult->fetch_assoc();
                                 ?>
-                                <tr>
+                                <tr data-aos="fade-right">
                                     <td>
                                         <img src="<?php echo $produk['imagePath']; ?>" class="img-cart"
                                             style="height: 80px; width: 80px" />
                                     </td>
                                     <td>
                                         <?php echo $produk['product_name']; ?><br />
-                                        <small>
-                                            <?php echo $produk['description']; ?>
-                                        </small>
+                                        <!-- <small>
+                                            <?php //echo $produk['description']; ?>
+                                        </small> -->
                                     </td>
                                     <td>Rp.
                                         <?php echo number_format($produk['price'], 0, ',', '.'); ?>
@@ -324,7 +326,56 @@ if ($resultCart) {
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
     <link rel="stylesheet" type="text/css" href="../assets/css/custom.css" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
 
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 500,
+                offset: 50,
+                once: true
+            });
+        });
+    </script>
 </body>
 
 </html>

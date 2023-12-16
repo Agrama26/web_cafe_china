@@ -116,7 +116,7 @@ if (isset($_POST['add_to_cart'])) {
             </nav>
         </div>
         <div class="row mb-5">
-            <div class="col-lg-6">
+            <div class="col-md-5 col-lg-4">
                 <div class="card">
                     <a href="<?php echo $productData['imagePath']; ?>" data-lightbox="products"
                         data-title="<?php echo $productData['product_name']; ?>">
@@ -125,7 +125,7 @@ if (isset($_POST['add_to_cart'])) {
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-6 offset-md-1 col-lg-7 offset-lg-1">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center text-danger">
@@ -178,6 +178,36 @@ if (isset($_POST['add_to_cart'])) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- rekomendasi produk -->
+    <div class="container-fluid py-5 mt-5" style="background-color: #fef9ec">
+        <div class="container">
+            <h4 class="text-center mb-5">Rekomendasi untuk anda</h4>
+            <div class="row justify-content-center">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Chinese/Dim Sum1.jpg" class="img-fluid img-thumbnail" alt="404" />
+                    </a>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Lokal/Es Cendol 1.jpg" class="img-fluid img-thumbnail" alt="404" />
+                    </a>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Western/Flat White (Square).jpg" class="img-fluid img-thumbnail"
+                            alt="404" />
+                    </a>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Japanese/Niku Udon.jpg" class="img-fluid img-thumbnail" alt="404" />
+                    </a>
                 </div>
             </div>
         </div>
