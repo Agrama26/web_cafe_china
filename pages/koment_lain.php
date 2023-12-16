@@ -89,10 +89,10 @@ if ($resultt) {
     <div class="container-fluid banner-produk">
         <div class="container">
             <div class="row">
-                <h3 class="text-light display-6 mx-3 mt-2">
+                <h3 class="text-light display-6 mx-5 ml-5">
                     Selamat Datang <br />di Cafe<span> China</span>
                 </h3>
-                <h5 class="text-light opacity-75 mx-3 mt-2">
+                <h5 class="text-light opacity-75 mx-5 ml-5 mt-2">
                     Ayo kunjungi cafe dengan nuansa china,
                     <br class="d-none d-md-block" />
                     kapan lagi nongki serasa di china
@@ -108,7 +108,7 @@ if ($resultt) {
                 Additional <span>Comments</span>
             </h3>
 
-            <div id="additionalCommentsContainer" data-masonry='{"percentPosition": true }'>
+            <div class="row" id="additionalCommentsContainer" data-masonry='{"percentPosition": true }'>
                 <?php
                 // Fetch additional comments from the database
                 $sql = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 6 OFFSET 6";
@@ -117,7 +117,7 @@ if ($resultt) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Display additional comments
-                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down-right">';
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down">';
                         echo '<div class="card p-3 masonri">';
                         echo '<figure>';
                         echo '<blockquote class="blockquote">';

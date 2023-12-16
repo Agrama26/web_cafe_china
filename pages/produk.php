@@ -96,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <div class="container-fluid banner-produk">
         <div class="container">
             <div class="row">
-                <h3 class="text-light display-6 mx-3 mt-2">
+                <h3 class="text-light display-6 mx-5 ml-5">
                     Selamat Datang <br />di Cafe<span> China</span>
                 </h3>
-                <h5 class="text-light opacity-75 mx-3 mt-2">
+                <h5 class="text-light opacity-75 mx-5 ml-5 mt-2">
                     Ayo kunjungi cafe dengan nuansa china,
                     <br class="d-none d-md-block" />
                     kapan lagi nongki serasa di china
