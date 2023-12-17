@@ -7,9 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $comment = $_POST['comment'];
+    $rating = $_POST['rating'];
+    $product_id = $_POST['product'];
 
     // Insert comment into the database
-    $sql = "INSERT INTO comments (name, email, comment) VALUES ('$name', '$email', '$comment')";
+    $sql = "INSERT INTO comments (name, email, comment, rating, product_id) VALUES ('$name', '$email', '$comment', $rating, $product_id)";
 
     if ($conn->query($sql) === TRUE) {
         // Comment successfully inserted
@@ -20,5 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../admin/index.php?status=error");
         exit();
     }
+
 }
 ?>

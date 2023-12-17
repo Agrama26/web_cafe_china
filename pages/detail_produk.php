@@ -13,11 +13,11 @@ if ($result) {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-mysqli_close($conn);
+
 if (isset($_POST['add_to_cart'])) {
     $cartItem = [
-        'id' => $productId,
-        'name' => $productData['name'],
+        'product_id' => $productId,
+        'product_name' => $productData['product_name'],
         'price' => $productData['price'],
     ];
 
@@ -142,6 +142,68 @@ if (isset($_POST['add_to_cart'])) {
                         <p><strong>Category : </strong>
                             <?php echo $productData['country_origin']; ?>
                         </p>
+                        <?php
+
+                        // Fungsi untuk mengonversi rating menjadi representasi bintang
+                        function displayStarRating($rating)
+                        {
+                            $fullStar = floor($rating);
+                            $halfStar = ceil($rating - $fullStar);
+                            $emptyStar = 5 - $fullStar - $halfStar;
+
+                            // Tampilkan bintang penuh
+                            for ($i = 0; $i < $fullStar; $i++) {
+                                echo '<span class="fa fa-star text-warning"></span>';
+                            }
+
+                            // Tampilkan setengah bintang jika ada
+                            if ($halfStar > 0) {
+                                echo '<span class="fa fa-star-half-alt text-warning"></span>';
+                            }
+
+                            // Tampilkan bintang kosong
+                            for ($i = 0; $i < $emptyStar; $i++) {
+                                echo '<span class="fa fa-star text-muted"></span>';
+                            }
+                        }
+
+                        ?>
+                        <?php
+                        // Ambil id produk dari variabel $productData
+                        if (isset($productData) && is_array($productData) && !empty($productData)) {
+                            // Ambil id produk dari variabel $productData
+                            $product_id = $productData['product_id'];
+
+                            // Query untuk mengambil rata-rata rating produk
+                            $sql = "SELECT AVG(rating) AS average_rating FROM comments WHERE product_id = $product_id";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $average_rating = $row['average_rating'];
+
+                                if ($average_rating !== null) {
+                                    echo '<div class="text-center mb-3">';
+                                    echo '    <strong>Average Rating : ';
+                                    displayStarRating($average_rating);
+                                    echo '    </strong>';
+                                    echo '</div>';
+                                } else {
+                                    echo '<div class="text-center mb-3">';
+                                    echo '    <strong>No ratings yet.</strong>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo '<div class="text-center mb-3">';
+                                echo '    <strong>No ratings yet.</strong>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="text-center mb-3">';
+                            echo '    <strong>Product data not available.</strong>';
+                            echo '</div>';
+                        }
+                        ?>
                         <button type="button" class="w-100 btn btn-danger px-5 mt-2 mb-2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             Add To Cart

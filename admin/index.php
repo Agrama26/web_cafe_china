@@ -12,8 +12,6 @@ if ($resultt) {
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
-
-// mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -90,9 +88,9 @@ if ($resultt) {
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item">
-                <img src="../assets/images/logo/ghost1.png" class="d-block w-100" alt="Slide 2">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Nikmati <span>Nuansa China di C</span>afe Kami</h3>
+                <img src="../assets/images/logo/bo tao2.jpg" class="d-block w-100" alt="Slide 2">
+                <div class="carousel-caption d-none d-md-block mb-5">
+                    <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
                     <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
                 </div>
             </div>
@@ -101,10 +99,10 @@ if ($resultt) {
                     <source src="../assets/images/logo/hu-tao.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="carousel-caption d-none d-md-block">
+                <div class="carousel-caption d-none d-md-block mb-5">
                     <h3>Selamat Datang</h3>
                     <p>
-                        <?php echo $userData['username']; ?> Di Cafe China.
+                        <?php echo $userData['username']; ?> Di Cafe <Span>China.</Span>
                     </p>
                 </div>
             </div>
@@ -392,25 +390,50 @@ if ($resultt) {
                     <h3>Comment</h3>
                     <form action="../pages/process_comment.php" method="post">
                         <div class="form-group mb-2">
-                            <label for="email" class="mb-2 mt-3">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                                required />
+                            <label for="exampleFormControlInput1" class="mb-2 mt-3">Email</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" name="email"
+                                placeholder="Email" required />
                         </div>
                         <div class="form-group mb-2">
-                            <label for="name" class="mb-2">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required />
+                            <label class="mb-2" for="exampleFormControlInput1">Name</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="name"
+                                placeholder="Name" required />
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="mb-2" for="product">Product</label>
+                            <select class="form-control" id="product" name="product">
+                                <?php
+                                // Fetch product options from the database
+                                $sql = "SELECT product_id, product_name FROM products";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['product_id'] . '">' . $row['product_name'] . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="mb-2" for="rating">Rating</label>
+                            <select class="form-control" id="rating" name="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="comment" class="mb-2">Comment</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="3"
+                            <label class="mb-2" for="exampleFormControlTextarea1">Comment</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="comment" rows="3"
                                 placeholder="Your Comment" required></textarea>
                         </div>
-                        <!-- Button trigger modal -->
-                        <button type="submit" class="btn btn-danger px-4 mt-3">
-                            Submit
-                        </button>
+                        <button type="submit" class="btn btn-danger px-4 mt-3">Submit</button>
                     </form>
                 </div>
+
 
 
             </div>
