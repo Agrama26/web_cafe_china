@@ -25,6 +25,7 @@ Cafe dengan nuansa seperti di china.
 
 Pastikan perangkat Anda sudah terinstal dengan perangkat lunak berikut:
 
+- Web Browser
 - Git: [Download Git](https://git-scm.com/)
 - Vscode: [Download Vscode](https://code.visualstudio.com/)
 - Laragon: [Download Laragon](https://laragon.org/)
@@ -62,3 +63,5 @@ git clone https://github.com/Agrama26/web_cafe_china.git
 
 - Pastikan file PHP sudah ada dalam proyek dan bisa diakses.
 - Buka browser dan akses proyek di localhost/php_dasar/web_cafe_china/admin/login.php
+- Masukan email berikut : ramadhanagung2611@gmail.com
+- Masukan password berikut : agung2611

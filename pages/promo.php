@@ -296,54 +296,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         }
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const cards = document.querySelectorAll('[data-aos]');
-            const observerConfig = {
-                rootMargin: '0px',
-                threshold: 0.5
-            };
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('aos-animate');
-                    } else {
-                        entry.target.classList.remove('aos-animate');
-                    }
-                });
-            }, observerConfig);
-
-            cards.forEach(card => {
-                observer.observe(card);
-            });
-
-            let lastScrollTop = 0;
-
-            function handleScroll() {
-                const st = window.pageYOffset || document.documentElement.scrollTop;
-
-                if (st > lastScrollTop) {
-                    // Scroll ke bawah
-                } else {
-                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
-                    cards.forEach(card => {
-                        if (card.getBoundingClientRect().top > window.innerHeight) {
-                            card.classList.remove('aos-animate');
-                        }
-                    });
-                }
-
-                lastScrollTop = st <= 0 ? 0 : st;
-            }
-
-            window.addEventListener('scroll', handleScroll);
-
-            AOS.init({
-                duration: 500,
-                offset: 50,
-                once: true
-            });
+        AOS.init({
+            duration: 500,
+            offset: 50,
+            once: true
         });
+
     </script>
 </body>
 
