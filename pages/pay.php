@@ -100,19 +100,17 @@ if ($resultCart) {
       <div class="row">
         <!-- KOLOM 1 -->
         <div class="col-md-7">
-          <form>
-            <h3 class="text-judul">Alamat Pengiriman</h3>
-
+          <form action="process_bayar.php" method="post">
             <label class="w-100 mb-3">
               Alamat <br />
-              <input type="text" class="form-control" />
+              <input type="text" name="alamat" class="form-control" />
             </label>
             <label class="w-100 mb-3">
               No Rumah <br />
-              <input type="number" class="form-control" />
+              <input type="number" name="no_rumah" class="form-control" />
             </label>
             <label class="w-100" for="exampleFormControlTextarea1">Detail Alamat</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea name="detail_alamat" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 
             <h3 class="text-judul mt-5">Kurir Pengiriman</h3>
             <label class="w-100 mb-3 border rounded p-2">
@@ -147,40 +145,38 @@ if ($resultCart) {
               <input type="radio" name="pembayaran" />
               <img src="../assets/images/logo/bayar-3.png" />
             </label>
-
-            <button type="submit" class="btn btn-lg btn-danger mt-5 mb-5">
-              Bayar
-            </button>
           </form>
         </div>
 
         <!-- KOLOM 2 -->
         <div class="col-md-4 offset-md-1 py-3">
           <div class="card sticky-top">
-            <div class="card-header bg-white">
-              <h3 class="text-judul">Detail Pembayaran</h3>
-            </div>
-            <div class="card-body">
-              <div class="row mt-2 mb-2">
-                <div class="col-md"><small>Sub Total</small></div>
-                <div class="col-md">Rp.
-                  <?= number_format($cartTotal, 0, ',', '.') ?>
+            <form action="process_bayar.php" method="post">
+              <div class="card-header bg-white">
+                <h3 class="text-judul">Detail Pembayaran</h3>
+              </div>
+              <div class="card-body">
+                <div class="row mt-2 mb-2">
+                  <div class="col-md"><small>Sub Total</small></div>
+                  <div class="col-md">Rp.
+                    <?= number_format($cartTotal, 0, ',', '.') ?>
+                  </div>
+                </div>
+                <div class="row mt-2 mb-2">
+                  <div class="col-md"><small>Biaya pengiriman</small></div>
+                  <div class="col-md">Rp. 10.000</div>
+                </div>
+                <div class="row mt-2 mb-2">
+                  <div class="col-md"><small>Total</small></div>
+                  <div class="col-md">Rp 156.000</div>
                 </div>
               </div>
-              <div class="row mt-2 mb-2">
-                <div class="col-md"><small>Biaya pengiriman</small></div>
-                <div class="col-md">Rp. 10.000</div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-lg btn-danger w-100">
+                  Bayar
+                </button>
               </div>
-              <div class="row mt-2 mb-2">
-                <div class="col-md"><small>Total</small></div>
-                <div class="col-md">Rp 156.000</div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button type="submit" class="btn btn-lg btn-danger w-100">
-                Bayar
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

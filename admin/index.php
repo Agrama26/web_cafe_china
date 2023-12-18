@@ -326,6 +326,14 @@ if ($resultt) {
 
             <div class="row" id="commentsContainer" data-masonry='{"percentPosition": true }'>
                 <?php
+                $sql = "SELECT * FROM products WHERE product_id = $productID";
+                $result = mysqli_query($conn, $sql);
+
+                if ($result) {
+                    $productData = mysqli_fetch_assoc($result);
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
                 // Fetch the first 6 comments from the database
                 $sql = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 6";
                 $result = $conn->query($sql);

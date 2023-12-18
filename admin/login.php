@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="success-msg">
               <p>Slamat ! Kamu adalah salah satu member skarang.</p>
-              <a href="index.php" class="profile">Masuk</a>
+              <a href="#" class="profile">Login Now</a>
             </div>
           </div>
 
@@ -206,7 +206,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="CTA">
-                  <input type="submit" value="Signup Now" id="submit" />
+                  <input type="submit" value="Signup Now" id="signup_btn" />
                   <a href="#" class="switch">Sudah ada yg Punya</a>
                 </div>
               </form>
