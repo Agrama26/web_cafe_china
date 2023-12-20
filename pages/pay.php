@@ -145,6 +145,11 @@ if ($resultCart) {
               <input type="radio" name="pembayaran" />
               <img src="../assets/images/logo/bayar-3.png" />
             </label>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-lg btn-danger w-100">
+                Bayar
+              </button>
+            </div>
           </form>
         </div>
 
@@ -170,11 +175,6 @@ if ($resultCart) {
                   <div class="col-md"><small>Total</small></div>
                   <div class="col-md">Rp 156.000</div>
                 </div>
-              </div>
-              <div class="card-footer">
-                <button type="submit" class="btn btn-lg btn-danger w-100">
-                  Bayar
-                </button>
               </div>
             </form>
           </div>

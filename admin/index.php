@@ -126,9 +126,9 @@ if ($resultt) {
                     <div class="card animasi">
                         <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h6 class="card-title">Potongan Harga 20%</h6>
+                            <h6 class="card-title">Bonus</h6>
                             <p class="card-text">
-                                harga dipotong ukuran gelasnya juga dipotong ya
+                                Beli 1 gratis ??? Gratis bertanya dan memberi saran
                             </p>
                         </div>
                     </div>
@@ -138,9 +138,9 @@ if ($resultt) {
                     <div class="card animasi">
                         <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Bonus Kelapa</h5>
+                            <h5 class="card-title">Diskon 5%</h5>
                             <p class="card-text">
-                                Anda Ingin Maju? Anda Ingin Sukses? Ya Seperti Saya Ini
+                                Diskon 5% untuk pembelian 2 porsi klepon dengan isi 10 buah
                             </p>
                         </div>
                     </div>
@@ -148,7 +148,7 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Japanese/Sakura Tea Latte.jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Western/Pancake1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Gratis Garpu</h5>
                             <p class="card-text">
@@ -160,11 +160,11 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/images/Chinese/boba1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Beli 1 Gratis ???</h5>
                             <p class="card-text">
-                                Anda Ingin Maju? Anda Ingin Sukses? Ya Seperti Saya Ini
+                                Diskon 50% untuk pembelian 2 buah xi boba dengan boba ekstra
                             </p>
                         </div>
                     </div>
@@ -379,7 +379,7 @@ if ($resultt) {
                     <div class="embed-responsive mb-3">
                         <iframe class="col-12 col-sm-12"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.8949271488314!2d97.15578600977521!3d5.120630337854275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304777a35c813bbf%3A0xfac9e2831347f07f!2sPoliteknik%20Negeri%20Lhokseumawe!5e0!3m2!1sid!2sid!4v1686736607675!5m2!1sid!2sid"
-                            width="500" height="350" style="border: 0" allowfullscreen="" loading="lazy"
+                            width="500" height="500" style="border: 0" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
