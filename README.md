@@ -33,13 +33,6 @@ Pastikan perangkat Anda sudah terinstal dengan perangkat lunak berikut:
 
 ### Langkah 2: Clone Repository
 
-- Pastikan anda sudah memiliki akun GitHub
-- Jika belum silahkan buat terlebih dahulu
-
-```bash
-https://github.com
-```
-
 - Lalu buka terminal atau command prompt bisa juga menggunakan gitbash,
 - untuk mempermudah anda bisa membuka terminal atau gitbash langsung pada Visual Studio Code anda,
 - lalu jalankan perintah berikut untuk mengklon repository:
@@ -49,7 +42,7 @@ git clone https://github.com/Agrama26/web_cafe_china.git
 
 ```
 
-### Langkah 3: Menjalankan Xampp atau Laragon
+### Langkah 3: Menjalankan Laragon
 
 - Pastikan XAMPP atau Laragon sudah diinstal dan dijalankan.
 - Start Apache dan MySql di XAMPP atau Laragon.
@@ -63,5 +56,4 @@ git clone https://github.com/Agrama26/web_cafe_china.git
 
 - Pastikan file PHP sudah ada dalam proyek dan bisa diakses.
 - Buka browser dan akses proyek di localhost/php_dasar/web_cafe_china/admin/login.php
-- Masukan email berikut : ramadhanagung2611@gmail.com
-- Masukan password berikut : agung2611
+- Silahkan login menggunakan akun yang sudah tersedia

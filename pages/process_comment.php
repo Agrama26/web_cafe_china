@@ -1,5 +1,6 @@
 <?php
 // Database configuration
+require "../session.php";
 include "../includes/koneksi.php";
 
 // Process form submission

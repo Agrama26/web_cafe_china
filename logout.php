@@ -7,6 +7,6 @@ session_destroy();
 setcookie('netter', '', time() - 3600);
 
 // Redirect ke halaman login setelah logout
-header("Location: index.php");
+header("Location: login.php");
 exit();
 ?>

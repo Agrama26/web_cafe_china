@@ -1,5 +1,5 @@
 <?php
-include "../admin/session.php";
+include "../session.php";
 include "../includes/koneksi.php";
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -68,7 +68,7 @@ if (isset($_POST['add_to_cart'])) {
                 <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
                 <ul class="navbar-nav ms-auto d-flex gap-3">
                     <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="../admin/index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -92,7 +92,7 @@ if (isset($_POST['add_to_cart'])) {
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-box-arrow-left"></i>Login</a>
                     </li>
                 </ul>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../includes/koneksi.php";
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -53,7 +54,7 @@ if ($resultt) {
                 <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
                 <ul class="navbar-nav ms-auto d-flex gap-3">
                     <li class="nav-item me-3">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -62,22 +63,22 @@ if ($resultt) {
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Food</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk1.php">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../pages/promo.php">Promo</a>
+                        <a class="nav-link" href="promo.php">Promo</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../pages/keranjang.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="keranjang.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="logout.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>

@@ -1,6 +1,6 @@
 <?php
-require './session.php';
-include "../includes/koneksi.php";
+require 'session.php';
+include "includes/koneksi.php";
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
 
@@ -32,9 +32,9 @@ if ($resultt) {
         rel="stylesheet" />
 
     <!-- style -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/lightbox.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -61,18 +61,18 @@ if ($resultt) {
                         </a>
                         <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Food</a>
+                                <a class="dropdown-item nav-link btn-nav" href="pages/produk.php">Food</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link btn-nav" href="../pages/produk1.php">Drink</a>
+                                <a class="dropdown-item nav-link btn-nav" href="pages/produk1.php">Drink</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../pages/promo.php">Promo</a>
+                        <a class="nav-link" href="pages/promo.php">Promo</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../pages/keranjang.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="pages/keranjang.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
@@ -88,7 +88,7 @@ if ($resultt) {
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item">
-                <img src="../assets/images/logo/bo tao2.jpg" class="d-block w-100" alt="Slide 2">
+                <img src="assets/images/logo/bo tao2.jpg" class="d-block w-100" alt="Slide 2">
                 <div class="carousel-caption d-none d-md-block mb-5">
                     <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
                     <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
@@ -96,7 +96,7 @@ if ($resultt) {
             </div>
             <div class="carousel-item active">
                 <video class="d-block w-100" autoplay loop muted>
-                    <source src="../assets/images/logo/hu-tao.mp4" type="video/mp4">
+                    <source src="assets/images/logo/hu-tao.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="carousel-caption d-none d-md-block mb-5">
@@ -124,7 +124,7 @@ if ($resultt) {
             <div class="row mt-5 justify-content-center">
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="..." />
+                        <img src="assets/images/Western/coffee_1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h6 class="card-title">Bonus</h6>
                             <p class="card-text">
@@ -136,7 +136,7 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="..." />
+                        <img src="assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Diskon 5%</h5>
                             <p class="card-text">
@@ -148,7 +148,7 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Western/Pancake1.jpg" class="card-img-top" alt="..." />
+                        <img src="assets/images/Western/Pancake1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Gratis Garpu</h5>
                             <p class="card-text">
@@ -160,7 +160,7 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <img src="../assets/images/Chinese/boba1.jpg" class="card-img-top" alt="..." />
+                        <img src="assets/images/Chinese/boba1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">Beli 1 Gratis ???</h5>
                             <p class="card-text">
@@ -171,7 +171,7 @@ if ($resultt) {
                 </div>
 
                 <div class="mt-5 d-flex justify-content-center mb-2" data-aos="fade-down">
-                    <a href="../pages/promo.php" class="btn bg-btn px-4 shadow">See All Promo
+                    <a href="pages/promo.php" class="btn bg-btn px-4 shadow">See All Promo
                     </a>
                 </div>
             </div>
@@ -236,8 +236,8 @@ if ($resultt) {
             <div class="row">
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <a href="../assets/images/Western/coffee_1.jpg" data-lightbox="Produk" data-title="Coffee">
-                            <img src="../assets/images/Western/coffee_1.jpg" class="card-img-top" alt="404" />
+                        <a href="assets/images/Western/coffee_1.jpg" data-lightbox="Produk" data-title="Coffee">
+                            <img src="assets/images/Western/coffee_1.jpg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Coffee</h6>
@@ -251,8 +251,8 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <a href="../assets/images/Lokal/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
-                            <img src="../assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="404" />
+                        <a href="assets/images/Lokal/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
+                            <img src="assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Klepon Cake</h6>
@@ -266,9 +266,9 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <a href="../assets/images/Chinese/Bubble Thai Tea.jpg" data-lightbox="Produk"
+                        <a href="assets/images/Chinese/Bubble Thai Tea.jpg" data-lightbox="Produk"
                             data-title="Bubble Thai Tea">
-                            <img src="../assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="404" />
+                            <img src="assets/images/Chinese/Bubble Thai Tea.jpg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Thai Tea</h6>
@@ -282,10 +282,8 @@ if ($resultt) {
 
                 <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
                     <div class="card animasi">
-                        <a href="../assets/images/Western/Mochacindo.jpg" data-lightbox="Produk"
-                            data-title="Mochacindo">
-                            <img src="../assets/images/Western/Mochacindo (Square).jpg" class="card-img-top"
-                                alt="404" />
+                        <a href="assets/images/Western/Mochacindo.jpg" data-lightbox="Produk" data-title="Mochacindo">
+                            <img src="assets/images/Western/Mochacindo (Square).jpg" class="card-img-top" alt="404" />
                         </a>
                         <div class="card-body text-center">
                             <h6 class="card-title text-danger fs-5">Mocha Chindo</h6>
@@ -306,10 +304,10 @@ if ($resultt) {
                     </a>
                     <ul class="dropdown-menu" data-aos="fade-up" aria-labelledby="dropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="../pages/produk.php">Food</a>
+                            <a class="dropdown-item" href="pages/produk.php">Food</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="../pages/produk1.php">Drink</a>
+                            <a class="dropdown-item" href="pages/produk1.php">Drink</a>
                         </li>
                     </ul>
                 </div>
@@ -362,7 +360,7 @@ if ($resultt) {
 
             <!-- Button to load more comments -->
             <div class="d-flex justify-content-center" data-aos="fade-down">
-                <a href="../pages/koment_lain.php" class="btn btn-danger mt-3">
+                <a href="pages/koment_lain.php" class="btn btn-danger mt-3">
                     View More Comments
                 </a>
             </div>
@@ -520,7 +518,7 @@ if ($resultt) {
     <!-- Footer End -->
 
     <!-- Script -->
-    <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
+    <script src="assets/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>

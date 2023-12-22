@@ -1,4 +1,5 @@
 <?php
+require "../session.php";
 include "../includes/koneksi.php";
 // Ambil data dari formulir
 $alamat = isset($_POST['alamat']) ? $_POST['alamat'] : '';

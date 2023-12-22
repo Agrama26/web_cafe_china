@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../includes/koneksi.php";
+include "includes/koneksi.php";
 
 // Fungsi untuk menyaring inpu
 // Menemukan sanitizeInput function
@@ -81,9 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/login.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/login.css" />
 </head>
 
 <body>
@@ -107,18 +107,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </a>
             <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Food</a>
+                <a class="dropdown-item nav-link btn-nav" href="pages/produk.php">Food</a>
               </li>
               <li>
-                <a class="dropdown-item nav-link btn-nav" href="../pages/produk.php">Drink</a>
+                <a class="dropdown-item nav-link btn-nav" href="pages/produk1.php">Drink</a>
               </li>
             </ul>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="../pages/promo.php">Promo</a>
+            <a class="nav-link" href="pages/promo.php">Promo</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="../pages/keranjang.php" tabindex="-1" aria-disabled="true"><i
+            <a class="nav-link" href="pages/keranjang.php" tabindex="-1" aria-disabled="true"><i
                 class="bi bi-cart2"></i>Cart</a>
           </li>
           <li class="nav-item me-3">
@@ -223,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="../assets/js/login.js"></script>
+  <script src="assets/js/login.js"></script>
 </body>
 
 </html>
