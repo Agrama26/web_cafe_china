@@ -69,6 +69,10 @@ if ($resultCart) {
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
 
     <!-- Nav -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
@@ -134,7 +138,7 @@ if ($resultCart) {
         <div class="container">
             <div class="row">
                 <div class="col-12" data-aos="fade-down">
-                    <h2 class="text-judul-halaman text-center">Shopping Cart</h2>
+                    <h2 class="text-judul-halaman text-center mb-3">Shopping Cart</h2>
                 </div>
             </div>
 
@@ -247,12 +251,13 @@ if ($resultCart) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -375,6 +380,23 @@ if ($resultCart) {
                 once: true
             });
         });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 1000);
+        });
+
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
     </script>
 </body>
 

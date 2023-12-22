@@ -72,6 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
@@ -212,12 +216,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -296,12 +301,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         }
     </script>
     <script>
-        AOS.init({
-            duration: 500,
-            offset: 50,
-            once: true
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 800,
+                offset: 50,
+                once: true
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 1000);
         });
 
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
     </script>
 </body>
 

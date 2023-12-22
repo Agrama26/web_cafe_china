@@ -48,6 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
         <div class="container">
@@ -113,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             <div class="row">
                 <!-- Kategori -->
                 <div class="text-center mb-5 col-md-4 col-lg-3 mb-5">
-                    <h5 class="mb-3">Category</h5>
-                    <ul class="list-group mt-4">
+                    <h5 class="mb-3" data-aos="fade-down">Category</h5>
+                    <ul class="list-group mt-4" data-aos="fade-down">
                         <li type="button" class="list-group-item text-dark btn-produk" style="text-decoration: none"
                             onclick="showProducts('All')">All</li>
                         <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
@@ -137,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 </div>
                 <!-- Produk -->
                 <div class="container-fluid col-md-8 col-lg-9">
-                    <h5 class="text-center mb-3">Product</h5>
+                    <h5 class="text-center mb-3" data-aos="fade-down">Product</h5>
                     <div class="row justify-content-center">
                         <?php
                         $sql = "SELECT * FROM products WHERE category = 'Minuman' ORDER BY country_origin";
@@ -146,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<div class="col-6 col-sm-6 col-lg-3 mb-4 product-item ' . $row['country_origin'] . '"> ';
-                                echo '<div class="card" data-aos="zoom-in-down">';
+                                echo '<div class="card" data-aos="zoom-in-down" data-aos-anchor-placement="center-center">';
                                 echo '<a href="' . $row['imagePath'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
                                 echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';
                                 echo '</a>';
@@ -213,12 +218,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -356,11 +362,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             window.addEventListener('scroll', handleScroll);
 
             AOS.init({
-                duration: 500,
+                duration: 800,
                 offset: 50,
                 once: true
             });
         });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 1000);
+        });
+
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
     </script>
 </body>
 

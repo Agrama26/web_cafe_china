@@ -31,7 +31,7 @@ if ($resultt) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cafe China</title>
+    <title>Cafe China | Home</title>
     <!-- icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
@@ -196,10 +196,11 @@ if ($resultt) {
 
     <!-- Melayani -->
     <div class="container-fluid py-5 main-color">
-        <div class="container" data-aos="fade-down">
+        <div class="container" data-aos-anchor-placement="center-center" data-aos="fade-down">
             <h3 class="text-center text-light mb-5">Our <span>Services</span></h3>
             <div class="row justify-content-center">
-                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="fade-right">
+                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos-anchor-placement="center-center"
+                    data-aos="fade-right">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
                             <a href="#"><i class="text-light bi bi-truck display-6"></i></a>
@@ -213,7 +214,8 @@ if ($resultt) {
                         </p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="zoom-in">
+                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos-anchor-placement="center-center"
+                    data-aos="zoom-in">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
                             <a href="#"><i class="text-light bi bi-shop-window display-6"></i></a>
@@ -227,7 +229,8 @@ if ($resultt) {
                         </p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos="fade-left">
+                <div class="col-sm-6 col-md-2 animasi mb-3" data-aos-anchor-placement="center-center"
+                    data-aos="fade-left">
                     <div class="d-flex justify-content-center">
                         <div class="melayani d-flex align-items-center justify-content-center">
                             <a href="#"><i class="text-light bi bi-mic display-6"></i></a>
@@ -246,11 +249,11 @@ if ($resultt) {
     </div>
 
     <!-- Produk -->
-    <div class="container-fluid" data-aos="fade-up">
+    <div class="container-fluid" data-aos="fade-up" data-aos-anchor-placement="center-center">
         <div class="container">
             <h3 class="text-center mb-5 mt-5">Best <span>Seller</span></h3>
             <div class="row">
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <a href="assets/images/Western/coffee_1.jpg" data-lightbox="Produk" data-title="Coffee">
                             <img src="assets/images/Western/coffee_1.jpg" class="card-img-top" alt="404" />
@@ -265,7 +268,7 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <a href="assets/images/Lokal/Klepon.jpeg" data-lightbox="Produk" data-title="Klepon">
                             <img src="assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="404" />
@@ -280,7 +283,7 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <a href="assets/images/Chinese/Bubble Thai Tea.jpg" data-lightbox="Produk"
                             data-title="Bubble Thai Tea">
@@ -296,7 +299,7 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <a href="assets/images/Western/Mochacindo.jpg" data-lightbox="Produk" data-title="Mochacindo">
                             <img src="assets/images/Western/Mochacindo (Square).jpg" class="card-img-top" alt="404" />
@@ -318,7 +321,8 @@ if ($resultt) {
                         data-bs-toggle="dropdown" aria-expanded="false">
                         See All
                     </a>
-                    <ul class="dropdown-menu" data-aos="fade-up" aria-labelledby="dropdownMenuLink">
+                    <ul class="dropdown-menu" data-aos="fade-up" data-aos-anchor-placement="center-center"
+                        aria-labelledby="dropdownMenuLink">
                         <li>
                             <a class="dropdown-item" href="pages/produk.php">Food</a>
                         </li>
@@ -334,7 +338,7 @@ if ($resultt) {
     <!-- Masonry -->
     <div class="container-fluid py-5 main-color mt-5">
         <div class="container">
-            <h3 class="text-light text-center mb-5" data-aos="fade-up">
+            <h3 class="text-light text-center mb-5" data-aos="fade-up" data-aos-anchor-placement="center-center">
                 Customer <span>Comments</span>
             </h3>
 
@@ -355,7 +359,7 @@ if ($resultt) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Display the initial 6 comments
-                        echo '<div class="col-lg-4 mb-3" data-aos="fade-up">';
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">';
                         echo '<div class="card p-3 masonri">';
                         echo '<figure>';
                         echo '<blockquote class="blockquote">';
@@ -375,7 +379,7 @@ if ($resultt) {
             </div>
 
             <!-- Button to load more comments -->
-            <div class="d-flex justify-content-center" data-aos="fade-up">
+            <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-anchor-placement="center-center">
                 <a href="pages/koment_lain.php" class="btn btn-danger mt-3">
                     View More Comments
                 </a>
@@ -388,7 +392,7 @@ if ($resultt) {
         <div class="container">
             <div class="row">
                 <!-- Map -->
-                <div class="col-lg-6" data-aos="fade-right">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-anchor-placement="center-center">
                     <h3 class="mb-3">Address</h3>
                     <div class="embed-responsive mb-3">
                         <iframe class="col-12 col-sm-12"
@@ -408,7 +412,7 @@ if ($resultt) {
                 }
                 ?>
 
-                <div class="col-lg-6" data-aos="fade-left">
+                <div class="col-lg-6" data-aos="fade-left" data-aos-anchor-placement="center-center">
                     <h3>Comment</h3>
                     <form action="pages/process_comment.php" method="post">
                         <div class="form-group mb-2">
@@ -461,12 +465,13 @@ if ($resultt) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="pages/about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -582,7 +587,7 @@ if ($resultt) {
             window.addEventListener('scroll', handleScroll);
 
             AOS.init({
-                duration: 500,
+                duration: 800,
                 offset: 50,
                 once: true
             });

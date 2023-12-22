@@ -24,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (username, email, no_hp, passwordd, created_at) VALUES ('$username', '$email', '$no_hp', '$password', '$created_at')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Registrasi berhasil. Selamat datang, $username!";
+        header("Location: selamat.php");
+        // echo "Registrasi berhasil. Selamat datang, $username!";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

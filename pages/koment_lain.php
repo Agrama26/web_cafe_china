@@ -105,7 +105,7 @@ if ($resultt) {
     <!-- Sisa Komentar -->
     <div class="container-fluid py-5 main-color my-5">
         <div class="container">
-            <h3 class="text-light text-center mb-5" data-aos="fade-down">
+            <h3 class="text-light text-center mb-5" data-aos="fade-down" data-aos-anchor-placement="center-center">
                 Additional <span>Comments</span>
             </h3>
 
@@ -118,7 +118,7 @@ if ($resultt) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Display additional comments
-                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down">';
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down" data-aos-anchor-placement="center-center">';
                         echo '<div class="card p-3 masonri">';
                         echo '<figure>';
                         echo '<blockquote class="blockquote">';
@@ -140,12 +140,13 @@ if ($resultt) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -261,7 +262,7 @@ if ($resultt) {
             window.addEventListener('scroll', handleScroll);
 
             AOS.init({
-                duration: 500,
+                duration: 800,
                 offset: 50,
                 once: true
             });

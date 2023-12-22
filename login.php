@@ -72,6 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/login.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -118,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </nav>
 
   <!-- Login dan registrasi -->
-  <div class="container-fluid py-5">
+  <div class="container-fluid py-5" data-aos="fade-in">
     <div class="container containerr">
       <section id="formHolder">
         <div class="row">
@@ -138,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
 
           <!-- Form Box -->
-          <div class="col-sm-12 col-md-6 col-lg-6 form">
+          <div class="col-sm-12 col-md-6 col-lg-6 form" data-aos="fade-in">
             <!-- Login Form -->
             <div class="login form-peice <?php echo $formClass; ?>">
               <form class="login-form" action="#" method="post">
@@ -162,41 +165,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Signup Form -->
             <div class="signup form-peice switched">
-              <!-- <form class="signup-form" action="registrasi.php" method="post">
-                <div class="form-group">
-                  <label for="name">Nama Lu</label>
-                  <input type="text" name="name" id="name" class="name" />
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="email">Email Lu</label>
-                  <input type="email" name="emailAdress" id="email" class="email" />
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="no_hp">08 berapa? - <small>null</small></label>
-                  <input type="text" name="phone" id="no_hp" />
-                </div>
-
-                <div class="form-group">
-                  <label for="pass">Password</label>
-                  <input type="password" name="password" id="pass" class="pass" />
-                  <span class="error"></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="passwordCon">Confirm Password</label>
-                  <input type="password" name="passwordCon" id="passwordCon" class="passConfirm" />
-                  <span class="error"></span>
-                </div>
-
-                <div class="CTA">
-                  <input type="submit" value="Signup Now" id="signup_btn" />
-                  <a href="#" class="switch">Sudah ada yg Punya</a>
-                </div>
-              </form> -->
               <form method="post" action="proses_register.php">
                 <div class="form-group">
                   <label for="username">Username:</label>
@@ -237,6 +205,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="assets/js/login.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = document.querySelectorAll('[data-aos]');
+      const observerConfig = {
+        rootMargin: '0px',
+        threshold: 0.5
+      };
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('aos-animate');
+          } else {
+            entry.target.classList.remove('aos-animate');
+          }
+        });
+      }, observerConfig);
+
+      cards.forEach(card => {
+        observer.observe(card);
+      });
+
+      let lastScrollTop = 0;
+
+      function handleScroll() {
+        const st = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (st > lastScrollTop) {
+          // Scroll ke bawah
+        } else {
+          // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+          cards.forEach(card => {
+            if (card.getBoundingClientRect().top > window.innerHeight) {
+              card.classList.remove('aos-animate');
+            }
+          });
+        }
+
+        lastScrollTop = st <= 0 ? 0 : st;
+      }
+
+      window.addEventListener('scroll', handleScroll);
+
+      AOS.init({
+        duration: 1500,
+        offset: 50,
+        once: true
+      });
+    });
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+      // Contoh: setelah 2 detik, sembunyikan loading overlay
+      setTimeout(function () {
+        hideLoadingOverlay();
+      }, 1000);
+    });
+
+    function hideLoadingOverlay() {
+      // Sembunyikan elemen loading
+      var loadingOverlay = document.getElementById("loading-overlay");
+      if (loadingOverlay) {
+        loadingOverlay.style.display = "none";
+      }
+    }
+  </script>
 </body>
 
 </html>
