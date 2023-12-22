@@ -1,6 +1,7 @@
 <?php
-include "../includes/koneksi.php";
 require '../session.php';
+include "../includes/koneksi.php";
+
 
 // Handle Add to Cart logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {

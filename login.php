@@ -27,6 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (password_verify($loginPassword, $user['passwordd'])) {
         // Login berhasil
         $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+
+        // Set cookie untuk menyimpan data login (opsional)
+        $cookie_name = "user_login";
+        $cookie_value = $user['user_id'];
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Cookie berlaku selama 30 hari
+
         header("Location: index.php");
         exit();
       } else {
@@ -37,25 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
       // Email tidak ditemukan
       header("Location: index.php?error=invalid");
-      exit();
-    }
-  } elseif (isset($_POST["signup_btn"])) {
-    // Proses registrasi
-    $username = sanitizeInput($_POST["name"]);
-    $email = sanitizeInput($_POST["emailAdress"]);
-    $phone = sanitizeInput($_POST["phone"]);
-    $password = password_hash(sanitizeInput($_POST["password"]), PASSWORD_DEFAULT);
-
-    $insertQuery = "INSERT INTO users (username, email, no_hp, passwordd) VALUES ('$username', '$email', '$phone', '$password')";
-    $result = mysqli_query($conn, $insertQuery);
-
-    if ($result) {
-      // Registrasi berhasil
-      header("Location: index.php?success=true");
-      exit();
-    } else {
-      // Registrasi gagal
-      header("Location: index.php?error=registration_failed");
       exit();
     }
   }
@@ -107,19 +95,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </a>
             <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item nav-link btn-nav" href="pages/produk.php">Food</a>
+                <a class="dropdown-item nav-link btn-nav" href="index.php">Food</a>
               </li>
               <li>
-                <a class="dropdown-item nav-link btn-nav" href="pages/produk1.php">Drink</a>
+                <a class="dropdown-item nav-link btn-nav" href="index.php">Drink</a>
               </li>
             </ul>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="pages/promo.php">Promo</a>
+            <a class="nav-link" href="index.php">Promo</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link" href="pages/keranjang.php" tabindex="-1" aria-disabled="true"><i
-                class="bi bi-cart2"></i>Cart</a>
+            <a class="nav-link" href="index.php" tabindex="-1" aria-disabled="true"><i class="bi bi-cart2"></i>Cart</a>
           </li>
           <li class="nav-item me-3">
             <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true"><i
@@ -146,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="success-msg">
               <p>Slamat ! Kamu adalah salah satu member skarang.</p>
-              <a href="#" class="profile">Login Now</a>
+              <a href="index.php" class="profile">Login Now</a>
             </div>
           </div>
 
@@ -175,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Signup Form -->
             <div class="signup form-peice switched">
-              <form class="signup-form" action="#" method="post">
+              <!-- <form class="signup-form" action="registrasi.php" method="post">
                 <div class="form-group">
                   <label for="name">Nama Lu</label>
                   <input type="text" name="name" id="name" class="name" />
@@ -194,8 +181,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="form-group">
-                  <label for="passlu">Password</label>
-                  <input type="password" name="password" id="passlu" class="pass" />
+                  <label for="pass">Password</label>
+                  <input type="password" name="password" id="pass" class="pass" />
                   <span class="error"></span>
                 </div>
 
@@ -207,6 +194,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="CTA">
                   <input type="submit" value="Signup Now" id="signup_btn" />
+                  <a href="#" class="switch">Sudah ada yg Punya</a>
+                </div>
+              </form> -->
+              <form method="post" action="proses_register.php">
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" name="username" class="name" required>
+                  <span class="error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" name="email" class="email" required>
+                  <span class="error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="no_hp">No. HP:</label>
+                  <input type="tel" name="no_hp" required>
+                  <span class="error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input type="password" name="password" class="pass" required>
+                  <span class="error"></span>
+                </div>
+                <div class="CTA">
+                  <input type="submit" value="Register">
                   <a href="#" class="switch">Sudah ada yg Punya</a>
                 </div>
               </form>

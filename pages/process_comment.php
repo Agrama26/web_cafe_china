@@ -16,11 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
         // Comment successfully inserted
-        header("Location: ../admin/index.php?status=success");
+        header("Location: ../index.php?status=success");
         exit();
     } else {
         // Comment insertion failed
-        header("Location: ../admin/index.php?status=error");
+        header("Location: ../index.php?status=error");
         exit();
     }
 

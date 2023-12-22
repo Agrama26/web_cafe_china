@@ -91,23 +91,23 @@ $(document).ready(function () {
     }
 
     // PassWord confirmation
-    if ($(".pass").val() !== $(".passConfirm").val()) {
-      $(".passConfirm")
-        .siblings(".error")
-        .text("Passwords gk sama")
-        .fadeIn()
-        .parent(".form-group")
-        .addClass("hasError");
-      passConfirm = false;
-    } else {
-      $(".passConfirm")
-        .siblings(".error")
-        .text("")
-        .fadeOut()
-        .parent(".form-group")
-        .removeClass("hasError");
-      passConfirm = false;
-    }
+    // if ($(".pass").val() !== $(".passConfirm").val()) {
+    //   $(".passConfirm")
+    //     .siblings(".error")
+    //     .text("Passwords gk sama")
+    //     .fadeIn()
+    //     .parent(".form-group")
+    //     .addClass("hasError");
+    //   passConfirm = false;
+    // } else {
+    //   $(".passConfirm")
+    //     .siblings(".error")
+    //     .text("")
+    //     .fadeOut()
+    //     .parent(".form-group")
+    //     .removeClass("hasError");
+    //   passConfirm = false;
+    // }
 
     // label effect
     if ($(this).val().length > 0) {
@@ -144,10 +144,10 @@ $(document).ready(function () {
     if (
       usernameError == true ||
       emailError == true ||
-      passwordError == true ||
-      passConfirm == true
+      passwordError == true
+      // passConfirm == true
     ) {
-      $(".name, .email, .pass, .passConfirm").blur();
+      $(".name, .email, .pass").blur();
     } else {
       $(".signup, .login").addClass("switched");
 

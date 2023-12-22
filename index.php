@@ -1,6 +1,17 @@
 <?php
-require 'session.php';
 include "includes/koneksi.php";
+
+session_start();
+
+// Periksa apakah pengguna sudah login
+if (isset($_SESSION['user_id'])) {
+    $username = $_SESSION['username'];
+    $userId = $_SESSION['user_id'];
+    // echo "Selamat datang, $username! (ID: $userId)";
+} else {
+    header("Location: login.php");
+    exit();
+}
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
 
@@ -41,6 +52,11 @@ if ($resultt) {
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
         <div class="container">
@@ -90,8 +106,8 @@ if ($resultt) {
             <div class="carousel-item">
                 <img src="assets/images/logo/bo tao2.jpg" class="d-block w-100" alt="Slide 2">
                 <div class="carousel-caption d-none d-md-block mb-5">
-                    <h3>Nikmati Nuansa <span>China</span> di Cafe Kami</h3>
-                    <p>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</p>
+                    <h1>Nikmati Nuansa <span>China</span> di Cafe Kami</h1>
+                    <h5>Ayo kunjungi cafe dengan nuansa china, kapan lagi nongki serasa di China.</h5>
                 </div>
             </div>
             <div class="carousel-item active">
@@ -100,10 +116,10 @@ if ($resultt) {
                     Your browser does not support the video tag.
                 </video>
                 <div class="carousel-caption d-none d-md-block mb-5">
-                    <h3>Selamat Datang</h3>
-                    <p>
-                        <?php echo $userData['username']; ?> Di Cafe <Span>China.</Span>
-                    </p>
+                    <h1>Selamat Datang</h1>
+                    <h5 class="text-lg">
+                        <?php echo "$username"; ?> Di Cafe <Span>China.</Span>
+                    </h5>
                 </div>
             </div>
         </div>
@@ -318,7 +334,7 @@ if ($resultt) {
     <!-- Masonry -->
     <div class="container-fluid py-5 main-color mt-5">
         <div class="container">
-            <h3 class="text-light text-center mb-5" data-aos="fade-down">
+            <h3 class="text-light text-center mb-5" data-aos="fade-up">
                 Customer <span>Comments</span>
             </h3>
 
@@ -333,17 +349,17 @@ if ($resultt) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
                 // Fetch the first 6 comments from the database
-                $sql = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 6";
+                $sql = "SELECT comments.id, comments.name, comments.comment, products.product_id, products.product_name FROM comments JOIN products ON comments.product_id = products.product_id ORDER BY created_at DESC LIMIT 6";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Display the initial 6 comments
-                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down">';
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-up">';
                         echo '<div class="card p-3 masonri">';
                         echo '<figure>';
                         echo '<blockquote class="blockquote">';
-                        echo '<p>' . $row['comment'] . '</p>';
+                        echo '<p>' . $row['product_name'] . '<br>' . $row['comment'] . '</p>';
                         echo '</blockquote>';
                         echo '<figcaption class="blockquote-footer">';
                         echo $row['name'];
@@ -359,7 +375,7 @@ if ($resultt) {
             </div>
 
             <!-- Button to load more comments -->
-            <div class="d-flex justify-content-center" data-aos="fade-down">
+            <div class="d-flex justify-content-center" data-aos="fade-up">
                 <a href="pages/koment_lain.php" class="btn btn-danger mt-3">
                     View More Comments
                 </a>
@@ -394,7 +410,7 @@ if ($resultt) {
 
                 <div class="col-lg-6" data-aos="fade-left">
                     <h3>Comment</h3>
-                    <form action="../pages/process_comment.php" method="post">
+                    <form action="pages/process_comment.php" method="post">
                         <div class="form-group mb-2">
                             <label for="exampleFormControlInput1" class="mb-2 mt-3">Email</label>
                             <input type="email" class="form-control" id="exampleFormControlInput1" name="email"
@@ -439,9 +455,6 @@ if ($resultt) {
                         <button type="submit" class="btn btn-danger px-4 mt-3">Submit</button>
                     </form>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -578,6 +591,23 @@ if ($resultt) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 1000);
+        });
+
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 

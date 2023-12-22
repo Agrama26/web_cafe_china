@@ -112,7 +112,7 @@ if ($resultt) {
             <div class="row" id="additionalCommentsContainer" data-masonry='{"percentPosition": true }'>
                 <?php
                 // Fetch additional comments from the database
-                $sql = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 6 OFFSET 6";
+                $sql = "SELECT comments.id, comments.name, comments.comment, products.product_id, products.product_name FROM comments JOIN products ON comments.product_id = products.product_id ORDER BY created_at DESC LIMIT 6 OFFSET 6";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -122,7 +122,7 @@ if ($resultt) {
                         echo '<div class="card p-3 masonri">';
                         echo '<figure>';
                         echo '<blockquote class="blockquote">';
-                        echo '<p>' . $row['comment'] . '</p>';
+                        echo '<p>' . $row['product_name'] . '<br>' . $row['comment'] . '</p>';
                         echo '</blockquote>';
                         echo '<figcaption class="blockquote-footer">';
                         echo $row['name'];
