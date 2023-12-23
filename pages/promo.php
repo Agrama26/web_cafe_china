@@ -140,20 +140,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <div class="container-fluid py-5">
         <div class="container">
             <!-- kategori promo -->
-            <div id="divku" class="row justify-content-center mb-4">
-                <div id="btnall" onclick="filterPromo('all')" class="col-sm-4 col-md-3 col-lg-2">
+            <div id="divku" class="row justify-content-center mb-4" data-aos="fade-up">
+                <div id="btnall" onclick="filterPromo('all')" class="col-sm-4 col-md-3 col-lg-2" data-aos="fade-right">
                     <button
                         class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'all' ? 'activate' : ''; ?>">
                         All Promo
                     </button>
                 </div>
-                <div id="btndiskon" onclick="filterPromo('diskon')" class="col-sm-4 col-md-3 col-lg-2">
+                <div id="btndiskon" onclick="filterPromo('diskon')" class="col-sm-4 col-md-3 col-lg-2"
+                    data-aos="fade-in">
                     <button
                         class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'diskon' ? 'activate' : ''; ?>">
                         Promo Diskon
                     </button>
                 </div>
-                <div id="btnpromo" onclick="filterPromo('bonus')" class="col-sm-4 col-md-3 col-lg-2">
+                <div id="btnpromo" onclick="filterPromo('bonus')" class="col-sm-4 col-md-3 col-lg-2"
+                    data-aos="fade-left">
                     <button
                         class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'bonus' ? 'activate' : ''; ?>">
                         Promo Bonus
@@ -184,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     if ($result) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
-                            echo '<div class="card" data-aos="zoom-in-down">';
+                            echo '<div class="card" data-aos="zoom-in-up">';
                             echo '<a href="' . $row['imagePath'] . '" data-lightbox="Produk" data-title="' . $row['product_name'] . '">';
                             echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="..." />';
                             echo '</a>';
@@ -356,7 +358,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             // Contoh: setelah 2 detik, sembunyikan loading overlay
             setTimeout(function () {
                 hideLoadingOverlay();
-            }, 1000);
+            }, 500);
         });
 
         function hideLoadingOverlay() {

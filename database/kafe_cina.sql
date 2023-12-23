@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 18, 2023 at 04:46 PM
+-- Generation Time: Dec 23, 2023 at 06:05 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -73,7 +73,12 @@ INSERT INTO `comments` (`id`, `email`, `name`, `comment`, `created_at`, `rating`
 (19, 'dimashayukmabar@gmail.com', 'Dimas Anjay Mabar Sleebw', 'Saya terpesona dengan pelayan wanitanya. Btw 08 berapa?', '2023-12-17 08:21:27', 5, 12),
 (20, 'abayhayuqmabar@gmail.com', '~-_Abay Haayyyuuqq_-~', 'Yang paling penting adalah wifi nya ya ges ya sangat bagus sehingga peforma gwe bermain epep menjadi meningkat', '2023-12-17 08:22:19', 5, 18),
 (21, 'abilrepperoktavia@gmail.com', 'Abil Repper Ganas', 'Saya sangat suka dengan fasilitas karaoke yang ada pada cafe cina ini dan pelayanannya juga baik, minumanya juga sangat menyegarkan', '2023-12-17 08:23:23', 4, 13),
-(22, 'reyhanbaikkadang@gmail.com', 'Reyhan Sok Baik', 'Dim Sum nya sangat recomended ya sahabat', '2023-12-17 08:24:23', 5, 14);
+(22, 'reyhanbaikkadang@gmail.com', 'Reyhan Sok Baik', 'Dim Sum nya sangat recomended ya sahabat', '2023-12-17 08:24:23', 5, 14),
+(23, 'dimas@gmail.com', 'subro', 'kurang es', '2023-12-20 05:23:19', 3, 8),
+(24, 'alfitrahcosmetic@gmail.com', 'Fitrah Cosmetic', 'Rasa nya sangat enak saya makan yang rasa ayam', '2023-12-22 09:02:47', 5, 14),
+(25, 'alfitrahcosmetic@gmail.com', 'Fitrah Cosmetic', 'Saya makan dimsum yang rasa ayam dan ayam nya sangat terasa jadi saya suka', '2023-12-22 09:04:34', 5, 14),
+(26, 'asukalangley2233@gmail.com', 'Asuka Langley', 'Sangat enak dan kenyal sekali saat dikunyah sangat direkomendasikan', '2023-12-22 10:52:33', 5, 10),
+(27, 'abilraper1122@gmail.com', 'Abil Rapper Ganas', 'Rasanya enak tapi saya lupa saya alergi ayam jadi gatal gatal', '2023-12-23 05:12:43', 3, 14);
 
 -- --------------------------------------------------------
 
@@ -114,7 +119,8 @@ INSERT INTO `products` (`product_id`, `product_name`, `imagePath`, `category`, `
 (16, 'Jiaozi', '../assets/images/Chinese/Jiaozi1.jpg', 'Makanan', 20000.00, 'Jiaozi, juga dikenal sebagai pangsit atau dumpling, adalah hidangan tradisional Tiongkok yang terdiri dari adonan tepung dan isian yang beragam. Hidangan ini terkenal karena bentuknya yang unik dan berbagai variasi rasa yang dapat disajikan baik dalam keadaan direbus, dikukus, atau digoreng. Artikel ini akan membahas asal-usul, proses pembuatan, variasi rasa, serta makna budaya Jiaozi dalam masyarakat Tiongkok. Beberapa legenda menyebutkan bahwa Jiaozi diciptakan oleh Zhang Zhongjing, seorang tabib terkenal, untuk mengatasi masalah masuk angin pada pasien-pasiennya selama musim dingin.', 'Chinese'),
 (17, 'Krisan Tea', '../assets/images/Chinese/Krisan Tea 1.jpg', 'Minuman', 10000.00, 'Minuman dari China yang merupakan sebuah teh daNegeri Cina sangat dikenal dengan variasi tehnya yang beragam dan merupakan salah satu pelopor dari berbagai jenis teh di seluruh dunia. Teh krisan atau teh chrysanthemum adalah salah satu jenis teh bunga dari Cina yang sering dikonsumsi sampai sekarang. Teh bunga ini sudah lama digunakan sebagai obat tradisional Cina dan dianggap memiliki berbagai manfaat untuk kesehatan. Berbeda dengan teh pada umumnya, teh krisan tidak memiliki kandungan kafein karena tidak berasal dari daun teh Camellia sinensis.', 'Chinese'),
 (18, 'Bubble Thai Tea', '../assets/images/Chinese/Bubble Thai Tea.jpg', 'Minuman', 15000.00, 'Thai Tea, atau Cha Yen, adalah minuman segar dan manis yang berasal dari Thailand. Terkenal dengan warna jingga cerahnya dan rasa uniknya, Thai Tea menjadi salah satu minuman yang sangat dicari dan dinikmati baik di dalam negeri maupun di berbagai belahan dunia. Artikel ini akan membahas asal-usul, bahan-bahan, proses pembuatan, dan kepopuleran Thai Tea. Thai Tea memiliki akar dalam tradisi minum teh Thailand yang kaya. Minuman ini diperkirakan pertama kali muncul pada abad ke-20 sebagai hasil dari inovasi dalam cara menyajikan teh. Sejak itu, Thai Tea telah menjadi ikon kuliner Thailand.', 'Chinese'),
-(19, 'Baijiu', '../assets/images/Chinese/baiju1.jpg', 'Minuman', 15000.00, 'Minuman baijiu, yang merupakan salah satu minuman beralkohol tradisional terkenal di Cina, telah menjadi bagian integral dari budaya dan sejarahnya. Baijiu secara harfiah berarti \"minuman putih\" dalam bahasa Mandarin, dan minuman ini telah memikat lidah para penikmatnya selama berabad-abad. Artikel ini akan membahas sejarah, proses pembuatan, serta keunikan dan rasanya yang khas.\r\n\r\nSejarah Baijiu : Tradisi yang Terpelihara\r\n\r\nBaijiu memiliki akar yang dalam dalam sejarah Cina, dengan catatan pembuatan minuman ini yang dapat ditelusuri lebih dari seribu tahun yang lalu. Pada awalnya, baijiu dianggap sebagai obat herbal yang diolah untuk tujuan medis. Namun, seiring waktu, minuman ini berkembang menjadi minuman keras yang dihargai dalam berbagai acara keagamaan, upacara pernikahan, dan festival.', 'Chinese');
+(19, 'Baijiu', '../assets/images/Chinese/baiju1.jpg', 'Minuman', 15000.00, 'Minuman baijiu, yang merupakan salah satu minuman beralkohol tradisional terkenal di Cina, telah menjadi bagian integral dari budaya dan sejarahnya. Baijiu secara harfiah berarti \"minuman putih\" dalam bahasa Mandarin, dan minuman ini telah memikat lidah para penikmatnya selama berabad-abad. Artikel ini akan membahas sejarah, proses pembuatan, serta keunikan dan rasanya yang khas.\r\n\r\nSejarah Baijiu : Tradisi yang Terpelihara\r\n\r\nBaijiu memiliki akar yang dalam dalam sejarah Cina, dengan catatan pembuatan minuman ini yang dapat ditelusuri lebih dari seribu tahun yang lalu. Pada awalnya, baijiu dianggap sebagai obat herbal yang diolah untuk tujuan medis. Namun, seiring waktu, minuman ini berkembang menjadi minuman keras yang dihargai dalam berbagai acara keagamaan, upacara pernikahan, dan festival.', 'Chinese'),
+(20, 'Pancake', '../assets/images/Western/Pancake1.jpg', 'Makanan', 25000.00, 'Pancake adalah hidangan dadar yang terbuat dari adonan yang terdiri dari tepung terigu, telur, susu, dan bahan-bahan lainnya. Hidangan ini umumnya dipanggang atau digoreng dan seringkali disajikan dengan berbagai macam topping, seperti sirup maple, buah segar, krim kocok, atau gula bubuk. Pancake memiliki tempat istimewa di hati banyak orang sebagai sarapan yang lezat atau camilan yang memuaskan. Pancake telah ada sejak zaman kuno dan muncul di berbagai budaya di seluruh dunia. Hidangan ini dapat ditemukan dalam bentuk yang berbeda, misalnya crepe di Prancis atau okonomiyaki di Jepang. Pancake versi Amerika Serikat, yang biasanya lebih tebal dan fluffy, menjadi sangat populer dan menjadi hidangan sarapan klasik di banyak rumah tangga.', 'Western');
 
 -- --------------------------------------------------------
 
@@ -138,7 +144,28 @@ CREATE TABLE `promotions` (
 INSERT INTO `promotions` (`promo_id`, `type`, `product_id`, `description`, `created_at`, `updated_at`) VALUES
 (5, 'diskon', 1, 'Diskon 5% untuk pembelian 2 porsi klepon', '2023-12-12 07:41:37', '2023-12-12 07:41:37'),
 (6, 'bonus', 2, 'Beli 1 gratis ??? Gratis bertanya dan memberi saran', '2023-12-12 07:41:58', '2023-12-12 07:41:58'),
-(8, 'diskon', 5, 'Diskon 50% untuk pembelian 2 buah xi boba', '2023-12-12 11:31:43', '2023-12-12 11:31:43');
+(8, 'diskon', 5, 'Diskon 50% untuk pembelian 2 buah xi boba', '2023-12-12 11:31:43', '2023-12-12 11:31:43'),
+(10, 'bonus', 20, 'Bonus garpu untuk dibawa pulang jika menambahan pancake', '2023-12-20 05:13:59', '2023-12-20 05:13:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tarif_pengiriman`
+--
+
+CREATE TABLE `tarif_pengiriman` (
+  `id` int NOT NULL,
+  `nama_kurir` varchar(255) NOT NULL,
+  `tarif` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tarif_pengiriman`
+--
+
+INSERT INTO `tarif_pengiriman` (`id`, `nama_kurir`, `tarif`) VALUES
+(1, 'kurir-1', 10000),
+(2, 'kurir-2', 12000);
 
 -- --------------------------------------------------------
 
@@ -160,7 +187,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `no_hp`, `passwordd`, `created_at`) VALUES
-(1, 'Agung RS', 'ramadhanagung2611@gmail.com', '089623277568', '$2y$10$2Xxb5CSGIWiQu6bi9cbUQeBqH91P5IioKIqwPsJu.ACwoO8fel2h6', '2023-11-25 21:43:40');
+(1, 'Agung RS', 'ramadhanagung2611@gmail.com', '089623277568', '$2y$10$2Xxb5CSGIWiQu6bi9cbUQeBqH91P5IioKIqwPsJu.ACwoO8fel2h6', '2023-11-25 21:43:40'),
+(12, 'Asuka Langley', 'asukalangley2233@gmail.com', '089653277568', '$2y$10$4bvooTxsRFDPBTw3uOitTOxUjABnMJ0QGyxDPp5xcFFV9YH.CuvJG', '2023-12-22 10:20:28'),
+(15, 'Dimas Hayyuk', 'dimashayukmabar@gmail.com', '083972618273', '$2y$10$A8V0SWfkYsA99jWcwd4rbueupqbtwz9AUYaI3qNJ1ghBJ9DACbtw2', '2023-12-22 18:01:48'),
+(16, 'Jabal Ost', 'jabalostjr22@gmail.com', '089765362718', '$2y$10$6SGuaElhbFQ9CaeCtE34Ie/SpFprEg1p9/1hWGw3Q6tz.5eZLZVJ2', '2023-12-22 18:03:51'),
+(17, 'Fitrah Cos', 'alfitrahcosmetic@gmail.com', '0893728268173', '$2y$10$SVGi7pndVCHB4B8srh5nTecEn/yVKp3qar3EjRUSzYDI6d56wXdbq', '2023-12-22 18:24:25'),
+(18, 'Abil Rapper', 'abilraper1122@gmail.com', '082974516273', '$2y$10$UT.3Sw2GIdskfnjUaeBg2.SO8ju5ZB8RAiFcTO//I/HjuDyj8pVOG', '2023-12-23 05:11:24');
 
 --
 -- Indexes for dumped tables
@@ -194,6 +226,12 @@ ALTER TABLE `promotions`
   ADD KEY `fk_promotions_products` (`product_id`);
 
 --
+-- Indexes for table `tarif_pengiriman`
+--
+ALTER TABLE `tarif_pengiriman`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -208,31 +246,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `promotions`
 --
 ALTER TABLE `promotions`
-  MODIFY `promo_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `promo_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tarif_pengiriman`
+--
+ALTER TABLE `tarif_pengiriman`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

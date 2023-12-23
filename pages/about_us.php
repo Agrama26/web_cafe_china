@@ -255,7 +255,7 @@ require '../session.php';
     <!-- Anggota -->
     <div class="container-fluid mt-5">
         <div class="container">
-            <div class=" mb-5" data-aos="fade-down" data-aos-anchor-placement="center-center">
+            <div class=" mb-5" data-aos="fade-right" data-aos-anchor-placement="center-center">
                 <h3>The Team</h3>
                 <h6 class="underline2">Orang Di balik Layar</h6>
             </div>
@@ -388,11 +388,11 @@ require '../session.php';
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="pages/about_us.php">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Reservation</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="#">About Us</a>
+                    <a class="btn btn-link" href="contact.php">Contact Us</a>
+                    <a class="btn btn-link" href="reservation.php">Reservation</a>
+                    <a class="btn btn-link" href="#">Privacy Policy</a>
+                    <a class="btn btn-link" href="#">Terms & Condition</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Contact</h4>
@@ -519,7 +519,7 @@ require '../session.php';
             // Contoh: setelah 2 detik, sembunyikan loading overlay
             setTimeout(function () {
                 hideLoadingOverlay();
-            }, 1000);
+            }, 500);
         });
 
         function hideLoadingOverlay() {

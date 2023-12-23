@@ -119,21 +119,7 @@ if ($resultCart) {
             <label class="w-100" for="exampleFormControlTextarea1">Detail Alamat</label>
             <textarea name="detail_alamat" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 
-            <?php
-            // Ambil nilai opsi pengiriman yang dipilih
-            $selectedCourier = isset($_POST['kurir']) ? $_POST['kurir'] : '';
-
-            // Query untuk mendapatkan tarif pengiriman dari database
-            $query = "SELECT tarif FROM tarif_pengiriman WHERE nama_kurir = '$selectedCourier'";
-            $result = mysqli_query($conn, $query);
-
-            // Ambil nilai tarif dari hasil query
-            $tarifPengiriman = mysqli_fetch_assoc($result);
-
-            // Hitung total pembayaran
-            $totalPembayaran = $cartTotal + $tarifPengiriman;
-            ?>
-            <h3 class="text-judul mt-5">Kurir Pengiriman</h3>
+            <!-- <h3 class="text-judul mt-5">Kurir Pengiriman</h3>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="kurir" />
               <img src="../assets/images/logo/kurir-1.png" />
@@ -143,7 +129,7 @@ if ($resultCart) {
               <input type="radio" name="kurir" />
               <img src="../assets/images/logo/kurir-2.png" />
               <span class="float-end">+ Rp 12.000</span>
-            </label>
+            </label> -->
 
             <h3 class="text-judul mt-5">Metode Pembayaran</h3>
             <label class="w-100 mb-3 border rounded p-2">
@@ -166,7 +152,7 @@ if ($resultCart) {
               <input type="radio" name="pembayaran" />
               <img src="../assets/images/logo/bayar-3.png" />
             </label>
-            <div class="card-footer">
+            <div class="card-footer mt-3">
               <button type="submit" class="btn btn-lg btn-danger w-100 mb-5">
                 Bayar
               </button>
@@ -175,6 +161,11 @@ if ($resultCart) {
         </div>
 
         <!-- KOLOM 2 -->
+        <?php
+        $subtotal = $cartTotal; // Subtotal dari keranjang belanja
+        $biaya_pengiriman = 10000; // Biaya pengiriman (contoh: Rp 10.000)
+        $total_pembayaran = $subtotal + $biaya_pengiriman;
+        ?>
         <div class="col-md-4 offset-md-1 py-3">
           <div class="card sticky-top">
             <form action="process_bayar.php" method="post">
@@ -195,7 +186,7 @@ if ($resultCart) {
                 <div class="row mt-2 mb-2">
                   <div class="col-md"><small>Total</small></div>
                   <div class="col-md">
-                    <?= "Rp. " . number_format($totalPembayaran, 0, ',', '.'); ?>
+                    <?= "Rp. " . number_format($total_pembayaran, 0, ',', '.'); ?>
                   </div>
                 </div>
               </div>
@@ -340,7 +331,7 @@ if ($resultCart) {
       // Contoh: setelah 2 detik, sembunyikan loading overlay
       setTimeout(function () {
         hideLoadingOverlay();
-      }, 1000);
+      }, 500);
     });
 
     function hideLoadingOverlay() {

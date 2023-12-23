@@ -383,7 +383,7 @@ if ($resultCart) {
             // Contoh: setelah 2 detik, sembunyikan loading overlay
             setTimeout(function () {
                 hideLoadingOverlay();
-            }, 1000);
+            }, 500);
         });
 
         function hideLoadingOverlay() {

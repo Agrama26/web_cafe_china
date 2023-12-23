@@ -49,13 +49,14 @@ if ($resultt) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 
 <body>
     <!-- Elemen loading -->
-    <div id="loading-overlay">
+    <!-- <div id="loading-overlay">
         <div id="loading-spinner"></div>
-    </div>
+    </div> -->
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">

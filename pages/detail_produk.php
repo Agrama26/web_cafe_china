@@ -253,27 +253,32 @@ if (isset($_POST['add_to_cart'])) {
     </div>
 
     <!-- rekomendasi produk -->
-    <div class="container-fluid py-5 mt-5" style="background-color: #fef9ec">
+    <div data-aos="fade-in" data-aos-anchor-placement="center-center" class="container-fluid py-5 mt-5"
+        style="background-color: #fef9ec">
         <div class="container">
-            <h4 class="text-center mb-5">Rekomendasi untuk anda</h4>
+            <h4 class="text-center mb-5">Recommendation</h4>
             <div class="row justify-content-center">
-                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
                     <a href="detail_1.html">
                         <img src="../assets/images/Chinese/Dim Sum1.jpg" class="img-fluid img-thumbnail" alt="404" />
                     </a>
                 </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
                     <a href="detail_1.html">
                         <img src="../assets/images/Lokal/Es Cendol 1.jpg" class="img-fluid img-thumbnail" alt="404" />
                     </a>
                 </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
                     <a href="detail_1.html">
                         <img src="../assets/images/Western/Flat White (Square).jpg" class="img-fluid img-thumbnail"
                             alt="404" />
                     </a>
                 </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
                     <a href="detail_1.html">
                         <img src="../assets/images/Japanese/Niku Udon.jpg" class="img-fluid img-thumbnail" alt="404" />
                     </a>
@@ -414,7 +419,7 @@ if (isset($_POST['add_to_cart'])) {
             // Contoh: setelah 2 detik, sembunyikan loading overlay
             setTimeout(function () {
                 hideLoadingOverlay();
-            }, 1000);
+            }, 500);
         });
 
         function hideLoadingOverlay() {

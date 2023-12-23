@@ -105,20 +105,20 @@ if ($resultt) {
     <!-- Sisa Komentar -->
     <div class="container-fluid py-5 main-color my-5">
         <div class="container">
-            <h3 class="text-light text-center mb-5" data-aos="fade-down" data-aos-anchor-placement="center-center">
+            <h3 class="text-light text-center mb-5" data-aos="fade-up" data-aos-anchor-placement="center-center">
                 Additional <span>Comments</span>
             </h3>
 
             <div class="row" id="additionalCommentsContainer" data-masonry='{"percentPosition": true }'>
                 <?php
                 // Fetch additional comments from the database
-                $sql = "SELECT comments.id, comments.name, comments.comment, products.product_id, products.product_name FROM comments JOIN products ON comments.product_id = products.product_id ORDER BY created_at DESC LIMIT 6 OFFSET 6";
+                $sql = "SELECT comments.id, comments.name, comments.comment, products.product_id, products.product_name FROM comments JOIN products ON comments.product_id = products.product_id ORDER BY comments.id DESC";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Display additional comments
-                        echo '<div class="col-lg-4 mb-3" data-aos="fade-down" data-aos-anchor-placement="center-center">';
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">';
                         echo '<div class="card p-3 masonri">';
                         echo '<figure>';
                         echo '<blockquote class="blockquote">';

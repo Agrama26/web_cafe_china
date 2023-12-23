@@ -12,7 +12,6 @@ function sanitizeInput($input)
   return $input;
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST["login"])) {
     // Proses login
@@ -34,7 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cookie_value = $user['user_id'];
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Cookie berlaku selama 30 hari
 
-        header("Location: index.php");
+        // Tandai bahwa halaman loading harus ditampilkan
+        $_SESSION['show_loading'] = true;
+
+        // Arahkan ke halaman loading
+        header("Location: loading.php");
         exit();
       } else {
         // Password tidak cocok
@@ -249,7 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       window.addEventListener('scroll', handleScroll);
 
       AOS.init({
-        duration: 1500,
+        duration: 1000,
         offset: 50,
         once: true
       });

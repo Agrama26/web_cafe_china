@@ -374,7 +374,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             // Contoh: setelah 2 detik, sembunyikan loading overlay
             setTimeout(function () {
                 hideLoadingOverlay();
-            }, 1000);
+            }, 500);
         });
 
         function hideLoadingOverlay() {
