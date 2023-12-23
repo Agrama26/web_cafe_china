@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </nav>
 
   <!-- Login dan registrasi -->
-  <div class="container-fluid py-5" data-aos="fade-in">
+  <div class="container-fluid py-5" data-aos="fade-in" data-aos-anchor-placement="center-center">
     <div class="container containerr">
       <section id="formHolder">
         <div class="row">

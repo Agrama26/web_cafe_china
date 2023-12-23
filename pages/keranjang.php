@@ -137,7 +137,7 @@ if ($resultCart) {
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
-                <div class="col-12" data-aos="fade-down">
+                <div class="col-12" data-aos="fade-down" data-aos-anchor-placement="center-center">
                     <h2 class="text-judul-halaman text-center mb-3">Shopping Cart</h2>
                 </div>
             </div>
@@ -227,10 +227,6 @@ if ($resultCart) {
                 <div class="col-md-5 ms-auto">
                     <div class="table-responsive">
                         <table class="table">
-                            <tr>
-                                <th>Shipping Costs</th>
-                                <td>Rp. 10.000</td>
-                            </tr>
                             <tr>
                                 <th>Total</th>
                                 <td>
@@ -375,7 +371,7 @@ if ($resultCart) {
             window.addEventListener('scroll', handleScroll);
 
             AOS.init({
-                duration: 500,
+                duration: 800,
                 offset: 50,
                 once: true
             });

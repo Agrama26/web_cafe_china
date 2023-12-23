@@ -118,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             <div class="row">
                 <!-- Kategori -->
                 <div class="text-center mb-5 col-md-4 col-lg-3 mb-5">
-                    <h5 class="mb-3" data-aos="fade-down">Category</h5>
-                    <ul class="list-group mt-4" data-aos="fade-down">
+                    <h5 class="mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">Category</h5>
+                    <ul class="list-group mt-4" data-aos="fade-up" data-aos-anchor-placement="center-center">
                         <li type="button" class="list-group-item text-dark btn-produk" style="text-decoration: none"
                             onclick="showProducts('All')">All</li>
                         <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
@@ -141,8 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     </ul>
                 </div>
                 <!-- Produk -->
-                <div class="container-fluid col-md-8 col-lg-9">
-                    <h5 class="text-center mb-3" data-aos="fade-down">Product</h5>
+                <div class="container-fluid col-md-8 col-lg-9" data-aos="fade-up">
+                    <h5 class="text-center mb-3">Product</h5>
                     <div class="row justify-content-center">
                         <?php
                         $sql = "SELECT * FROM products WHERE category = 'Minuman' ORDER BY country_origin";
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<div class="col-6 col-sm-6 col-lg-3 mb-4 product-item ' . $row['country_origin'] . '"> ';
-                                echo '<div class="card" data-aos="zoom-in-down" data-aos-anchor-placement="center-center">';
+                                echo '<div class="card" data-aos="zoom-in-up" data-aos-anchor-placement="center-center">';
                                 echo '<a href="' . $row['imagePath'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
                                 echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';
                                 echo '</a>';

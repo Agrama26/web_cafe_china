@@ -119,6 +119,20 @@ if ($resultCart) {
             <label class="w-100" for="exampleFormControlTextarea1">Detail Alamat</label>
             <textarea name="detail_alamat" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 
+            <?php
+            // Ambil nilai opsi pengiriman yang dipilih
+            $selectedCourier = isset($_POST['kurir']) ? $_POST['kurir'] : '';
+
+            // Query untuk mendapatkan tarif pengiriman dari database
+            $query = "SELECT tarif FROM tarif_pengiriman WHERE nama_kurir = '$selectedCourier'";
+            $result = mysqli_query($conn, $query);
+
+            // Ambil nilai tarif dari hasil query
+            $tarifPengiriman = mysqli_fetch_assoc($result);
+
+            // Hitung total pembayaran
+            $totalPembayaran = $cartTotal + $tarifPengiriman;
+            ?>
             <h3 class="text-judul mt-5">Kurir Pengiriman</h3>
             <label class="w-100 mb-3 border rounded p-2">
               <input type="radio" name="kurir" />
@@ -180,7 +194,9 @@ if ($resultCart) {
                 </div>
                 <div class="row mt-2 mb-2">
                   <div class="col-md"><small>Total</small></div>
-                  <div class="col-md">Rp 156.000</div>
+                  <div class="col-md">
+                    <?= "Rp. " . number_format($totalPembayaran, 0, ',', '.'); ?>
+                  </div>
                 </div>
               </div>
             </form>

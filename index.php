@@ -135,10 +135,10 @@ if ($resultt) {
 
     <!-- Menu Promo -->
     <div class="container-fluid py-5">
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center">
             <h3 class="text-center">Promo Of The<span> Week</span></h3>
             <div class="row mt-5 justify-content-center">
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <img src="assets/images/Western/coffee_1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
@@ -150,7 +150,7 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <img src="assets/images/Lokal/Klepon_1.jpeg" class="card-img-top" alt="..." />
                         <div class="card-body">
@@ -162,7 +162,7 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <img src="assets/images/Western/Pancake1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
@@ -174,7 +174,7 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up">
+                <div class="col-6 col-sm-6 col-lg-3 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">
                     <div class="card animasi">
                         <img src="assets/images/Chinese/boba1.jpg" class="card-img-top" alt="..." />
                         <div class="card-body">
@@ -186,7 +186,8 @@ if ($resultt) {
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-center mb-2" data-aos="fade-down">
+                <div class="mt-5 d-flex justify-content-center mb-2" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
                     <a href="pages/promo.php" class="btn bg-btn px-4 shadow">See All Promo
                     </a>
                 </div>
@@ -196,7 +197,7 @@ if ($resultt) {
 
     <!-- Melayani -->
     <div class="container-fluid py-5 main-color">
-        <div class="container" data-aos-anchor-placement="center-center" data-aos="fade-down">
+        <div class="container" data-aos-anchor-placement="center-center" data-aos="fade-up">
             <h3 class="text-center text-light mb-5">Our <span>Services</span></h3>
             <div class="row justify-content-center">
                 <div class="col-sm-6 col-md-2 animasi mb-3" data-aos-anchor-placement="center-center"
@@ -315,13 +316,14 @@ if ($resultt) {
                 </div>
             </div>
 
-            <div class="mt-5 d-flex justify-content-center" data-aos="fade-down">
+            <div class="mt-5 d-flex justify-content-center" data-aos="fade-up"
+                data-aos-anchor-placement="center-center">
                 <div class="dropdown">
                     <a class="btn bg-btn dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         See All
                     </a>
-                    <ul class="dropdown-menu" data-aos="fade-up" data-aos-anchor-placement="center-center"
+                    <ul class="dropdown-menu" data-aos="fade-in" data-aos-anchor-placement="center-center"
                         aria-labelledby="dropdownMenuLink">
                         <li>
                             <a class="dropdown-item" href="pages/produk.php">Food</a>
