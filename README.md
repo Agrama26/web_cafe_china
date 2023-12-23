@@ -44,16 +44,17 @@ git clone https://github.com/Agrama26/web_cafe_china.git
 
 ### Langkah 3: Menjalankan Laragon
 
-- Pastikan XAMPP atau Laragon sudah diinstal dan dijalankan.
-- Start Apache dan MySql di XAMPP atau Laragon.
+- Pastikan Laragon sudah diinstal dan dijalankan.
+- Start Apache dan MySql di Laragon.
 
 ### Langkah 4: Import Database
 
-- Buka http://localhost/phpmyadmin/ lalu buat new database dengan nama kafe_cina
+- Buka http://localhost/phpmyadmin/ untuk masuk ke phpmyadmin lalu buat new database dengan nama kafe_cina
 - Klik Import cari file kafe_cina.sql yang sudah anda ambil saat clone sebelumnya lalu klik import
 
 ### Langkah 5: Menjalankan Web
 
 - Pastikan file PHP sudah ada dalam proyek dan bisa diakses.
 - Buka browser dan akses proyek di localhost/php_dasar/web_cafe_china/admin/login.php
-- Silahkan login menggunakan akun yang sudah tersedia
+- Jika belum mempunyai akun maka klik belum punya dan lakukan registrasi
+- Jika sudah baru login dengan akun yang baru dibuat dan anda bisa masuk ke dalam web ini
