@@ -1,6 +1,6 @@
 <?php
 include "../includes/koneksi.php";
-require '../admin/session.php';
+require '../session.php';
 
 // Pastikan Anda memiliki informasi pengguna saat ini atau sesuaikan sesuai kebutuhan
 $user_id = 1; // Gantilah ini dengan metode untuk mendapatkan ID pengguna saat ini
@@ -64,9 +64,15 @@ if ($resultCart) {
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
 
     <!-- Nav -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
@@ -79,7 +85,7 @@ if ($resultCart) {
                 <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
                 <ul class="navbar-nav ms-auto d-flex gap-3">
                     <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="../admin/index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -103,7 +109,7 @@ if ($resultCart) {
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
@@ -115,10 +121,10 @@ if ($resultCart) {
     <div class="container-fluid banner-produk">
         <div class="container">
             <div class="row">
-                <h3 class="text-light display-6 mx-3 mt-2">
+                <h3 class="text-light display-6 mx-5 ml-5">
                     Selamat Datang <br />di Cafe<span> China</span>
                 </h3>
-                <h5 class="text-light opacity-75 mx-3 mt-2">
+                <h5 class="text-light opacity-75 mx-5 ml-5 mt-2">
                     Ayo kunjungi cafe dengan nuansa china,
                     <br class="d-none d-md-block" />
                     kapan lagi nongki serasa di china
@@ -131,8 +137,8 @@ if ($resultCart) {
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h2 class="text-judul-halaman text-center">Keranjang Belanja</h2>
+                <div class="col-12" data-aos="fade-down" data-aos-anchor-placement="center-center">
+                    <h2 class="text-judul-halaman text-center mb-3">Shopping Cart</h2>
                 </div>
             </div>
 
@@ -142,9 +148,9 @@ if ($resultCart) {
                         <table class="table">
                             <tr>
                                 <th>Foto</th>
-                                <th>Nama Produk & Deskripsi</th>
+                                <th>Nama Produk</th>
                                 <th>Harga Satuan</th>
-                                <th>Kuantitas</th>
+                                <th>Jumlah</th>
                                 <th>Harga</th>
                                 <th>Hapus</th>
                             </tr>
@@ -162,16 +168,16 @@ if ($resultCart) {
                                 $produkResult = $stmt->get_result();
                                 $produk = $produkResult->fetch_assoc();
                                 ?>
-                                <tr>
+                                <tr data-aos="fade-right">
                                     <td>
                                         <img src="<?php echo $produk['imagePath']; ?>" class="img-cart"
                                             style="height: 80px; width: 80px" />
                                     </td>
                                     <td>
                                         <?php echo $produk['product_name']; ?><br />
-                                        <small>
-                                            <?php echo $produk['description']; ?>
-                                        </small>
+                                        <!-- <small>
+                                            <?php //echo $produk['description']; ?>
+                                        </small> -->
                                     </td>
                                     <td>Rp.
                                         <?php echo number_format($produk['price'], 0, ',', '.'); ?>
@@ -185,7 +191,8 @@ if ($resultCart) {
                                     </td>
                                     <td>
                                         <a href="hapus.php?id=<?php echo $row['id']; ?>"
-                                            class="btn btn-danger rounded-circle btn-tambah">
+                                            class="btn btn-danger rounded-circle btn-tambah"
+                                            onclick="return confirmDelete();">
                                             <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_54_458)">
@@ -210,14 +217,16 @@ if ($resultCart) {
                 </div>
             </div>
 
+            <script>
+                function confirmDelete() {
+                    return confirm("Are you sure you want to delete this product?");
+                }
+            </script>
+
             <div class="row">
                 <div class="col-md-5 ms-auto">
                     <div class="table-responsive">
                         <table class="table">
-                            <tr>
-                                <th>Biaya pengiriman</th>
-                                <td>Rp. 10.000</td>
-                            </tr>
                             <tr>
                                 <th>Total</th>
                                 <td>
@@ -227,7 +236,7 @@ if ($resultCart) {
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="pay.php" class="btn btn-lg btn-outline-danger w-100">Bayar</a>
+                                    <a href="pay.php" class="btn btn-lg btn-outline-danger w-100">Pay Now</a>
                                 </td>
                             </tr>
                         </table>
@@ -238,12 +247,13 @@ if ($resultCart) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -317,7 +327,73 @@ if ($resultCart) {
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
     <link rel="stylesheet" type="text/css" href="../assets/css/custom.css" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
 
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 800,
+                offset: 50,
+                once: true
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 500);
+        });
+
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>

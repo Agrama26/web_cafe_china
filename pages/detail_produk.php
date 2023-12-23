@@ -1,5 +1,5 @@
 <?php
-include "../admin/session.php";
+include "../session.php";
 include "../includes/koneksi.php";
 
 $productID = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -13,11 +13,11 @@ if ($result) {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-mysqli_close($conn);
+
 if (isset($_POST['add_to_cart'])) {
     $cartItem = [
-        'id' => $productId,
-        'name' => $productData['name'],
+        'product_id' => $productId,
+        'product_name' => $productData['product_name'],
         'price' => $productData['price'],
     ];
 
@@ -54,9 +54,16 @@ if (isset($_POST['add_to_cart'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container">
@@ -68,7 +75,7 @@ if (isset($_POST['add_to_cart'])) {
                 <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
                 <ul class="navbar-nav ms-auto d-flex gap-3">
                     <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="../admin/index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -92,7 +99,7 @@ if (isset($_POST['add_to_cart'])) {
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-box-arrow-left"></i>Login</a>
                     </li>
                 </ul>
@@ -116,7 +123,7 @@ if (isset($_POST['add_to_cart'])) {
             </nav>
         </div>
         <div class="row mb-5">
-            <div class="col-lg-6">
+            <div class="col-md-5 col-lg-4">
                 <div class="card">
                     <a href="<?php echo $productData['imagePath']; ?>" data-lightbox="products"
                         data-title="<?php echo $productData['product_name']; ?>">
@@ -125,7 +132,7 @@ if (isset($_POST['add_to_cart'])) {
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-6 offset-md-1 col-lg-7 offset-lg-1">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center text-danger">
@@ -142,6 +149,68 @@ if (isset($_POST['add_to_cart'])) {
                         <p><strong>Category : </strong>
                             <?php echo $productData['country_origin']; ?>
                         </p>
+                        <?php
+
+                        // Fungsi untuk mengonversi rating menjadi representasi bintang
+                        function displayStarRating($rating)
+                        {
+                            $fullStar = floor($rating);
+                            $halfStar = ceil($rating - $fullStar);
+                            $emptyStar = 5 - $fullStar - $halfStar;
+
+                            // Tampilkan bintang penuh
+                            for ($i = 0; $i < $fullStar; $i++) {
+                                echo '<span class="fa fa-star text-warning"></span>';
+                            }
+
+                            // Tampilkan setengah bintang jika ada
+                            if ($halfStar > 0) {
+                                echo '<span class="fa fa-star-half-alt text-warning"></span>';
+                            }
+
+                            // Tampilkan bintang kosong
+                            for ($i = 0; $i < $emptyStar; $i++) {
+                                echo '<span class="fa fa-star text-muted"></span>';
+                            }
+                        }
+
+                        ?>
+                        <?php
+                        // Ambil id produk dari variabel $productData
+                        if (isset($productData) && is_array($productData) && !empty($productData)) {
+                            // Ambil id produk dari variabel $productData
+                            $product_id = $productData['product_id'];
+
+                            // Query untuk mengambil rata-rata rating produk
+                            $sql = "SELECT AVG(rating) AS average_rating FROM comments WHERE product_id = $product_id";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $average_rating = $row['average_rating'];
+
+                                if ($average_rating !== null) {
+                                    echo '<div class="text-center mb-3">';
+                                    echo '    <strong>Average Rating : ';
+                                    displayStarRating($average_rating);
+                                    echo '    </strong>';
+                                    echo '</div>';
+                                } else {
+                                    echo '<div class="text-center mb-3">';
+                                    echo '    <strong>No ratings yet.</strong>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo '<div class="text-center mb-3">';
+                                echo '    <strong>No ratings yet.</strong>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="text-center mb-3">';
+                            echo '    <strong>Product data not available.</strong>';
+                            echo '</div>';
+                        }
+                        ?>
                         <button type="button" class="w-100 btn btn-danger px-5 mt-2 mb-2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             Add To Cart
@@ -183,13 +252,49 @@ if (isset($_POST['add_to_cart'])) {
         </div>
     </div>
 
+    <!-- rekomendasi produk -->
+    <div data-aos="fade-in" data-aos-anchor-placement="center-center" class="container-fluid py-5 mt-5"
+        style="background-color: #fef9ec">
+        <div class="container">
+            <h4 class="text-center mb-5">Recommendation</h4>
+            <div class="row justify-content-center">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Chinese/Dim Sum1.jpg" class="img-fluid img-thumbnail" alt="404" />
+                    </a>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Lokal/Es Cendol 1.jpg" class="img-fluid img-thumbnail" alt="404" />
+                    </a>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Western/Flat White (Square).jpg" class="img-fluid img-thumbnail"
+                            alt="404" />
+                    </a>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-2 mb-3" data-aos="fade-up"
+                    data-aos-anchor-placement="center-center">
+                    <a href="detail_1.html">
+                        <img src="../assets/images/Japanese/Niku Udon.jpg" class="img-fluid img-thumbnail" alt="404" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -258,6 +363,73 @@ if (isset($_POST['add_to_cart'])) {
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
     <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 800,
+                offset: 50,
+                once: true
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 500);
+        });
+
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>

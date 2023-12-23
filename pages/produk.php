@@ -1,6 +1,7 @@
 <?php
+require '../session.php';
 include "../includes/koneksi.php";
-require '../admin/session.php';
+
 
 // Handle Add to Cart logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
@@ -49,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 </head>
 
 <body>
+    <!-- Elemen loading -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
         <div class="container">
@@ -60,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
                 <ul class="navbar-nav ms-auto d-flex gap-3">
                     <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="../admin/index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -84,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                                 class="bi bi-cart2"></i>Cart</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="../admin/logout.php" tabindex="-1" aria-disabled="true"><i
+                        <a class="nav-link" href="../logout.php" tabindex="-1" aria-disabled="true"><i
                                 class="bi bi-box-arrow-left"></i>Logout</a>
                     </li>
                 </ul>
@@ -96,10 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <div class="container-fluid banner-produk">
         <div class="container">
             <div class="row">
-                <h3 class="text-light display-6 mx-3 mt-2">
+                <h3 class="text-light display-6 mx-5 ml-5">
                     Selamat Datang <br />di Cafe<span> China</span>
                 </h3>
-                <h5 class="text-light opacity-75 mx-3 mt-2">
+                <h5 class="text-light opacity-75 mx-5 ml-5 mt-2">
                     Ayo kunjungi cafe dengan nuansa china,
                     <br class="d-none d-md-block" />
                     kapan lagi nongki serasa di china
@@ -114,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             <div class="row">
                 <!-- Kategori -->
                 <div class="text-center mb-5 col-md-4 col-lg-3 mb-5">
-                    <h5 class="mb-3">Category</h5>
-                    <ul class="list-group mt-4">
+                    <h5 class="mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">Category</h5>
+                    <ul class="list-group mt-4" data-aos="fade-up" data-aos-anchor-placement="center-center">
                         <li type="button" class="list-group-item text-dark btn-produk" style="text-decoration: none"
                             onclick="showProducts('All')">All</li>
                         <li class="list-group-item text-dark btn-produk" type="button" style="text-decoration: none"
@@ -137,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     </ul>
                 </div>
                 <!-- Produk -->
-                <div class="container-fluid col-md-8 col-lg-9">
+                <div class="container-fluid col-md-8 col-lg-9" data-aos="fade-up">
                     <h5 class="text-center mb-4">Product</h5>
                     <div class="row justify-content-center">
                         <?php
@@ -147,8 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<div class="col-6 col-sm-6 col-lg-3 mb-4 product-item ' . $row['country_origin'] . '"> ';
-                                echo '<div class="card" data-aos="zoom-in-down">';
-                                echo '<a href="detail_produk.php?id=' . $row['product_id'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
+                                echo '<div class="card" data-aos="zoom-in-up" data-aos-anchor-placement="center-center">';
+                                echo '<a href="' . $row['imagePath'] . '" data-lightbox="products" data-title="' . $row['product_name'] . '">';
                                 echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="404" />';
                                 echo '</a>';
                                 echo '<div class="card-body">';
@@ -156,13 +162,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                                 echo '<strong>' . $row['product_name'] . '</strong>';
                                 echo '</h5>';
                                 echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
-                                echo '<form method="post" action="keranjang.php">';
+                                echo '<form method="post" action="">';
                                 echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                                 echo '<div class="form-group">';
                                 echo '<label for="quantity"></label>';
                                 echo '<input type="number" name="quantity" id="quantity" class="mb-2 btn-produk form-control" value="1" min="1">';
                                 echo '</div>';
-                                echo '<div class="dropdown">';
+                                echo '<div class="dropup">';
                                 echo '<a class="btn btn-produk dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">';
                                 echo 'More';
                                 echo '</a>';
@@ -214,12 +220,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-black footer text-light fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-black footer text-light" data-aos="fade-in"
+        data-aos-anchor-placement="center-center">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-start section-judul mb-4">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="about_us.php">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Reservation</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
@@ -314,11 +321,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         crossorigin="anonymous"></script>
     <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
     <script>
-        AOS.init({
-            duration: 500, // Durasi animasi dalam milidetik
-            offset: 50, // Offset untuk memicu animasi lebih awal atau lebih lambat
-            once: true // Animasi hanya akan dimainkan satu kali
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll('[data-aos]');
+            const observerConfig = {
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    } else {
+                        entry.target.classList.remove('aos-animate');
+                    }
+                });
+            }, observerConfig);
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            let lastScrollTop = 0;
+
+            function handleScroll() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (st > lastScrollTop) {
+                    // Scroll ke bawah
+                } else {
+                    // Scroll ke atas, tambahkan kelas 'aos-animate' untuk animasi keluar
+                    cards.forEach(card => {
+                        if (card.getBoundingClientRect().top > window.innerHeight) {
+                            card.classList.remove('aos-animate');
+                        }
+                    });
+                }
+
+                lastScrollTop = st <= 0 ? 0 : st;
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            AOS.init({
+                duration: 800,
+                offset: 50,
+                once: true
+            });
         });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
+            // Contoh: setelah 2 detik, sembunyikan loading overlay
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 500);
+        });
+
+        function hideLoadingOverlay() {
+            // Sembunyikan elemen loading
+            var loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                loadingOverlay.style.display = "none";
+            }
+        }
     </script>
 </body>
 

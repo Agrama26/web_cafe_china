@@ -7,6 +7,37 @@ body {
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid rgb(226, 40, 40);
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 a span {
   color: rgb(226, 40, 40);
   font-weight: bolder;
@@ -43,7 +74,7 @@ a span {
   border-color: rgb(226, 40, 40);
 }
 
-h3 span {
+h1 span {
   color: rgb(226, 40, 40);
 }
 
@@ -100,16 +131,36 @@ h5 span {
 /* end komen */
 /* produk */
 .banner-produk {
-  height: 60vh;
+  height: 57vh;
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
-  background-image: url("../images/logo/hu2.jpg");
-  background-size: cover;
+  background-image: url("../images/logo/bo tao.jpg");
+  background-size: contain;
   background-position: center;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+/* Media query untuk layar berukuran small (misalnya, lebar 576px) */
+@media (max-width: 575.98px) {
+  .banner-produk {
+    background-position: right center; /* Menggeser gambar ke bagian kanan */
+  }
+}
+
+/* Media query untuk layar berukuran md (misalnya, lebar 768px) */
+@media (max-width: 767.98px) {
+  .banner-produk {
+    background-position: right center; /* Menggeser gambar ke bagian kanan */
+  }
+}
+
+/* Media query untuk layar berukuran large (misalnya, lebar 1200px) */
+@media (min-width: 1200px) {
+  .banner-produk {
+    background-position: center; /* Tanpa efek zoom, posisi gambar tetap di tengah */
+  }
 }
 
 .btn-produk {

@@ -1,57 +1,28 @@
 <?php
-require '../session.php';
+session_start();
 include "../includes/koneksi.php";
 
-// Function to fetch promotions from the database
-function getPromotions($type = '')
-{
-    global $conn;
-    $promotions = [];
+$productID = isset($_GET['id']) ? $_GET['id'] : 1;
 
-    if ($type === '') {
-        $sql = "SELECT * FROM promotions";
-    } else {
-        $sql = "SELECT * FROM promotions WHERE type = '$type'";
-    }
+$sqll = "SELECT * FROM users WHERE user_id = $productID";
+$resultt = mysqli_query($conn, $sqll);
 
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $promotions[] = $row;
-        }
-    }
-
-    return $promotions;
+if ($resultt) {
+    $userData = mysqli_fetch_assoc($resultt);
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-// Handle Add to Cart logic
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $productId = $_POST['product_id'];
-    $quantity = $_POST['quantity'];
-
-    // Assuming you have user authentication in place, get the user ID
-    $userId = 1; // Replace with your user authentication logic
-
-    // Add the product to the cart
-    $sql = "INSERT INTO carts (user_id, product_id, quantity) VALUES ($userId, $productId, $quantity)";
-    $conn->query($sql);
-
-    // Display an alert with the added quantity
-    echo '<script>';
-    echo 'alert("Added ' . $quantity . ' item(s) to your cart!");';
-    echo '</script>';
-}
+// mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Promo</title>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cafe China</title>
     <!-- icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
@@ -61,22 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <link
         href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
         rel="stylesheet" />
+
     <!-- style -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/lightbox.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
-    <!-- Elemen loading -->
-    <div id="loading-overlay">
-        <div id="loading-spinner"></div>
-    </div>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
         <div class="container">
@@ -88,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 <a class="navbar-brand" href="#">Cafe<span> China</span>.</a>
                 <ul class="navbar-nav ms-auto d-flex gap-3">
                     <li class="nav-item me-3">
-                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -105,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         </ul>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link active" href="#">Promo</a>
+                        <a class="nav-link" href="promo.php">Promo</a>
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="keranjang.php" tabindex="-1" aria-disabled="true"><i
@@ -136,83 +102,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         </div>
     </div>
 
-    <!-- Promo -->
-    <div class="container-fluid py-5">
+    <!-- Sisa Komentar -->
+    <div class="container-fluid py-5 main-color my-5">
         <div class="container">
-            <!-- kategori promo -->
-            <div id="divku" class="row justify-content-center mb-4" data-aos="fade-up">
-                <div id="btnall" onclick="filterPromo('all')" class="col-sm-4 col-md-3 col-lg-2" data-aos="fade-right">
-                    <button
-                        class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'all' ? 'activate' : ''; ?>">
-                        All Promo
-                    </button>
-                </div>
-                <div id="btndiskon" onclick="filterPromo('diskon')" class="col-sm-4 col-md-3 col-lg-2"
-                    data-aos="fade-in">
-                    <button
-                        class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'diskon' ? 'activate' : ''; ?>">
-                        Promo Diskon
-                    </button>
-                </div>
-                <div id="btnpromo" onclick="filterPromo('bonus')" class="col-sm-4 col-md-3 col-lg-2"
-                    data-aos="fade-left">
-                    <button
-                        class="btn btn-promo w-100 fs-6 mb-3 <?php echo isset($_GET['type']) && $_GET['type'] === 'bonus' ? 'activate' : ''; ?>">
-                        Promo Bonus
-                    </button>
-                </div>
-            </div>
+            <h3 class="text-light text-center mb-5" data-aos="fade-up" data-aos-anchor-placement="center-center">
+                Additional <span>Comments</span>
+            </h3>
 
-            <!-- Isi Promo -->
-            <!-- All Promo -->
-            <div id="semuapromo">
-                <div class="row justify-content-center">
+            <div class="row" id="additionalCommentsContainer" data-masonry='{"percentPosition": true }'>
+                <?php
+                // Fetch additional comments from the database
+                $sql = "SELECT comments.id, comments.name, comments.comment, products.product_id, products.product_name FROM comments JOIN products ON comments.product_id = products.product_id ORDER BY comments.id DESC";
+                $result = $conn->query($sql);
 
-                    <?php
-                    $typeFilter = isset($_GET['type']) ? $_GET['type'] : 'all';
-
-                    $sql = "SELECT products.product_id, products.product_name, products.imagePath, products.price, promotions.type, promotions.description
-                            FROM promotions
-                            JOIN products ON promotions.product_id = products.product_id";
-
-                    if ($typeFilter !== 'all') {
-                        $sql .= " WHERE promotions.type = '$typeFilter'";
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Display additional comments
+                        echo '<div class="col-lg-4 mb-3" data-aos="fade-up" data-aos-anchor-placement="center-center">';
+                        echo '<div class="card p-3 masonri">';
+                        echo '<figure>';
+                        echo '<blockquote class="blockquote">';
+                        echo '<p>' . $row['product_name'] . '<br>' . $row['comment'] . '</p>';
+                        echo '</blockquote>';
+                        echo '<figcaption class="blockquote-footer">';
+                        echo $row['name'];
+                        echo '</figcaption>';
+                        echo '</figure>';
+                        echo '</div>';
+                        echo '</div>';
                     }
-
-                    $sql .= " ORDER BY promotions.type, promotions.created_at DESC";
-
-                    $result = mysqli_query($conn, $sql);
-
-                    if ($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<div class="col-6 col-sm-6 col-lg-3 mb-3">';
-                            echo '<div class="card" data-aos="zoom-in-up">';
-                            echo '<a href="' . $row['imagePath'] . '" data-lightbox="Produk" data-title="' . $row['product_name'] . '">';
-                            echo '<img src="' . $row['imagePath'] . '" class="card-img-top" alt="..." />';
-                            echo '</a>';
-                            echo '<div class="card-body">';
-                            echo '<h6 class="card-title text-center fs-5">' . $row['product_name'] . '</h6>';
-                            echo '<p class="text-center">' . $row['description'] . '</p>';
-                            echo '<form action="" method="post">';
-                            echo '<h5 class="text-center text-danger mb-3">Rp.' . number_format($row['price'], 0, ',', '.') . '</h5>';
-                            echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
-                            echo '<div class="form-group">';
-                            echo '<label for="quantity"></label>';
-                            echo '<input type="number" name="quantity" id="quantity" class="mb-2 btn-produk form-control" value="1" min="1">';
-                            echo '</div>';
-                            echo '<button type="submit" class="btn btn-promo w-100" name="add_to_cart">Add To Cart</button>';
-                            echo '</form>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    } else {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                    }
-
-                    ?>
-
-                </div>
+                } else {
+                    echo '<p>No more comments.</p>';
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -288,20 +210,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     </div>
     <!-- Footer End -->
 
-    <!-- Scripts -->
+    <!-- Script -->
+    <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
-    <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
-    <script src="../assets/js/script.js"></script>
-    <script>
-        function filterPromo(type) {
-            window.location.href = 'promo.php?type=' + type;
-        }
-    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll('[data-aos]');
@@ -352,26 +268,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             });
         });
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Simulasikan proses login (gunakan metode sesuai dengan aplikasi Anda)
-            // Contoh: setelah 2 detik, sembunyikan loading overlay
-            setTimeout(function () {
-                hideLoadingOverlay();
-            }, 500);
-        });
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        function hideLoadingOverlay() {
-            // Sembunyikan elemen loading
-            var loadingOverlay = document.getElementById("loading-overlay");
-            if (loadingOverlay) {
-                loadingOverlay.style.display = "none";
-            }
-        }
-    </script>
 </body>
 
 </html>
-<?php
-$conn->close();
-?>
